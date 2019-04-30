@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ECBC11E5-2EEE-4442-9E80-193D963EC059}</ProjectGuid>
+    <ProjectGuid>{F5334594-933B-4FA9-AE1C-23F0487E552E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Pharmacy_App</RootNamespace>
     <AssemblyName>Pharmacy_App</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>

@@ -9,7 +9,7 @@ namespace Pharmacy_App
     static class Program
     {
         /// <summary>
-        /// Uygulamanın ana girdi noktası.
+        /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
