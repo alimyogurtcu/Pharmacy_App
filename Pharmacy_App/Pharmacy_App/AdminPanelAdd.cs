@@ -23,8 +23,7 @@ namespace Pharmacy_App
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            label6.Text = dateTimePickerExpirationDate.Text.ToString();
-            //this.Close();// closing admin panel add form
+            this.Close();// closing admin panel add form
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

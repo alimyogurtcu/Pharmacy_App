@@ -47,7 +47,6 @@
             this.textBoxAmount = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -236,21 +235,11 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Expiration Date";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(588, 106);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 43;
-            this.label6.Text = "label6";
-            // 
             // AdminPanelAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox1);
             this.Name = "AdminPanelAdd";
             this.Text = "AdminPanelAdd";
@@ -258,7 +247,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -283,6 +271,5 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerSellDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label6;
     }
 }

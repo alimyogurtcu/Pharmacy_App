@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Pharmacy_App
 {
-    public partial class AdminPanelLogin : Form
+    public partial class Employee : Form
     {
-        public AdminPanelLogin()
+        public Employee()
         {
             InitializeComponent();
         }
@@ -28,6 +28,11 @@ namespace Pharmacy_App
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
