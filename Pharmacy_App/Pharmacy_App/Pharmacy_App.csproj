@@ -46,6 +46,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminPanel.Designer.cs">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanelAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminPanelAdd.Designer.cs">
+      <DependentUpon>AdminPanelAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanelDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminPanelDelete.Designer.cs">
+      <DependentUpon>AdminPanelDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanelHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminPanelHistory.Designer.cs">
+      <DependentUpon>AdminPanelHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanelLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminPanelLogin.Designer.cs">
+      <DependentUpon>AdminPanelLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanelUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminPanelUpdate.Designer.cs">
+      <DependentUpon>AdminPanelUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +90,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdminPanel.resx">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminPanelAdd.resx">
+      <DependentUpon>AdminPanelAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminPanelDelete.resx">
+      <DependentUpon>AdminPanelDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminPanelHistory.resx">
+      <DependentUpon>AdminPanelHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminPanelLogin.resx">
+      <DependentUpon>AdminPanelLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminPanelUpdate.resx">
+      <DependentUpon>AdminPanelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
