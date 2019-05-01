@@ -15,7 +15,8 @@ namespace Pharmacy_App
 {
     public partial class Form1 : Form
     {
-        string xmlFile = @"C://students.xml";
+        string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
+        string folderName = @"C:/Users/Public/PharmacyAppData";
         public Form1()
         {
             InitializeComponent();
@@ -23,24 +24,30 @@ namespace Pharmacy_App
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Directory.Exists(xmlFile))
+            if (Directory.Exists(folderName))
             {
-
+                
             }
             else
             {
+                Directory.CreateDirectory(folderName);
+
                 string xmlContent = "<medicines>" +
                     "</medicines>";
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(xmlContent);
 
-                using (XmlTextWriter writer = new XmlTextWriter(@xmlFile, null))
+                using (XmlTextWriter writer = new XmlTextWriter(xmlFileLocation, null))
                 {
 
                     writer.Formatting = Formatting.Indented; // optional
                     doc.Save(writer);
                 }
+
             }
+            
+                
+            
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)

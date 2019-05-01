@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dateTimePickerSellDate = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerExpirationDate = new System.Windows.Forms.DateTimePicker();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButtonUnsaleable = new System.Windows.Forms.RadioButton();
+            this.radioButtonSaleable = new System.Windows.Forms.RadioButton();
             this.label12 = new System.Windows.Forms.Label();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -47,24 +45,10 @@
             this.textBoxAmount = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Location = new System.Drawing.Point(47, 32);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(100, 20);
-            this.textBoxName.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -72,8 +56,8 @@
             this.groupBox1.Controls.Add(this.dateTimePickerExpirationDate);
             this.groupBox1.Controls.Add(this.buttonAdd);
             this.groupBox1.Controls.Add(this.buttonCancel);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.radioButtonUnsaleable);
+            this.groupBox1.Controls.Add(this.radioButtonSaleable);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.textBoxPrice);
             this.groupBox1.Controls.Add(this.label11);
@@ -86,16 +70,16 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxName);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(132, 74);
+            this.groupBox1.Location = new System.Drawing.Point(157, 86);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(421, 260);
-            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medicine";
             // 
             // dateTimePickerSellDate
             // 
-            this.dateTimePickerSellDate.Location = new System.Drawing.Point(62, 84);
+            this.dateTimePickerSellDate.Location = new System.Drawing.Point(91, 84);
             this.dateTimePickerSellDate.Name = "dateTimePickerSellDate";
             this.dateTimePickerSellDate.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerSellDate.TabIndex = 42;
@@ -125,29 +109,29 @@
             this.buttonCancel.TabIndex = 40;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click_1);
             // 
-            // radioButton2
+            // radioButtonUnsaleable
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(229, 148);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(61, 17);
-            this.radioButton2.TabIndex = 39;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Unvalid";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButtonUnsaleable.AutoSize = true;
+            this.radioButtonUnsaleable.Location = new System.Drawing.Point(229, 148);
+            this.radioButtonUnsaleable.Name = "radioButtonUnsaleable";
+            this.radioButtonUnsaleable.Size = new System.Drawing.Size(78, 17);
+            this.radioButtonUnsaleable.TabIndex = 39;
+            this.radioButtonUnsaleable.TabStop = true;
+            this.radioButtonUnsaleable.Text = "Unsaleable";
+            this.radioButtonUnsaleable.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radioButtonSaleable
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(229, 128);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(48, 17);
-            this.radioButton1.TabIndex = 38;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Valid";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButtonSaleable.AutoSize = true;
+            this.radioButtonSaleable.Location = new System.Drawing.Point(229, 128);
+            this.radioButtonSaleable.Name = "radioButtonSaleable";
+            this.radioButtonSaleable.Size = new System.Drawing.Size(66, 17);
+            this.radioButtonSaleable.TabIndex = 38;
+            this.radioButtonSaleable.TabStop = true;
+            this.radioButtonSaleable.Text = "Saleable";
+            this.radioButtonSaleable.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -195,7 +179,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 87);
+            this.label5.Location = new System.Drawing.Point(35, 90);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 25;
@@ -235,6 +219,22 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Expiration Date";
             // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(47, 32);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxName.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Name";
+            // 
             // AdminPanelAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,24 +252,24 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxAmount;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dateTimePickerSellDate;
+        private System.Windows.Forms.DateTimePicker dateTimePickerExpirationDate;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.RadioButton radioButtonUnsaleable;
+        private System.Windows.Forms.RadioButton radioButtonSaleable;
+        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxCost;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.DateTimePicker dateTimePickerExpirationDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerSellDate;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxAmount;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label label1;
     }
 }
