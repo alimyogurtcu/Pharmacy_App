@@ -70,11 +70,11 @@
     <Compile Include="AdminPanelHistory.Designer.cs">
       <DependentUpon>AdminPanelHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminPanelLogin.cs">
+    <Compile Include="Employee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminPanelLogin.Designer.cs">
-      <DependentUpon>AdminPanelLogin.cs</DependentUpon>
+    <Compile Include="Employee.Designer.cs">
+      <DependentUpon>Employee.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminPanelUpdate.cs">
       <SubType>Form</SubType>
@@ -102,8 +102,8 @@
     <EmbeddedResource Include="AdminPanelHistory.resx">
       <DependentUpon>AdminPanelHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminPanelLogin.resx">
-      <DependentUpon>AdminPanelLogin.cs</DependentUpon>
+    <EmbeddedResource Include="Employee.resx">
+      <DependentUpon>Employee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminPanelUpdate.resx">
       <DependentUpon>AdminPanelUpdate.cs</DependentUpon>
