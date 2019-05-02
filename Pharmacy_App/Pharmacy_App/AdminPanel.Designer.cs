@@ -28,25 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewMedicines = new System.Windows.Forms.ListView();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonHistory = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listView1
+            // listViewMedicines
             // 
-            this.listView1.Location = new System.Drawing.Point(12, 45);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(418, 393);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listViewMedicines.FullRowSelect = true;
+            this.listViewMedicines.GridLines = true;
+            this.listViewMedicines.Location = new System.Drawing.Point(12, 45);
+            this.listViewMedicines.Name = "listViewMedicines";
+            this.listViewMedicines.Size = new System.Drawing.Size(752, 393);
+            this.listViewMedicines.TabIndex = 0;
+            this.listViewMedicines.UseCompatibleStateImageBehavior = false;
+            this.listViewMedicines.View = System.Windows.Forms.View.Details;
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(436, 215);
+            this.buttonUpdate.Location = new System.Drawing.Point(770, 182);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 3;
@@ -56,7 +60,7 @@
             // 
             // buttonHistory
             // 
-            this.buttonHistory.Location = new System.Drawing.Point(436, 244);
+            this.buttonHistory.Location = new System.Drawing.Point(770, 211);
             this.buttonHistory.Name = "buttonHistory";
             this.buttonHistory.Size = new System.Drawing.Size(75, 23);
             this.buttonHistory.TabIndex = 4;
@@ -66,7 +70,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(436, 273);
+            this.buttonCancel.Location = new System.Drawing.Point(770, 240);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 66;
@@ -76,7 +80,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(436, 186);
+            this.buttonDelete.Location = new System.Drawing.Point(770, 153);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 68;
@@ -86,7 +90,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(436, 157);
+            this.buttonAdd.Location = new System.Drawing.Point(770, 124);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 67;
@@ -94,30 +98,43 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Location = new System.Drawing.Point(737, 16);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(27, 23);
+            this.buttonRefresh.TabIndex = 69;
+            this.buttonRefresh.Text = "R";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // AdminPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(857, 450);
+            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonHistory);
             this.Controls.Add(this.buttonUpdate);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listViewMedicines);
             this.Name = "AdminPanel";
             this.Text = "AdminPanel";
+            this.Load += new System.EventHandler(this.AdminPanel_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewMedicines;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonHistory;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonRefresh;
     }
 }

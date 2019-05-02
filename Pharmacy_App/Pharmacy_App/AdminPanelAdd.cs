@@ -16,7 +16,6 @@ namespace Pharmacy_App
     {
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
         string folderName = @"C:/Users/Public/PharmacyAppData";
-
         public AdminPanelAdd()
         {
             InitializeComponent();
@@ -29,17 +28,19 @@ namespace Pharmacy_App
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            string name, amount, cost, price, expirationDate, sellDate, status = ""; //decleration of values for get informations from textboxes 
-
+            string name, experationDate, status = "", category; //decleration of values for get informations from textboxes 
+            double cost, price;
+            int amount, mg, count;
 
             //getting values from textboxes to values.
 
             name = textBoxName.Text.ToString();
-            amount = textBoxAmount.Text.ToString();
-            cost = textBoxCost.Text.ToString();
-            price = textBoxPrice.Text.ToString();
-            expirationDate = dateTimePickerExpirationDate.Text.ToString();
-            sellDate = dateTimePickerSellDate.Text.ToString();
+            amount = int.Parse(textBoxAmount.Text.ToString());
+            mg = int.Parse(textBoxMg.Text.ToString());
+            cost = double.Parse(textBoxCost.Text.ToString());
+            price = double.Parse(textBoxPrice.Text.ToString());
+            experationDate = dateTimePickerExpirationDate.Text.ToString();
+            category = comboBoxCategory.Text.ToString();
 
             if (radioButtonSaleable.Checked) //here we are get status from salable radioButton
             {
@@ -56,20 +57,38 @@ namespace Pharmacy_App
 
             var doc = XDocument.Load(@xmlFileLocation); //opening xml file
 
+            XmlDocument medicines = new XmlDocument();
+            medicines.Load(xmlFileLocation);
+
+            XmlNodeList countL = medicines.GetElementsByTagName("countLastValue");
+
+            count = int.Parse(countL[0].InnerXml);
+
             //adding new element and saving it 
             var newElement = new XElement("medicine",
-            new XElement("names", name),
+            new XElement("count",++count),
+            new XElement("name", name),
+            new XElement("mg",mg),
             new XElement("amount", amount),
             new XElement("cost", cost),
             new XElement("price", price),
-            new XElement("expirationDate", expirationDate),
-            new XElement("saleDate", sellDate),
-            new XElement("status", status));
+            new XElement("experationDate", experationDate),
+            new XElement("status", status),
+            new XElement("category", category));
 
             doc.Element("medicines").Add(newElement);
 
-            doc.Save(@xmlFileLocation);
 
+            var items = from item in doc.Descendants("medicines")
+                        where item.Element("countLastValue").Value == (count-1).ToString()
+                        select item;
+
+            foreach (XElement itemElement in items)
+            {
+                itemElement.SetElementValue("countLastValue", count);
+            }
+
+            doc.Save(@xmlFileLocation);
 
 
         }
@@ -81,6 +100,7 @@ namespace Pharmacy_App
         private void ButtonCancel_Click_1(object sender, EventArgs e)
         {
             this.Close();
+
         }
     }
 }
