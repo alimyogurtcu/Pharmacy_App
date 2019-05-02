@@ -33,6 +33,7 @@ namespace Pharmacy_App
                 Directory.CreateDirectory(folderName);
 
                 string xmlContent = "<medicines>" +
+                    "<countLastValue>0</countLastValue>"+
                     "</medicines>";
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(xmlContent);
