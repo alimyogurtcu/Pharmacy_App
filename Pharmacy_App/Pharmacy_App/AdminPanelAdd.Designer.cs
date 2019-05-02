@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxMg = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.dateTimePickerSellDate = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerExpirationDate = new System.Windows.Forms.DateTimePicker();
             this.buttonAdd = new System.Windows.Forms.Button();
@@ -47,11 +50,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBoxCategory);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.textBoxMg);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.dateTimePickerSellDate);
             this.groupBox1.Controls.Add(this.dateTimePickerExpirationDate);
             this.groupBox1.Controls.Add(this.buttonAdd);
@@ -72,10 +80,36 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(157, 86);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 260);
+            this.groupBox1.Size = new System.Drawing.Size(461, 262);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medicine";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Location = new System.Drawing.Point(399, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 16);
+            this.label7.TabIndex = 45;
+            this.label7.Text = "g";
+            // 
+            // textBoxMg
+            // 
+            this.textBoxMg.Location = new System.Drawing.Point(355, 32);
+            this.textBoxMg.Name = "textBoxMg";
+            this.textBoxMg.Size = new System.Drawing.Size(38, 20);
+            this.textBoxMg.TabIndex = 44;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(327, 35);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(22, 13);
+            this.label6.TabIndex = 43;
+            this.label6.Text = "Mg";
             // 
             // dateTimePickerSellDate
             // 
@@ -196,7 +230,7 @@
             // 
             // textBoxAmount
             // 
-            this.textBoxAmount.Location = new System.Drawing.Point(210, 32);
+            this.textBoxAmount.Location = new System.Drawing.Point(212, 32);
             this.textBoxAmount.Name = "textBoxAmount";
             this.textBoxAmount.Size = new System.Drawing.Size(100, 20);
             this.textBoxAmount.TabIndex = 5;
@@ -204,7 +238,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(161, 35);
+            this.label3.Location = new System.Drawing.Point(163, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 4;
@@ -234,6 +268,18 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
+            // 
+            // comboBoxCategory
+            // 
+            this.comboBoxCategory.FormattingEnabled = true;
+            this.comboBoxCategory.Items.AddRange(new object[] {
+            "hap",
+            "surup",
+            "sampuan"});
+            this.comboBoxCategory.Location = new System.Drawing.Point(313, 58);
+            this.comboBoxCategory.Name = "comboBoxCategory";
+            this.comboBoxCategory.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCategory.TabIndex = 5;
             // 
             // AdminPanelAdd
             // 
@@ -271,5 +317,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxMg;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBoxCategory;
     }
 }
