@@ -57,7 +57,6 @@ namespace Pharmacy_App
             XmlDocument medicines = new XmlDocument();
             medicines.Load(xmlFileLocation);
 
-            XmlNodeList countList = medicines.GetElementsByTagName("count");
             XmlNodeList nameList = medicines.GetElementsByTagName("name");
             XmlNodeList categoryList = medicines.GetElementsByTagName("category");
             XmlNodeList mgList = medicines.GetElementsByTagName("mg");
@@ -70,11 +69,10 @@ namespace Pharmacy_App
             //--------------------------------------------------------------------------------------
 
 
-            for (int i = 0; i < countList.Count; i++)// Assaning every element from xml document to developer defined medicineRecords class list
+            for (int i = 0; i < nameList.Count; i++)// Assaning every element from xml document to developer defined medicineRecords class list
             {
                 medicineRecordList.Add(new medicineRecords
                 {
-                    count = int.Parse(countList[i].InnerXml),
                     name = nameList[i].InnerXml,
                     category = categoryList[i].InnerXml,
                     mg = int.Parse(mgList[i].InnerXml),
@@ -82,14 +80,15 @@ namespace Pharmacy_App
                     cost = double.Parse(costList[i].InnerXml),
                     price = double.Parse(priceList[i].InnerXml),
                     experationDate = experationDateList[i].InnerXml,
-                    status = statusList[i].InnerXml
+                    status = statusList[i].InnerXml,
                 });
+
             }
 
 
             for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecors list's elements to the list view 
             {
-                ListViewItem row = new ListViewItem(medicineRecordList[i].count.ToString());
+                ListViewItem row = new ListViewItem((i + 1).ToString());
 
                 ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].name.ToString());
                 ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].category.ToString());
@@ -111,6 +110,7 @@ namespace Pharmacy_App
                 row.SubItems.Add(itms7);
 
                 listViewMedicines.Items.Add(row);
+
             }
 
         }
