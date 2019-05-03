@@ -47,7 +47,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePickerExperationDate = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerSellDate = new System.Windows.Forms.DateTimePicker();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewMedicines
@@ -218,22 +217,11 @@
             this.dateTimePickerSellDate.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerSellDate.TabIndex = 93;
             // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.Location = new System.Drawing.Point(617, 60);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(25, 23);
-            this.buttonRefresh.TabIndex = 94;
-            this.buttonRefresh.Text = "R";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
             // AdminPanelUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(979, 555);
-            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.dateTimePickerSellDate);
             this.Controls.Add(this.dateTimePickerExperationDate);
             this.Controls.Add(this.buttonCancel);
@@ -282,6 +270,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerExperationDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerSellDate;
-        private System.Windows.Forms.Button buttonRefresh;
     }
 }

@@ -8,7 +8,6 @@ namespace Pharmacy_App
 {
     class medicineRecords
     {
-        public int count { get; set; }
         public string name { get; set; }
         public string category { get; set; }
         public int mg { get; set; }
@@ -17,6 +16,7 @@ namespace Pharmacy_App
         public double cost { get; set; }
         public double price { get; set; }
         public string status { get; set; }
+        public string updatedDate { get; set; }
 
     }
 }
