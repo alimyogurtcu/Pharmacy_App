@@ -104,7 +104,7 @@
             this.comboBoxCategory.Location = new System.Drawing.Point(61, 58);
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxCategory.TabIndex = 5;
+            this.comboBoxCategory.TabIndex = 4;
             // 
             // label7
             // 
@@ -121,7 +121,7 @@
             this.textBoxMg.Location = new System.Drawing.Point(369, 32);
             this.textBoxMg.Name = "textBoxMg";
             this.textBoxMg.Size = new System.Drawing.Size(38, 20);
-            this.textBoxMg.TabIndex = 44;
+            this.textBoxMg.TabIndex = 3;
             // 
             // label6
             // 
@@ -137,14 +137,14 @@
             this.dateTimePickerExpirationDate.Location = new System.Drawing.Point(273, 58);
             this.dateTimePickerExpirationDate.Name = "dateTimePickerExpirationDate";
             this.dateTimePickerExpirationDate.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerExpirationDate.TabIndex = 4;
+            this.dateTimePickerExpirationDate.TabIndex = 5;
             // 
             // buttonAdd
             // 
             this.buttonAdd.Location = new System.Drawing.Point(327, 196);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonAdd.TabIndex = 41;
+            this.buttonAdd.TabIndex = 10;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -154,7 +154,7 @@
             this.buttonReturn.Location = new System.Drawing.Point(408, 196);
             this.buttonReturn.Name = "buttonReturn";
             this.buttonReturn.Size = new System.Drawing.Size(75, 23);
-            this.buttonReturn.TabIndex = 40;
+            this.buttonReturn.TabIndex = 11;
             this.buttonReturn.Text = "Return";
             this.buttonReturn.UseVisualStyleBackColor = true;
             this.buttonReturn.Click += new System.EventHandler(this.ButtonReturn_Click_1);
@@ -165,7 +165,7 @@
             this.radioButtonUnsaleable.Location = new System.Drawing.Point(229, 148);
             this.radioButtonUnsaleable.Name = "radioButtonUnsaleable";
             this.radioButtonUnsaleable.Size = new System.Drawing.Size(78, 17);
-            this.radioButtonUnsaleable.TabIndex = 39;
+            this.radioButtonUnsaleable.TabIndex = 9;
             this.radioButtonUnsaleable.TabStop = true;
             this.radioButtonUnsaleable.Text = "Unsaleable";
             this.radioButtonUnsaleable.UseVisualStyleBackColor = true;
@@ -176,7 +176,7 @@
             this.radioButtonSaleable.Location = new System.Drawing.Point(229, 128);
             this.radioButtonSaleable.Name = "radioButtonSaleable";
             this.radioButtonSaleable.Size = new System.Drawing.Size(66, 17);
-            this.radioButtonSaleable.TabIndex = 38;
+            this.radioButtonSaleable.TabIndex = 8;
             this.radioButtonSaleable.TabStop = true;
             this.radioButtonSaleable.Text = "Saleable";
             this.radioButtonSaleable.UseVisualStyleBackColor = true;
@@ -196,7 +196,7 @@
             this.textBoxPrice.Location = new System.Drawing.Point(40, 153);
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(100, 20);
-            this.textBoxPrice.TabIndex = 36;
+            this.textBoxPrice.TabIndex = 7;
             // 
             // label11
             // 
@@ -222,7 +222,7 @@
             this.textBoxCost.Location = new System.Drawing.Point(40, 125);
             this.textBoxCost.Name = "textBoxCost";
             this.textBoxCost.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCost.TabIndex = 33;
+            this.textBoxCost.TabIndex = 6;
             // 
             // label4
             // 
@@ -238,7 +238,7 @@
             this.textBoxAmount.Location = new System.Drawing.Point(226, 32);
             this.textBoxAmount.Name = "textBoxAmount";
             this.textBoxAmount.Size = new System.Drawing.Size(100, 20);
-            this.textBoxAmount.TabIndex = 5;
+            this.textBoxAmount.TabIndex = 2;
             // 
             // label3
             // 

@@ -16,15 +16,10 @@ namespace Pharmacy_App
     {
         List<medicineRecords> temporaryMedicineRecordList = new List<medicineRecords>();
 
-        string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
+        string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml"; // xml file location
         public AdminPanelAdd()
         {
             InitializeComponent();
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();// closing admin panel add form
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -35,11 +30,17 @@ namespace Pharmacy_App
                    price = 0;
             int amount = 0,
                 mg = 0;
-            bool validation = true;
-            //---------------------------------------------------------
+            bool validation = true;// value for check if medicine is valid or not
+                                   //---------------------------------------------------------
 
-            //getting values from textboxes to values.
 
+            // getting values from textboxes to values with *validations !!!
+
+            // for validation, validation bool valiue used. If
+            // valudation is true program continues to check 
+            // values. If all values correctly writted adding
+            // values to xml document proccess is starts. Else
+            // gives errors for each value.
 
             name = textBoxName.Text.ToString();
 
@@ -157,6 +158,10 @@ namespace Pharmacy_App
 
             if (validation)
             {
+                // Asks if user wants to continue to add medicine.
+                // If dialog result is Yes. Program adds the medicine.
+                // If dialog result is no Program dont do anything.
+
                 if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "name : " + name + "\n" + "category : " +category + "\n" + "amount :" + amount + "\n" + "mg : " + mg + "\n" + "experationDate : " + experationDate + "\n" + "cost : " + cost + "\n" + "price : " + price + "\n" + "status : " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     temporaryMedicineRecordList.Add(new medicineRecords // adding new item to temporary list.
@@ -246,9 +251,11 @@ namespace Pharmacy_App
 
         private void AdminPanelAdd_Load(object sender, EventArgs e)
         {
-            radioButtonSaleable.Checked = true;// radio button salable is checked
+            radioButtonSaleable.Checked = true;// Radio button salable is checked
 
-            //adding colums to the list view
+
+            // Adding colums to the list view
+
             listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);
             listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);
@@ -261,14 +268,21 @@ namespace Pharmacy_App
             listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
 
             //------------------------------
+
+            this.comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList; // Makes combo box unvriteable
         }
 
         private void ButtonReturn_Click_1(object sender, EventArgs e)
         {
+            // For return to admin main panel
+
             AdminPanel AP = new AdminPanel();
             AP.Show();
             this.Close();
 
         }
+
+
+
     }
 }

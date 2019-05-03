@@ -50,6 +50,7 @@ namespace Pharmacy_App
             listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
 
             //----------------------------------------------------------------------------
 
@@ -65,6 +66,7 @@ namespace Pharmacy_App
             XmlNodeList priceList = medicines.GetElementsByTagName("price");
             XmlNodeList experationDateList = medicines.GetElementsByTagName("experationDate");
             XmlNodeList statusList = medicines.GetElementsByTagName("status");
+            XmlNodeList UpdatedDateList = medicines.GetElementsByTagName("updatedDate");
 
             //--------------------------------------------------------------------------------------
 
@@ -81,6 +83,7 @@ namespace Pharmacy_App
                     price = double.Parse(priceList[i].InnerXml),
                     experationDate = experationDateList[i].InnerXml,
                     status = statusList[i].InnerXml,
+                    updatedDate = UpdatedDateList[i].InnerXml,
                 });
 
             }
@@ -98,6 +101,8 @@ namespace Pharmacy_App
                 ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].cost.ToString());
                 ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].price.ToString());
                 ListViewItem.ListViewSubItem itms7 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].status.ToString());
+                ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].updatedDate.ToString());
+
 
 
                 row.SubItems.Add(itms1);
@@ -108,9 +113,9 @@ namespace Pharmacy_App
                 row.SubItems.Add(itms5);
                 row.SubItems.Add(itms6);
                 row.SubItems.Add(itms7);
+                row.SubItems.Add(itms9);
 
                 listViewMedicines.Items.Add(row);
-
             }
 
         }
