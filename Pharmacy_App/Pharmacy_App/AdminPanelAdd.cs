@@ -157,7 +157,7 @@ namespace Pharmacy_App
 
             if (validation)
             {
-                if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "name : " + name + "\n" + category + "\n" + amount + "\n" + mg + "\n" + experationDate + "\n" + cost + "\n" + price + "\n" + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "name : " + name + "\n" + "category : " +category + "\n" + "amount :" + amount + "\n" + "mg : " + mg + "\n" + "experationDate : " + experationDate + "\n" + "cost : " + cost + "\n" + "price : " + price + "\n" + "status : " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     temporaryMedicineRecordList.Add(new medicineRecords // adding new item to temporary list.
                     {
