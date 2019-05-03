@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Data.SQLite;
 using System.Xml.Linq;
 
 namespace Pharmacy_App
 {
     public partial class AdminPanelAdd : Form
     {
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= medicines.db"); //sql
+
         List<medicineRecords> temporaryMedicineRecordList = new List<medicineRecords>();
 
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml"; // xml file location
@@ -24,14 +27,25 @@ namespace Pharmacy_App
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            //decleration of values for get informations from textboxes
-            string name = "", experationDate, status = "", category;  
+            string name = "", experationDate, status = "", category;
             double cost = 0,
                    price = 0;
             int amount = 0,
                 mg = 0;
+            //decleration of values for get informations from textboxes
+
+            //*sql add
+            conn.Open();
+            string sql = "insert into Medicines(Name, Category, Milligram, Amount, Cost, Price, ExperationDate, UpdatedDate) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + System.DateTime.Now + "')";
+            SQLiteCommand uploadDB = new SQLiteCommand(sql, conn);
+            uploadDB.ExecuteNonQuery();
+            conn.Close();
+            //*sql add
+
             bool validation = true;// value for check if medicine is valid or not
-                                   //---------------------------------------------------------
+
+
+            //---------------------------------------------------------
 
 
             // getting values from textboxes to values with *validations !!!
