@@ -82,3 +82,13 @@ C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\EntityF
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.xml
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.dll
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.dll
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.xml
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.xml
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete

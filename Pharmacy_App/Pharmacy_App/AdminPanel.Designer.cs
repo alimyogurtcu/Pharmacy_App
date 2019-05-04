@@ -41,14 +41,14 @@
             this.listViewMedicines.GridLines = true;
             this.listViewMedicines.Location = new System.Drawing.Point(12, 41);
             this.listViewMedicines.Name = "listViewMedicines";
-            this.listViewMedicines.Size = new System.Drawing.Size(1058, 393);
+            this.listViewMedicines.Size = new System.Drawing.Size(843, 393);
             this.listViewMedicines.TabIndex = 0;
             this.listViewMedicines.UseCompatibleStateImageBehavior = false;
             this.listViewMedicines.View = System.Windows.Forms.View.Details;
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(1076, 99);
+            this.buttonUpdate.Location = new System.Drawing.Point(861, 100);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 3;
@@ -58,7 +58,7 @@
             // 
             // buttonHistory
             // 
-            this.buttonHistory.Location = new System.Drawing.Point(1076, 128);
+            this.buttonHistory.Location = new System.Drawing.Point(861, 129);
             this.buttonHistory.Name = "buttonHistory";
             this.buttonHistory.Size = new System.Drawing.Size(75, 23);
             this.buttonHistory.TabIndex = 4;
@@ -68,7 +68,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(1076, 157);
+            this.buttonCancel.Location = new System.Drawing.Point(861, 158);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 66;
@@ -78,7 +78,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(1076, 41);
+            this.buttonAdd.Location = new System.Drawing.Point(861, 42);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 67;
@@ -88,7 +88,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(1076, 70);
+            this.buttonDelete.Location = new System.Drawing.Point(861, 71);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 68;
@@ -100,7 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1164, 569);
+            this.ClientSize = new System.Drawing.Size(983, 443);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonCancel);

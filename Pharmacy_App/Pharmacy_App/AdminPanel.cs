@@ -65,14 +65,14 @@ namespace Pharmacy_App
             // Adding columns for list view
             
             listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);
-            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
+            listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
 
             //----------------------------------------------------------------------------

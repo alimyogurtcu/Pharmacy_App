@@ -280,7 +280,7 @@
             this.listViewMedicines.GridLines = true;
             this.listViewMedicines.Location = new System.Drawing.Point(12, 25);
             this.listViewMedicines.Name = "listViewMedicines";
-            this.listViewMedicines.Size = new System.Drawing.Size(1205, 308);
+            this.listViewMedicines.Size = new System.Drawing.Size(864, 308);
             this.listViewMedicines.TabIndex = 5;
             this.listViewMedicines.UseCompatibleStateImageBehavior = false;
             this.listViewMedicines.View = System.Windows.Forms.View.Details;
@@ -298,7 +298,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1302, 607);
+            this.ClientSize = new System.Drawing.Size(893, 576);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.listViewMedicines);
             this.Controls.Add(this.groupBox1);

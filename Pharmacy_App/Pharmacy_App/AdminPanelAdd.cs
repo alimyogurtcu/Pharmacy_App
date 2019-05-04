@@ -43,13 +43,7 @@ namespace Pharmacy_App
             int amount = 0;
                 
 
-            //*sql add
-            conn.Open();
-            string sql = "insert into Medicines(Name, Category, Milligram, Amount, Cost, Price, ExperationDate, UpdatedDate) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + System.DateTime.Now + "')";
-            SQLiteCommand uploadDB = new SQLiteCommand(sql, conn);
-            uploadDB.ExecuteNonQuery();
-            conn.Close();
-            //*sql add
+
 
             bool validation = true;// value for check if medicine is valid or not
 
@@ -150,6 +144,14 @@ namespace Pharmacy_App
             if(errorMessage == "")
             {
                 validation = true;
+
+                //*sql add
+                conn.Open();
+                string sql = "insert into Medicines(Name, Category, Milligram, ExperationDate, Amount, Cost, Price, Status, UpdatedDate) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + status.ToString() + "', '" + System.DateTime.Now + "')";
+                SQLiteCommand uploadDB = new SQLiteCommand(sql, conn);
+                uploadDB.ExecuteNonQuery();
+                conn.Close();
+                //*sql add
             }
             else
             {
@@ -165,7 +167,7 @@ namespace Pharmacy_App
                 // If dialog result is Yes. Program adds the medicine.
                 // If dialog result is no Program dont do anything.
 
-                if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "name : " + name + "\n" + "category : " +category + "\n" + "amount :" + amount + "\n" + "mg : " + mg + "\n" + "experationDate : " + experationDate + "\n" + "cost : " + cost + "\n" + "price : " + price + "\n" + "status : " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "Name: " + name + "\n" + "Category: " +category + "\n" + "Amount:" + amount + "\n" + "Milligram: " + mg + "\n" + "Experation Date: " + experationDate + "\n" + "Cost: " + cost + "\n" + "Price: " + price + "\n" + "Status: " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     /*--------------------sql code here--------------------*/
 
@@ -174,14 +176,14 @@ namespace Pharmacy_App
                     // Adding colums to the list view
 
                     listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);
-                    listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
+                    listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
 
                     //------------------------------
@@ -264,7 +266,8 @@ namespace Pharmacy_App
                 {
                     /*doNothing*/
                 }
-                
+
+
             }
             else
             {
@@ -289,8 +292,6 @@ namespace Pharmacy_App
             this.Close();
 
         }
-
-
 
     }
 }
