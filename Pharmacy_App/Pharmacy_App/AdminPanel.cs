@@ -42,6 +42,7 @@ namespace Pharmacy_App
         {
             AdminPanelUpdate adminPanelUpdate = new AdminPanelUpdate();
             adminPanelUpdate.Show();
+            this.Close();
         }
 
         private void buttonHistory_Click(object sender, EventArgs e)
@@ -99,7 +100,7 @@ namespace Pharmacy_App
                 {
                     name = nameList[i].InnerXml,
                     category = categoryList[i].InnerXml,
-                    mg = int.Parse(mgList[i].InnerXml),
+                    mg = double.Parse(mgList[i].InnerXml),
                     amount = int.Parse(amountList[i].InnerXml),
                     cost = double.Parse(costList[i].InnerXml),
                     price = double.Parse(priceList[i].InnerXml),

@@ -18,9 +18,27 @@ namespace Pharmacy_App
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
 
+
+        // this string variables will be used for get values
+        // from list view and make validation for selected
+        // item in xml file
+        string xmlName,xmlCategory,xmlExperationDate,xmlStatus;
+        int xmlAmount;
+        double xmlMg, xmlCost, xmlPrice;
+        //-----------------------------------------------
+        int listViewIndex;
+
+
         public AdminPanelUpdate()
         {
             InitializeComponent();
+        }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
+        {
+            AdminPanel Ap = new AdminPanel();
+            Ap.Show();
+            this.Close();
         }
 
         public void Form_Reload(object sender, EventArgs e)
@@ -41,16 +59,16 @@ namespace Pharmacy_App
 
             // Adding columns for list view
 
-            listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);
-            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);// sub item 0
+            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);//  sub item 1
+            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);// sub item 2
+            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);// sub item 3
+            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center); // sub item 4
+            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);// sub item 5
+            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);// sub item 6
+            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);// sub item 7
+            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);// sub item 8
+            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);// sub item 9
 
             //----------------------------------------------------------------------------
 
@@ -77,7 +95,7 @@ namespace Pharmacy_App
                 {
                     name = nameList[i].InnerXml,
                     category = categoryList[i].InnerXml,
-                    mg = int.Parse(mgList[i].InnerXml),
+                    mg = double.Parse(mgList[i].InnerXml),
                     amount = int.Parse(amountList[i].InnerXml),
                     cost = double.Parse(costList[i].InnerXml),
                     price = double.Parse(priceList[i].InnerXml),
@@ -89,7 +107,7 @@ namespace Pharmacy_App
             }
 
 
-            for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecors list's elements to the list view 
+            for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecords list's elements to the list view 
             {
                 ListViewItem row = new ListViewItem((i + 1).ToString());
 
@@ -125,9 +143,213 @@ namespace Pharmacy_App
             updateViewList();    
         }
 
-        private void buttonRefresh_Click(object sender, EventArgs e)
+
+        private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Form_Reload(sender,e);
+            
+
+            listViewIndex = listViewMedicines.FocusedItem.Index;
+
+            // getting values from viev list to medicine groub box
+
+            textBoxName.Text = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
+            comboBoxCategory.Text = listViewMedicines.FocusedItem.SubItems[2].Text.ToString();
+            textBoxMg.Text = listViewMedicines.FocusedItem.SubItems[3].Text.ToString();
+            dateTimePickerExpirationDate.Text = listViewMedicines.FocusedItem.SubItems[4].Text.ToString();
+            textBoxAmount.Text = listViewMedicines.FocusedItem.SubItems[5].Text.ToString();
+            textBoxCost.Text = listViewMedicines.FocusedItem.SubItems[6].Text.ToString();
+            textBoxPrice.Text = listViewMedicines.FocusedItem.SubItems[7].Text.ToString();
+            
+            if(listViewMedicines.FocusedItem.SubItems[8].Text.ToString() == "Saleable")
+            {
+                radioButtonSaleable.Checked = true;
+            }
+            else
+            {
+                radioButtonUnsaleable.Checked = true;
+            }
+
+            //----------------------------------------------------------
+            
+
+            
+
+            // getting values to variables
+
+            xmlName = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
+            xmlCategory = listViewMedicines.FocusedItem.SubItems[2].Text.ToString();
+            xmlMg = double.Parse(listViewMedicines.FocusedItem.SubItems[3].Text.ToString());
+            xmlExperationDate = listViewMedicines.FocusedItem.SubItems[4].Text.ToString();
+            xmlAmount = int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString());
+            xmlCost = double.Parse(listViewMedicines.FocusedItem.SubItems[6].Text.ToString());
+            xmlPrice = double.Parse(listViewMedicines.FocusedItem.SubItems[7].Text.ToString());
+
+            if (listViewMedicines.FocusedItem.SubItems[8].Text.ToString() == "Saleable")
+            {
+                xmlStatus = "Saleable";
+            }
+            else
+            {
+                xmlStatus = "Unsaleable";
+            }
+            //------------------------------------------------------------------------------------
+
+            
+
+
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+
+            string name, status, updatedDate;
+            double mg = 0, cost = 0, price = 0;
+            int amount = 0;
+            string errorMessage = "";
+            bool validation = true;
+
+
+            name = textBoxName.Text.ToString();
+            if (name == "")
+            {
+                errorMessage += "\nName";
+            }
+            else { /*doNothing*/}
+
+            string category = comboBoxCategory.Text.ToString();
+
+            if (category == "")
+            {
+                errorMessage += "\nCategory";
+            }
+            else { /*doNothing*/}
+
+            try
+            {
+                mg = double.Parse(textBoxMg.Text.ToString());
+            }
+            catch (Exception ex)
+            {
+                errorMessage += "\nMg";
+            }
+
+            string experationDate = dateTimePickerExpirationDate.Text.ToString();
+
+            try
+            {
+                amount = int.Parse(textBoxAmount.Text.ToString());
+            }
+            catch
+            {
+                errorMessage += "\nAmount";
+            }
+
+            try
+            {
+                cost = double.Parse(textBoxCost.Text.ToString());
+            }
+            catch
+            {
+                errorMessage += "\nCost";
+            }
+
+            try
+            {
+                price = double.Parse(textBoxPrice.Text.ToString());
+            }
+            catch
+            {
+                errorMessage += "\nPrice";
+            }
+
+            updatedDate = System.DateTime.Now.ToString();
+
+            if (radioButtonSaleable.Checked)
+            {
+                status = radioButtonSaleable.Text.ToString();
+            }
+            else
+            {
+                status = radioButtonUnsaleable.Text.ToString();
+            }
+
+            if (errorMessage == "")
+            {
+                validation = true;
+            }
+            else
+            {
+                validation = false;
+                MessageBox.Show("Invalid inputs. Please try again:\n" + errorMessage, "validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+            if (validation)
+            {
+                if (MessageBox.Show("Medicine:\n" +
+                        xmlName +
+                        " " +
+                        xmlCategory +
+                        " " +
+                        xmlMg +
+                        " " +
+                        xmlAmount +
+                        " " +
+                        xmlCost +
+                        " " +
+                        xmlPrice +
+                        " " +
+                        xmlExperationDate +
+                        " " +
+                        xmlStatus +
+                        "\nDo you want to continue to update ?", "updated check", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    /*-------------------------------------sqlCodeHere-----------------------------*/
+
+
+                    var medicineDoc = XDocument.Load(@xmlFileLocation);
+
+                    var items = from item in medicineDoc.Descendants("medicine")
+                                where (item.Element("name").Value == xmlName && item.Element("category").Value == xmlCategory && item.Element("mg").Value == xmlMg.ToString() && item.Element("experationDate").Value == xmlExperationDate && item.Element("amount").Value == xmlAmount.ToString() && item.Element("cost").Value == xmlCost.ToString() && item.Element("price").Value == xmlPrice.ToString() && item.Element("status").Value == xmlStatus.ToString())
+                                select item;
+
+                    foreach (XElement itemElement in items)
+                    {
+                        itemElement.SetElementValue("name", name);
+                        itemElement.SetElementValue("category", category);
+                        itemElement.SetElementValue("mg", mg);
+                        itemElement.SetElementValue("experationDate", experationDate);
+                        itemElement.SetElementValue("amount", amount);
+                        itemElement.SetElementValue("cost", cost);
+                        itemElement.SetElementValue("price", price);
+                        itemElement.SetElementValue("status", status);
+                        itemElement.SetElementValue("updatedDate", updatedDate);
+
+                    }
+
+                    medicineDoc.Save(@xmlFileLocation);
+
+                    textBoxName.Text = "";
+                    textBoxAmount.Text = "";
+                    textBoxMg.Text = "";
+                    textBoxPrice.Text = "";
+                    textBoxCost.Text = "";
+                    comboBoxCategory.Text = "";
+                    radioButtonSaleable.Checked = false;
+                    radioButtonUnsaleable.Checked = false;
+
+                    Form_Reload(sender, e);
+
+                    MessageBox.Show("Medicine updated" , "confirm",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                }
+            }
+            else { /*doNothing*/}
+
+            
+                
+
+
         }
     }
 }

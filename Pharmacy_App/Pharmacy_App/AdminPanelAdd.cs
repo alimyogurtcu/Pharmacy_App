@@ -25,14 +25,23 @@ namespace Pharmacy_App
             InitializeComponent();
         }
 
+        public void Form_Reload(object sender, EventArgs e)
+        {
+            listViewMedicines.Items.Clear();
+            listViewMedicines.Columns.Clear();
+            
+        }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            string name = "", experationDate, status = "", category;
-            double cost = 0,
-                   price = 0;
-            int amount = 0,
-                mg = 0;
             //decleration of values for get informations from textboxes
+
+            string name = "", experationDate, status = "", category,errorMessage = "";
+            double cost = 0,
+                   price = 0,
+                   mg = 0;
+            int amount = 0;
+                
 
             //*sql add
             conn.Open();
@@ -50,7 +59,7 @@ namespace Pharmacy_App
 
             // getting values from textboxes to values with *validations !!!
 
-            // for validation, validation bool valiue used. If
+            // for validation, validation bool value used. If
             // valudation is true program continues to check 
             // values. If all values correctly writted adding
             // values to xml document proccess is starts. Else
@@ -60,103 +69,72 @@ namespace Pharmacy_App
 
             if (name == "")
             {
-                validation = false;
-                MessageBox.Show("Unvalid name ");
+                errorMessage += "\nName";
                 textBoxName.Text = "";
                 textBoxName.Focus();
             }
             else { /*doNothing*/}
-            
 
-            if (validation)
+            try
             {
-                try
-                {
-                    amount = int.Parse(textBoxAmount.Text.ToString());
-                    validation = true;
-                }
-                catch (Exception Ex)
-                {
-                    validation = false;
-                    MessageBox.Show("Unvalid amount. Please try again", "amount validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxAmount.Text = "";
-                    textBoxAmount.Focus();
-                }
+                amount = int.Parse(textBoxAmount.Text.ToString());
             }
-            else
-            {/*doNothing*/}
-              
-
-            if (validation)
+            catch (Exception Ex)
             {
-                try
-                {
-                    validation = true;
-                    mg = int.Parse(textBoxMg.Text.ToString());
-
-                }
-                catch (Exception Ex)
-                {
-                    validation = false;
-                    MessageBox.Show("Unvalid mg. Please try again", "mg validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxMg.Text = "";
-                    textBoxMg.Focus();
-                }
+                textBoxAmount.Text = "";
+                errorMessage += "\nAmount";
+                textBoxAmount.Focus();
             }
-            else { /*doNothing*/ }
 
-
-            if (validation)
+            try
             {
-                try
-                {
-                    validation = true;
-                    cost = double.Parse(textBoxCost.Text.ToString());
-                }
-                catch (Exception Ex)
-                {
-                    validation = false;
-                    MessageBox.Show("unvalid cost. Please try again", "cost validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxCost.Text = "";
-                    textBoxCost.Focus();
-                }
-            }
-            else { /*doNothing*/}
-            
+                mg = double.Parse(textBoxMg.Text.ToString());
 
-            if (validation)
-            {
-                try
-                {
-                    validation = true;
-                    price = double.Parse(textBoxPrice.Text.ToString());
-                }
-                catch
-                {
-                    validation = false;
-                    MessageBox.Show("unvalid price. PLease try again", "price validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxPrice.Text = "";
-                    textBoxPrice.Focus();
-                }
             }
-            else { /*doNothing*/}
-            
-            
+            catch (Exception Ex)
+            {
+                textBoxMg.Text = "";
+                errorMessage += "\nMg";
+                textBoxMg.Focus();
+            }
+
+            try
+            {
+                cost = double.Parse(textBoxCost.Text.ToString());
+            }
+            catch (Exception Ex)
+            {
+                textBoxCost.Text = "";
+                errorMessage += "\nCost";
+                textBoxCost.Text = "";
+                textBoxCost.Focus();
+            }
+
+            try
+            {
+                
+                price = double.Parse(textBoxPrice.Text.ToString());
+            }
+            catch
+            {
+                textBoxPrice.Text = "";
+                errorMessage = errorMessage += "\nCost";
+                textBoxPrice.Text = "";
+                textBoxPrice.Focus();
+            }
+
+
             experationDate = dateTimePickerExpirationDate.Text.ToString();
             category = comboBoxCategory.Text.ToString();
 
-            if (validation)
+
+            if (category == "")
             {
-                if (category == "")
-                {
-                    validation = false;
-                    MessageBox.Show("Please choose category", "category validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    comboBoxCategory.Focus();
-                }
-                else {/*doNothing*/}
+                errorMessage += "\nCategory";
+                comboBoxCategory.Focus();
             }
-            else { /*doNothing*/}
-            
+            else {/*doNothing*/}
+
 
             if (radioButtonSaleable.Checked) //here we are get status from salable radioButton
             {
@@ -166,6 +144,17 @@ namespace Pharmacy_App
             else if (radioButtonUnsaleable.Checked) //here we are get status from unSalable radioButton
             {
                 status = radioButtonUnsaleable.Text.ToString();
+            }
+
+
+            if(errorMessage == "")
+            {
+                validation = true;
+            }
+            else
+            {
+                validation = false;
+                MessageBox.Show("Invalid inputs found. Please check your ınputs and try again! \n" + errorMessage, "value input eror message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             //-------------------------------------------
@@ -178,6 +167,25 @@ namespace Pharmacy_App
 
                 if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "name : " + name + "\n" + "category : " +category + "\n" + "amount :" + amount + "\n" + "mg : " + mg + "\n" + "experationDate : " + experationDate + "\n" + "cost : " + cost + "\n" + "price : " + price + "\n" + "status : " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    /*--------------------sql code here--------------------*/
+
+                    Form_Reload(sender, e);
+
+                    // Adding colums to the list view
+
+                    listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);
+                    listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
+
+                    //------------------------------
+
                     temporaryMedicineRecordList.Add(new medicineRecords // adding new item to temporary list.
                     {
                         name = name,
@@ -249,6 +257,8 @@ namespace Pharmacy_App
                     comboBoxCategory.Text = "";
                     radioButtonSaleable.Checked = true;
 
+                    
+
                 }
                 else
                 {
@@ -266,22 +276,6 @@ namespace Pharmacy_App
         private void AdminPanelAdd_Load(object sender, EventArgs e)
         {
             radioButtonSaleable.Checked = true;// Radio button salable is checked
-
-
-            // Adding colums to the list view
-
-            listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);
-            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
-
-            //------------------------------
 
             this.comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList; // Makes combo box unvriteable
         }
