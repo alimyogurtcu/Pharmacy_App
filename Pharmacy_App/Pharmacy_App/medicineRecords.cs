@@ -10,7 +10,7 @@ namespace Pharmacy_App
     {
         public string name { get; set; }
         public string category { get; set; }
-        public int mg { get; set; }
+        public double mg { get; set; }
         public string experationDate { get; set; }
         public int amount { get; set; }
         public double cost { get; set; }

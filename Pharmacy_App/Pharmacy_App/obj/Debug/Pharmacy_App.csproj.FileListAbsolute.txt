@@ -72,3 +72,13 @@ C:\Users\alimy\Desktop\Yeni klasör\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy
 C:\Users\alimy\Desktop\Yeni klasör\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete
 C:\Users\alimy\Desktop\Yeni klasör\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.exe
 C:\Users\alimy\Desktop\Yeni klasör\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.pdb
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.dll
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.dll
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.xml
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.xml
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete
