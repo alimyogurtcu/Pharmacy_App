@@ -4,7 +4,6 @@ C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\bin\Debug\Pharmac
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csprojAssemblyReference.cache
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanel.resources
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.Form1.resources
-C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.Properties.Resources.resources
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.GenerateResource.cache
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CoreCompileInputs.cache
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.exe

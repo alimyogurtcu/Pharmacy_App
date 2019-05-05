@@ -66,7 +66,7 @@ namespace Pharmacy_App
 
             // Adding columns for list view
             
-            listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
             listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
@@ -94,6 +94,15 @@ namespace Pharmacy_App
             XmlNodeList UpdatedDateList = medicines.GetElementsByTagName("updatedDate");
             imagePathList = medicines.GetElementsByTagName("imagePath");
 
+            ImageList img = new ImageList();
+            img.ImageSize = new Size(70, 70);
+
+            for (int i = 0; i < imagePathList.Count; i++)
+            {
+                img.Images.Add(Image.FromFile(imagePathList[i].InnerXml));
+
+            }
+
             //--------------------------------------------------------------------------------------
 
 
@@ -117,6 +126,7 @@ namespace Pharmacy_App
 
             for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecors list's elements to the list view 
             {
+                listViewMedicines.SmallImageList = img;
                 ListViewItem row = new ListViewItem((i+1).ToString());
 
                 ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].name.ToString());
@@ -130,7 +140,7 @@ namespace Pharmacy_App
                 ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].updatedDate.ToString());
 
 
-
+                row.ImageIndex = i;
                 row.SubItems.Add(itms1);
                 row.SubItems.Add(itms8);
                 row.SubItems.Add(itms2);
