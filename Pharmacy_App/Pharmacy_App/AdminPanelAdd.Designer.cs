@@ -105,6 +105,7 @@
             this.pictureBoxImage.Location = new System.Drawing.Point(546, 19);
             this.pictureBoxImage.Name = "pictureBoxImage";
             this.pictureBoxImage.Size = new System.Drawing.Size(187, 200);
+            this.pictureBoxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxImage.TabIndex = 7;
             this.pictureBoxImage.TabStop = false;
             this.pictureBoxImage.Click += new System.EventHandler(this.pictureBoxImage_Click);
@@ -122,9 +123,17 @@
             // 
             this.comboBoxCategory.FormattingEnabled = true;
             this.comboBoxCategory.Items.AddRange(new object[] {
-            "hap",
-            "surup",
-            "sampuan"});
+            "Antipyretics",
+            "Analgesics",
+            "Antimalarial Drugs",
+            "Antibiotics",
+            "Antiseptics",
+            "Mood Stabilizers",
+            "Hormone replacements",
+            "Oral contraceptives",
+            "Stimulants",
+            "Tranquilizers",
+            "Statins"});
             this.comboBoxCategory.Location = new System.Drawing.Point(61, 58);
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(121, 21);
@@ -308,7 +317,6 @@
             this.listViewMedicines.TabIndex = 5;
             this.listViewMedicines.UseCompatibleStateImageBehavior = false;
             this.listViewMedicines.View = System.Windows.Forms.View.Details;
-            this.listViewMedicines.SelectedIndexChanged += new System.EventHandler(this.listViewMedicines_SelectedIndexChanged);
             // 
             // label8
             // 

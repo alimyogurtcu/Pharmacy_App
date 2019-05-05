@@ -151,14 +151,6 @@ namespace Pharmacy_App
             if(errorMessage == "")
             {
                 validation = true;
-
-                //*sql add
-                conn.Open();
-                string sql = "insert into Medicines(Name, Category, Milligram, ExperationDate, Amount, Cost, Price, Status, UpdatedDate) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + status.ToString() + "', '" + System.DateTime.Now + "')";
-                SQLiteCommand uploadDB = new SQLiteCommand(sql, conn);
-                uploadDB.ExecuteNonQuery();
-                conn.Close();
-                //*sql add
             }
             else
             {
@@ -176,9 +168,15 @@ namespace Pharmacy_App
                 // If dialog result is Yes. Program adds the medicine.
                 // If dialog result is no Program dont do anything.
 
-                if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "Name: " + name + "\n" + "Category: " +category + "\n" + "Amount:" + amount + "\n" + "Milligram: " + mg + "\n" + "Experation Date: " + experationDate + "\n" + "Cost: " + cost + "\n" + "Price: " + price + "\n" + "Status: " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "Name: " + name + "\n" + "Category: " + category + "\n" + "Amount:" + amount + "\n" + "Milligram: " + mg + "\n" + "Experation Date: " + experationDate + "\n" + "Cost: " + cost + "\n" + "Price: " + price + "\n" + "Status: " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    /*--------------------sql code here--------------------*/
+                    //*sql add
+                    conn.Open();
+                    string sql = "insert into Medicines(Name, Category, Milligram, ExperationDate, Amount, Cost, Price, Status, UpdatedDate) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + status.ToString() + "', '" + System.DateTime.Now + "')";
+                    SQLiteCommand uploadDB = new SQLiteCommand(sql, conn);
+                    uploadDB.ExecuteNonQuery();
+                    conn.Close();
+                    //*sql add
 
                     Form_Reload(sender, e);
 
@@ -351,11 +349,6 @@ namespace Pharmacy_App
             }
             else { /*doNothing*/}
             
-
-        }
-
-        private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 

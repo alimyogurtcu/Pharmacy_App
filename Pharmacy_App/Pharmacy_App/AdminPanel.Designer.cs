@@ -104,9 +104,11 @@
             // 
             // pictureBoxImage
             // 
+            this.pictureBoxImage.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureBoxImage.Location = new System.Drawing.Point(0, 14);
             this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(186, 183);
+            this.pictureBoxImage.Size = new System.Drawing.Size(186, 168);
+            this.pictureBoxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxImage.TabIndex = 69;
             this.pictureBoxImage.TabStop = false;
             // 

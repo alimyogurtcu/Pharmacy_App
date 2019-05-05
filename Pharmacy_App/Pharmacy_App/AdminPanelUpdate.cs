@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using System.Data.SQLite;
 using System.IO;
 
 namespace Pharmacy_App
 {
     public partial class AdminPanelUpdate : Form
     {
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= medicines.db"); //sql
+        SQLiteCommand update = new SQLiteCommand(); //sql
+
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
         string imageFolderPath = @"C:/Users/Public/PharmacyAppData/Images";// folder for images
@@ -51,6 +55,7 @@ namespace Pharmacy_App
             AdminPanelUpdate_Load(sender, e);
         }
 
+
         private void pictureBoxImages_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -66,6 +71,8 @@ namespace Pharmacy_App
                 {
                     System.IO.File.Copy(imageSourcePath, imageFolderPath + "/" + imageCopyName);
                     pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + imageCopyName);
+                    pictureBoxImage.Width = 100;
+                    pictureBoxImage.Height = 100;
                 }
                 catch
                 {
@@ -98,14 +105,14 @@ namespace Pharmacy_App
             // Adding columns for list view
 
             listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);// sub item 0
-            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);//  sub item 1
-            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);// sub item 2
-            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);// sub item 3
+            listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);//  sub item 1
+            listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);// sub item 2
+            listViewMedicines.Columns.Add("Mg", 50 , HorizontalAlignment.Center);// sub item 3
             listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center); // sub item 4
-            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);// sub item 5
-            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);// sub item 6
-            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);// sub item 7
-            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);// sub item 8
+            listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);// sub item 5
+            listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);// sub item 6
+            listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);// sub item 7
+            listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);// sub item 8
             listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);// sub item 9
 
             //----------------------------------------------------------------------------
@@ -236,10 +243,11 @@ namespace Pharmacy_App
 
             //getting image from xml file
             
-            pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString());
-            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString()); //-ERROR-
+            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage; //-ERROR-
             //---------------------------
 
+            labelID.Text = (medicineNumber+1).ToString(); //sql
 
         }
 
@@ -320,6 +328,7 @@ namespace Pharmacy_App
             if (errorMessage == "")
             {
                 validation = true;
+
             }
             else
             {
@@ -348,8 +357,13 @@ namespace Pharmacy_App
                         xmlStatus +
                         "\nDo you want to continue to update ?", "updated check", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    /*-------------------------------------sqlCodeHere-----------------------------*/
-
+                    //sql*
+                    conn.Open();
+                    update.Connection = conn;
+                    update.CommandText = "Update Medicines set Name ='" + textBoxName.Text + "', Category = '" + comboBoxCategory.Text + "', Milligram = '" + textBoxMg.Text + "', ExperationDate = '" + dateTimePickerExpirationDate.Text + "', Amount = '" + textBoxAmount.Text + "', Cost = '" + textBoxCost.Text + "', Price = '" + textBoxPrice.Text + "', Status = '" + status.ToString() + "', UpdatedDate = '" + System.DateTime.Now + "' where ID =" + labelID.Text + "";
+                    update.ExecuteNonQuery();
+                    conn.Close();
+                    //sql*
 
                     var medicineDoc = XDocument.Load(@xmlFileLocation);
 

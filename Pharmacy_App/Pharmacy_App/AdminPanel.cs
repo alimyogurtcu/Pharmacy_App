@@ -168,8 +168,8 @@ namespace Pharmacy_App
 
             //getting image from xml file
 
-            pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString());
-            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString()); //-ERROR-
+            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage; //-ERROR-
             //---------------------------
         }
     }
