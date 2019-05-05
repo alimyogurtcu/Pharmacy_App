@@ -18,8 +18,10 @@ namespace Pharmacy_App
         SQLiteConnection conn = new SQLiteConnection(@"Data Source= medicines.db"); //sql
 
         List<medicineRecords> temporaryMedicineRecordList = new List<medicineRecords>();
-
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml"; // xml file location
+        string imageFolderPath = @"C:/Users/Public/PharmacyAppData/Images";// folder for images
+        string image = "";
+        string imageSourcePath, imageCopyName = "";
         public AdminPanelAdd()
         {
             InitializeComponent();
@@ -112,7 +114,7 @@ namespace Pharmacy_App
             catch
             {
                 textBoxPrice.Text = "";
-                errorMessage = errorMessage += "\nCost";
+                errorMessage = errorMessage += "\nPrice";
                 textBoxPrice.Text = "";
                 textBoxPrice.Focus();
             }
@@ -140,6 +142,11 @@ namespace Pharmacy_App
                 status = radioButtonUnsaleable.Text.ToString();
             }
 
+            if(imageCopyName == "")
+            {
+                errorMessage += "\nImage";
+            }
+
 
             if(errorMessage == "")
             {
@@ -158,6 +165,8 @@ namespace Pharmacy_App
                 validation = false;
                 MessageBox.Show("Invalid inputs found. Please check your ınputs and try again! \n" + errorMessage, "value input eror message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+
 
             //-------------------------------------------
 
@@ -199,11 +208,13 @@ namespace Pharmacy_App
                         experationDate = experationDate,
                         status = status,
                         updatedDate = System.DateTime.Now.ToString(),
+                        imagePath = imageFolderPath + "/" + imageCopyName,
 
-                });
+                    });
 
                     for (var i = 0; i < temporaryMedicineRecordList.Count; i++)// Adding temporaryMedicineRecors list's elements to the list view 
                     {
+
                         ListViewItem row = new ListViewItem((i + 1).ToString());
 
                         ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].name.ToString());
@@ -226,7 +237,7 @@ namespace Pharmacy_App
                         row.SubItems.Add(itms6);
                         row.SubItems.Add(itms7);
                         row.SubItems.Add(itms9);
-
+                        
                         listViewMedicines.Items.Add(row);
                     }
 
@@ -242,7 +253,8 @@ namespace Pharmacy_App
                     new XElement("experationDate", experationDate),
                     new XElement("status", status),
                     new XElement("category", category),
-                    new XElement("updatedDate", System.DateTime.Now.ToString()));
+                    new XElement("updatedDate", System.DateTime.Now.ToString()),
+                    new XElement("imagePath", imageFolderPath+"/"+imageCopyName));
 
                     doc.Element("medicines").Add(newElement);
 
@@ -258,7 +270,8 @@ namespace Pharmacy_App
                     textBoxPrice.Text = "";
                     comboBoxCategory.Text = "";
                     radioButtonSaleable.Checked = true;
-
+                    pictureBoxImage.Image = null;
+                    imageCopyName = "";
                     
 
                 }
@@ -293,5 +306,69 @@ namespace Pharmacy_App
 
         }
 
+        private void pictureBoxImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Please select product picture.";
+            ofd.Filter = "JPG|*.jpg|JPEG|*.jpeg|GIF|*.gif|PNG|*.png";
+            DialogResult dr = ofd.ShowDialog();
+            if(dr == System.Windows.Forms.DialogResult.OK)
+            {
+                imageSourcePath = ofd.FileName.ToString();
+                imageCopyName = ofd.SafeFileName.ToString();
+
+                try
+                {
+                    System.IO.File.Copy(imageSourcePath, imageFolderPath + "/" + imageCopyName);
+                    pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + imageCopyName);
+                }
+                catch
+                {
+                    for(int i = 0; i < 100000; i++)
+                    {
+                        try
+                        {
+                            System.IO.File.Copy(imageSourcePath, imageFolderPath + "/" + "(" + i + ")" + imageCopyName);
+                            pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + "(" + i + ")" + imageCopyName);
+                            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                            imageCopyName = "(" + i + ")" + imageCopyName;
+                            break;
+                        }
+                        catch(Exception Ex)
+                        {
+
+                        }
+                    }
+                }
+
+                
+
+                labelClickMessage.Text = "";
+                
+
+                    
+
+            }
+            else { /*doNothing*/}
+            
+
+        }
+
+        private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clickMessageLabel_Click(object sender, EventArgs e)
+        {
+            pictureBoxImage_Click(sender,e);
+        }
+
+
+
+
+
     }
+
+    
 }

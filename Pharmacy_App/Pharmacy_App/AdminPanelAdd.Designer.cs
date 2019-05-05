@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelClickMessage = new System.Windows.Forms.Label();
+            this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,10 +55,13 @@
             this.listViewMedicines = new System.Windows.Forms.ListView();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelClickMessage);
+            this.groupBox1.Controls.Add(this.pictureBoxImage);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.comboBoxCategory);
             this.groupBox1.Controls.Add(this.label7);
@@ -80,10 +85,29 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 339);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(489, 225);
+            this.groupBox1.Size = new System.Drawing.Size(733, 225);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medicine";
+            // 
+            // labelClickMessage
+            // 
+            this.labelClickMessage.AutoSize = true;
+            this.labelClickMessage.Location = new System.Drawing.Point(594, 120);
+            this.labelClickMessage.Name = "labelClickMessage";
+            this.labelClickMessage.Size = new System.Drawing.Size(93, 13);
+            this.labelClickMessage.TabIndex = 47;
+            this.labelClickMessage.Text = "click to add image";
+            this.labelClickMessage.Click += new System.EventHandler(this.clickMessageLabel_Click);
+            // 
+            // pictureBoxImage
+            // 
+            this.pictureBoxImage.Location = new System.Drawing.Point(546, 19);
+            this.pictureBoxImage.Name = "pictureBoxImage";
+            this.pictureBoxImage.Size = new System.Drawing.Size(187, 200);
+            this.pictureBoxImage.TabIndex = 7;
+            this.pictureBoxImage.TabStop = false;
+            this.pictureBoxImage.Click += new System.EventHandler(this.pictureBoxImage_Click);
             // 
             // label5
             // 
@@ -284,6 +308,7 @@
             this.listViewMedicines.TabIndex = 5;
             this.listViewMedicines.UseCompatibleStateImageBehavior = false;
             this.listViewMedicines.View = System.Windows.Forms.View.Details;
+            this.listViewMedicines.SelectedIndexChanged += new System.EventHandler(this.listViewMedicines_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -307,6 +332,7 @@
             this.Load += new System.EventHandler(this.AdminPanelAdd_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +364,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListView listViewMedicines;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelClickMessage;
+        private System.Windows.Forms.PictureBox pictureBoxImage;
     }
 }

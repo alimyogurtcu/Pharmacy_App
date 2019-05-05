@@ -17,7 +17,7 @@ namespace Pharmacy_App
     {
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
-
+        string imageFolderPath = @"C:/Users/Public/PharmacyAppData/Images";// folder for images
 
         // this string variables will be used for get values
         // from list view and make validation for selected
@@ -27,6 +27,8 @@ namespace Pharmacy_App
         double xmlMg, xmlCost, xmlPrice;
         //-----------------------------------------------
         int listViewIndex;
+        string imageSourcePath, imageCopyName;
+        XmlNodeList imagePathList;
 
 
         public AdminPanelUpdate()
@@ -49,6 +51,42 @@ namespace Pharmacy_App
             AdminPanelUpdate_Load(sender, e);
         }
 
+        private void pictureBoxImages_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Please select product picture.";
+            ofd.Filter = "JPG|*.jpg|JPEG|*.jpeg|GIF|*.gif|PNG|*.png";
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                imageSourcePath = ofd.FileName.ToString();
+                imageCopyName = ofd.SafeFileName.ToString();
+
+                try
+                {
+                    System.IO.File.Copy(imageSourcePath, imageFolderPath + "/" + imageCopyName);
+                    pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + imageCopyName);
+                }
+                catch
+                {
+                    for (int i = 0; i < 100000; i++)
+                    {
+                        try
+                        {
+                            System.IO.File.Copy(imageSourcePath, imageFolderPath + "/" + "(" + i + ")" + imageCopyName);
+                            pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + "(" + i + ")" + imageCopyName);
+                            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                            imageCopyName = "(" + i + ")" + imageCopyName;
+                            break;
+                        }
+                        catch (Exception Ex)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -85,6 +123,7 @@ namespace Pharmacy_App
             XmlNodeList experationDateList = medicines.GetElementsByTagName("experationDate");
             XmlNodeList statusList = medicines.GetElementsByTagName("status");
             XmlNodeList UpdatedDateList = medicines.GetElementsByTagName("updatedDate");
+            imagePathList = medicines.GetElementsByTagName("imagePath");
 
             //--------------------------------------------------------------------------------------
 
@@ -146,12 +185,14 @@ namespace Pharmacy_App
 
         private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            int medicineNumber;
+
 
             listViewIndex = listViewMedicines.FocusedItem.Index;
 
             // getting values from viev list to medicine groub box
 
+            medicineNumber = (int.Parse(listViewMedicines.FocusedItem.SubItems[0].Text.ToString()) - 1);
             textBoxName.Text = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
             comboBoxCategory.Text = listViewMedicines.FocusedItem.SubItems[2].Text.ToString();
             textBoxMg.Text = listViewMedicines.FocusedItem.SubItems[3].Text.ToString();
@@ -159,8 +200,8 @@ namespace Pharmacy_App
             textBoxAmount.Text = listViewMedicines.FocusedItem.SubItems[5].Text.ToString();
             textBoxCost.Text = listViewMedicines.FocusedItem.SubItems[6].Text.ToString();
             textBoxPrice.Text = listViewMedicines.FocusedItem.SubItems[7].Text.ToString();
-            
-            if(listViewMedicines.FocusedItem.SubItems[8].Text.ToString() == "Saleable")
+
+            if (listViewMedicines.FocusedItem.SubItems[8].Text.ToString() == "Saleable")
             {
                 radioButtonSaleable.Checked = true;
             }
@@ -170,9 +211,7 @@ namespace Pharmacy_App
             }
 
             //----------------------------------------------------------
-            
 
-            
 
             // getting values to variables
 
@@ -194,7 +233,12 @@ namespace Pharmacy_App
             }
             //------------------------------------------------------------------------------------
 
+
+            //getting image from xml file
             
+            pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString());
+            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            //---------------------------
 
 
         }
@@ -312,7 +356,7 @@ namespace Pharmacy_App
                     var items = from item in medicineDoc.Descendants("medicine")
                                 where (item.Element("name").Value == xmlName && item.Element("category").Value == xmlCategory && item.Element("mg").Value == xmlMg.ToString() && item.Element("experationDate").Value == xmlExperationDate && item.Element("amount").Value == xmlAmount.ToString() && item.Element("cost").Value == xmlCost.ToString() && item.Element("price").Value == xmlPrice.ToString() && item.Element("status").Value == xmlStatus.ToString())
                                 select item;
-
+                                
                     foreach (XElement itemElement in items)
                     {
                         itemElement.SetElementValue("name", name);
@@ -324,6 +368,7 @@ namespace Pharmacy_App
                         itemElement.SetElementValue("price", price);
                         itemElement.SetElementValue("status", status);
                         itemElement.SetElementValue("updatedDate", updatedDate);
+                        itemElement.SetElementValue("imagePath", imageFolderPath + "/" + imageCopyName);
 
                     }
 
@@ -346,7 +391,7 @@ namespace Pharmacy_App
             }
             else { /*doNothing*/}
 
-            
+            pictureBoxImage.Image = null;
                 
 
 

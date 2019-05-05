@@ -47,7 +47,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(436, 224);
+            this.button2.Location = new System.Drawing.Point(818, 280);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 76);
             this.button2.TabIndex = 7;
@@ -91,7 +91,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(436, 306);
+            this.buttonCancel.Location = new System.Drawing.Point(818, 362);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(82, 76);
             this.buttonCancel.TabIndex = 17;
@@ -103,7 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 450);
+            this.ClientSize = new System.Drawing.Size(912, 450);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.textBoxSeach);
