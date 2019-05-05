@@ -17,6 +17,7 @@ namespace Pharmacy_App
     {
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
         string folderName = @"C:/Users/Public/PharmacyAppData";
+        string imageFolderName = @"C:/Users/Public/PharmacyAppData/Images";
         public Form1()
         {
             InitializeComponent();
@@ -44,6 +45,16 @@ namespace Pharmacy_App
                     writer.Formatting = Formatting.Indented; // optional
                     doc.Save(writer);
                 }
+
+            }
+
+            if (Directory.Exists(imageFolderName))
+            {
+
+            }
+            else
+            {
+                Directory.CreateDirectory(imageFolderName);
 
             }
             

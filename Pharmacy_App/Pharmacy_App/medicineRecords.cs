@@ -17,6 +17,7 @@ namespace Pharmacy_App
         public double price { get; set; }
         public string status { get; set; }
         public string updatedDate { get; set; }
+        public string imagePath { get; set; }
 
     }
 }

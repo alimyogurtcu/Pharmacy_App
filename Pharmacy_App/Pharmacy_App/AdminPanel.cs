@@ -19,6 +19,8 @@ namespace Pharmacy_App
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();// adding class
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";// adding file location
 
+        XmlNodeList imagePathList;
+
         public AdminPanel()
         {
             InitializeComponent();
@@ -90,6 +92,7 @@ namespace Pharmacy_App
             XmlNodeList experationDateList = medicines.GetElementsByTagName("experationDate");
             XmlNodeList statusList = medicines.GetElementsByTagName("status");
             XmlNodeList UpdatedDateList = medicines.GetElementsByTagName("updatedDate");
+            imagePathList = medicines.GetElementsByTagName("imagePath");
 
             //--------------------------------------------------------------------------------------
 
@@ -157,6 +160,17 @@ namespace Pharmacy_App
         {
             Form_Reload(sender,e);
             
+        }
+
+        private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int medicineNumber = (int.Parse(listViewMedicines.FocusedItem.SubItems[0].Text.ToString()) - 1);
+
+            //getting image from xml file
+
+            pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString());
+            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            //---------------------------
         }
     }
 }

@@ -51,7 +51,10 @@
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.pictureBoxImage = new System.Windows.Forms.PictureBox();
+            this.labelImagePath = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewMedicines
@@ -60,7 +63,7 @@
             this.listViewMedicines.GridLines = true;
             this.listViewMedicines.Location = new System.Drawing.Point(12, 89);
             this.listViewMedicines.Name = "listViewMedicines";
-            this.listViewMedicines.Size = new System.Drawing.Size(699, 356);
+            this.listViewMedicines.Size = new System.Drawing.Size(699, 388);
             this.listViewMedicines.TabIndex = 0;
             this.listViewMedicines.UseCompatibleStateImageBehavior = false;
             this.listViewMedicines.View = System.Windows.Forms.View.Details;
@@ -89,7 +92,7 @@
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.textBoxName);
             this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Location = new System.Drawing.Point(717, 89);
+            this.groupBox2.Location = new System.Drawing.Point(717, 241);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(507, 236);
             this.groupBox2.TabIndex = 96;
@@ -285,11 +288,30 @@
             this.label19.TabIndex = 0;
             this.label19.Text = "Name";
             // 
+            // pictureBoxImage
+            // 
+            this.pictureBoxImage.Location = new System.Drawing.Point(717, 89);
+            this.pictureBoxImage.Name = "pictureBoxImage";
+            this.pictureBoxImage.Size = new System.Drawing.Size(182, 146);
+            this.pictureBoxImage.TabIndex = 97;
+            this.pictureBoxImage.TabStop = false;
+            this.pictureBoxImage.Click += new System.EventHandler(this.pictureBoxImages_Click);
+            // 
+            // labelImagePath
+            // 
+            this.labelImagePath.AutoSize = true;
+            this.labelImagePath.Location = new System.Drawing.Point(905, 89);
+            this.labelImagePath.Name = "labelImagePath";
+            this.labelImagePath.Size = new System.Drawing.Size(0, 13);
+            this.labelImagePath.TabIndex = 47;
+            // 
             // AdminPanelUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1236, 555);
+            this.Controls.Add(this.labelImagePath);
+            this.Controls.Add(this.pictureBoxImage);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.listViewMedicines);
             this.Name = "AdminPanelUpdate";
@@ -297,7 +319,9 @@
             this.Load += new System.EventHandler(this.AdminPanelUpdate_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -326,5 +350,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.PictureBox pictureBoxImage;
+        private System.Windows.Forms.Label labelImagePath;
     }
 }
