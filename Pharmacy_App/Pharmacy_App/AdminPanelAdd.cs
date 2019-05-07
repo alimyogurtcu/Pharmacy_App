@@ -273,19 +273,19 @@ namespace Pharmacy_App
                     pictureBoxImage.Image = null;
                     imageCopyName = "";
                     
-
-                }
+                    }
                 else
                 {
                     /*doNothing*/
                 }
-
 
             }
             else
             {
                 //do nothing
             }
+
+            
 
         }
 

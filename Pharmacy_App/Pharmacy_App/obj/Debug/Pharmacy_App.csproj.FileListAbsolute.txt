@@ -91,3 +91,4 @@ C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\E
 C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.xml
 C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.employePanel.resources

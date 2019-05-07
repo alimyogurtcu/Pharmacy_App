@@ -100,6 +100,12 @@
     <Compile Include="AdminPanelUpdate.Designer.cs">
       <DependentUpon>AdminPanelUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="employePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="employePanel.Designer.cs">
+      <DependentUpon>employePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminPanelUpdate.resx">
       <DependentUpon>AdminPanelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="employePanel.resx">
+      <DependentUpon>employePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

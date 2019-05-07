@@ -9,74 +9,34 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using System.IO;
-
 namespace Pharmacy_App
 {
-    public partial class AdminPanel : Form
+    public partial class employePanel : Form
     {
 
-        List<medicineRecords> medicineRecordList = new List<medicineRecords>();// adding class
-        string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";// adding file location
-
+        List<medicineRecords> medicineRecordList = new List<medicineRecords>();
+        string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
         XmlNodeList imagePathList;
-
-        public AdminPanel()
+        public employePanel()
         {
             InitializeComponent();
-        }
-
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            AdminPanelAdd adminPanelAdd = new AdminPanelAdd();
-            adminPanelAdd.Show();
-            this.Close();
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            
-            AdminPanelDelete adminPanelDelete = new AdminPanelDelete();
-            adminPanelDelete.Show();
-            this.Close();
-        }
-
-        private void buttonUpdate_Click(object sender, EventArgs e)
-        {
-            AdminPanelUpdate adminPanelUpdate = new AdminPanelUpdate();
-            adminPanelUpdate.Show();
-            this.Close();
-        }
-
-        private void buttonHistory_Click(object sender, EventArgs e)
-        {
-            AdminPanelHistory adminPanelHistory = new AdminPanelHistory();
-            adminPanelHistory.Show();
-        }
-
-        public void Form_Reload(object sender, EventArgs e)
-        {
-            listViewMedicines.Items.Clear();
-            listViewMedicines.Columns.Clear();
-            medicineRecordList.Clear();
-            AdminPanel_Load(sender, e);
         }
 
         public void updateViewList() // funchtion for get values from xml to view list
         {
 
             // Adding columns for list view
-            
-            listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
-            listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
+
+            listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);// sub item 0
+            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);//  sub item 1
+            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);// sub item 2
+            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);// sub item 3
+            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center); // sub item 4
+            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);// sub item 5
+            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);// sub item 6
+            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);// sub item 7
+            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);// sub item 8
+            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);// sub item 9
 
             //----------------------------------------------------------------------------
 
@@ -107,7 +67,7 @@ namespace Pharmacy_App
             //--------------------------------------------------------------------------------------
 
 
-            for (int i = 0; i < nameList.Count; i++)// Assaning every element from xml document to developer defined medicineRecords class list
+            for (int i = 0; i < nameList.Count; i++)// Assıgning every element from xml document to developer defined medicineRecords class list
             {
                 medicineRecordList.Add(new medicineRecords
                 {
@@ -125,10 +85,11 @@ namespace Pharmacy_App
             }
 
 
-            for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecors list's elements to the list view 
+            for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecords list's elements to the list view 
             {
                 listViewMedicines.SmallImageList = img;
-                ListViewItem row = new ListViewItem((i+1).ToString());
+
+                ListViewItem row = new ListViewItem((i + 1).ToString());
 
                 ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].name.ToString());
                 ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].category.ToString());
@@ -139,6 +100,7 @@ namespace Pharmacy_App
                 ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].price.ToString());
                 ListViewItem.ListViewSubItem itms7 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].status.ToString());
                 ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].updatedDate.ToString());
+
 
 
                 row.ImageIndex = i;
@@ -157,31 +119,9 @@ namespace Pharmacy_App
 
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void AdminPanel_Load(object sender, EventArgs e)
+        private void employePanel_Load(object sender, EventArgs e)
         {
             updateViewList();
-        }
-
-        private void buttonRefresh_Click(object sender, EventArgs e)
-        {
-            Form_Reload(sender,e);
-            
-        }
-
-        private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int medicineNumber = (int.Parse(listViewMedicines.FocusedItem.SubItems[0].Text.ToString()) - 1);
-
-            //getting image from xml file
-
-            pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString());
-            pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
-            //---------------------------
         }
     }
 }

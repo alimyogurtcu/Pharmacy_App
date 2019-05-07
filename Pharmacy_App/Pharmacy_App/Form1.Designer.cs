@@ -63,12 +63,13 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.Location = new System.Drawing.Point(296, 270);
+            this.button2.Location = new System.Drawing.Point(303, 304);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 28);
+            this.button2.Size = new System.Drawing.Size(195, 28);
             this.button2.TabIndex = 74;
-            this.button2.Text = "Cancel";
+            this.button2.Text = "Continue As Developer";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // labelAdminName
             // 
@@ -89,11 +90,11 @@
             // buttonLogin
             // 
             this.buttonLogin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonLogin.Location = new System.Drawing.Point(386, 270);
+            this.buttonLogin.Location = new System.Drawing.Point(333, 270);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 28);
+            this.buttonLogin.Size = new System.Drawing.Size(130, 28);
             this.buttonLogin.TabIndex = 71;
-            this.buttonLogin.Text = "Login";
+            this.buttonLogin.Text = "Login As Admin";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 

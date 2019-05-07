@@ -22,7 +22,7 @@ namespace Pharmacy_App
         // this string variables will be used for get values
         // from list view and make validation for selected
         // item in xml file
-        string xmlName,xmlCategory,xmlExperationDate,xmlStatus;
+        string xmlName,xmlCategory,xmlExperationDate,xmlStatus, imagePathFull;
         int xmlAmount;
         double xmlMg, xmlCost, xmlPrice;
         //-----------------------------------------------
@@ -66,6 +66,7 @@ namespace Pharmacy_App
                 {
                     System.IO.File.Copy(imageSourcePath, imageFolderPath + "/" + imageCopyName);
                     pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + imageCopyName);
+                    imagePathFull = imageFolderPath + "/" + imageCopyName;
                 }
                 catch
                 {
@@ -77,6 +78,7 @@ namespace Pharmacy_App
                             pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + "(" + i + ")" + imageCopyName);
                             pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
                             imageCopyName = "(" + i + ")" + imageCopyName;
+                            imagePathFull = imageFolderPath + "/" + imageCopyName;
                             break;
                         }
                         catch (Exception Ex)
@@ -137,7 +139,7 @@ namespace Pharmacy_App
             //--------------------------------------------------------------------------------------
 
 
-            for (int i = 0; i < nameList.Count; i++)// Assaning every element from xml document to developer defined medicineRecords class list
+            for (int i = 0; i < nameList.Count; i++)// Assıgning every element from xml document to developer defined medicineRecords class list
             {
                 medicineRecordList.Add(new medicineRecords
                 {
@@ -212,6 +214,8 @@ namespace Pharmacy_App
             textBoxAmount.Text = listViewMedicines.FocusedItem.SubItems[5].Text.ToString();
             textBoxCost.Text = listViewMedicines.FocusedItem.SubItems[6].Text.ToString();
             textBoxPrice.Text = listViewMedicines.FocusedItem.SubItems[7].Text.ToString();
+            imagePathFull = imagePathList[medicineNumber].InnerXml.ToString();
+
 
             if (listViewMedicines.FocusedItem.SubItems[8].Text.ToString() == "Saleable")
             {
@@ -257,153 +261,161 @@ namespace Pharmacy_App
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-
+            
             string name, status, updatedDate;
             double mg = 0, cost = 0, price = 0;
             int amount = 0;
             string errorMessage = "";
             bool validation = true;
 
-
-            name = textBoxName.Text.ToString();
-            if (name == "")
+            if(listViewMedicines.FocusedItem == null)
             {
-                errorMessage += "\nName";
-            }
-            else { /*doNothing*/}
-
-            string category = comboBoxCategory.Text.ToString();
-
-            if (category == "")
-            {
-                errorMessage += "\nCategory";
-            }
-            else { /*doNothing*/}
-
-            try
-            {
-                mg = double.Parse(textBoxMg.Text.ToString());
-            }
-            catch (Exception ex)
-            {
-                errorMessage += "\nMg";
-            }
-
-            string experationDate = dateTimePickerExpirationDate.Text.ToString();
-
-            try
-            {
-                amount = int.Parse(textBoxAmount.Text.ToString());
-            }
-            catch
-            {
-                errorMessage += "\nAmount";
-            }
-
-            try
-            {
-                cost = double.Parse(textBoxCost.Text.ToString());
-            }
-            catch
-            {
-                errorMessage += "\nCost";
-            }
-
-            try
-            {
-                price = double.Parse(textBoxPrice.Text.ToString());
-            }
-            catch
-            {
-                errorMessage += "\nPrice";
-            }
-
-            updatedDate = System.DateTime.Now.ToString();
-
-            if (radioButtonSaleable.Checked)
-            {
-                status = radioButtonSaleable.Text.ToString();
+                MessageBox.Show("Please select a medicine", "medicine selection confirm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                status = radioButtonUnsaleable.Text.ToString();
-            }
-
-            if (errorMessage == "")
-            {
-                validation = true;
-            }
-            else
-            {
-                validation = false;
-                MessageBox.Show("Invalid inputs. Please try again:\n" + errorMessage, "validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-            if (validation)
-            {
-                if (MessageBox.Show("Medicine:\n" +
-                        xmlName +
-                        " " +
-                        xmlCategory +
-                        " " +
-                        xmlMg +
-                        " " +
-                        xmlAmount +
-                        " " +
-                        xmlCost +
-                        " " +
-                        xmlPrice +
-                        " " +
-                        xmlExperationDate +
-                        " " +
-                        xmlStatus +
-                        "\nDo you want to continue to update ?", "updated check", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                name = textBoxName.Text.ToString();
+                if (name == "")
                 {
-                    /*-------------------------------------sqlCodeHere-----------------------------*/
+                    errorMessage += "\nName";
+                }
+                else { /*doNothing*/}
+
+                string category = comboBoxCategory.Text.ToString();
+
+                if (category == "")
+                {
+                    errorMessage += "\nCategory";
+                }
+                else { /*doNothing*/}
+
+                try
+                {
+                    mg = double.Parse(textBoxMg.Text.ToString());
+                }
+                catch (Exception ex)
+                {
+                    errorMessage += "\nMg";
+                }
+
+                string experationDate = dateTimePickerExpirationDate.Text.ToString();
+
+                try
+                {
+                    amount = int.Parse(textBoxAmount.Text.ToString());
+                }
+                catch
+                {
+                    errorMessage += "\nAmount";
+                }
+
+                try
+                {
+                    cost = double.Parse(textBoxCost.Text.ToString());
+                }
+                catch
+                {
+                    errorMessage += "\nCost";
+                }
+
+                try
+                {
+                    price = double.Parse(textBoxPrice.Text.ToString());
+                }
+                catch
+                {
+                    errorMessage += "\nPrice";
+                }
+
+                updatedDate = System.DateTime.Now.ToString();
+
+                if (radioButtonSaleable.Checked)
+                {
+                    status = radioButtonSaleable.Text.ToString();
+                }
+                else
+                {
+                    status = radioButtonUnsaleable.Text.ToString();
+                }
+
+                if (errorMessage == "")
+                {
+                    validation = true;
+                }
+                else
+                {
+                    validation = false;
+                    MessageBox.Show("Invalid inputs. Please try again:\n" + errorMessage, "validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
 
-                    var medicineDoc = XDocument.Load(@xmlFileLocation);
-
-                    var items = from item in medicineDoc.Descendants("medicine")
-                                where (item.Element("name").Value == xmlName && item.Element("category").Value == xmlCategory && item.Element("mg").Value == xmlMg.ToString() && item.Element("experationDate").Value == xmlExperationDate && item.Element("amount").Value == xmlAmount.ToString() && item.Element("cost").Value == xmlCost.ToString() && item.Element("price").Value == xmlPrice.ToString() && item.Element("status").Value == xmlStatus.ToString())
-                                select item;
-                                
-                    foreach (XElement itemElement in items)
+                if (validation)
+                {
+                    if (MessageBox.Show("Medicine:\n" +
+                            xmlName +
+                            " " +
+                            xmlCategory +
+                            " " +
+                            xmlMg +
+                            " " +
+                            xmlAmount +
+                            " " +
+                            xmlCost +
+                            " " +
+                            xmlPrice +
+                            " " +
+                            xmlExperationDate +
+                            " " +
+                            xmlStatus +
+                            "\nDo you want to continue to update ?", "updated check", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        itemElement.SetElementValue("name", name);
-                        itemElement.SetElementValue("category", category);
-                        itemElement.SetElementValue("mg", mg);
-                        itemElement.SetElementValue("experationDate", experationDate);
-                        itemElement.SetElementValue("amount", amount);
-                        itemElement.SetElementValue("cost", cost);
-                        itemElement.SetElementValue("price", price);
-                        itemElement.SetElementValue("status", status);
-                        itemElement.SetElementValue("updatedDate", updatedDate);
-                        itemElement.SetElementValue("imagePath", imageFolderPath + "/" + imageCopyName);
+                        /*-------------------------------------sqlCodeHere-----------------------------*/
+
+
+                        var medicineDoc = XDocument.Load(@xmlFileLocation);
+
+                        var items = from item in medicineDoc.Descendants("medicine")
+                                    where (item.Element("name").Value == xmlName && item.Element("category").Value == xmlCategory && item.Element("mg").Value == xmlMg.ToString() && item.Element("experationDate").Value == xmlExperationDate && item.Element("amount").Value == xmlAmount.ToString() && item.Element("cost").Value == xmlCost.ToString() && item.Element("price").Value == xmlPrice.ToString() && item.Element("status").Value == xmlStatus.ToString())
+                                    select item;
+
+                        foreach (XElement itemElement in items)
+                        {
+                            itemElement.SetElementValue("name", name);
+                            itemElement.SetElementValue("category", category);
+                            itemElement.SetElementValue("mg", mg);
+                            itemElement.SetElementValue("experationDate", experationDate);
+                            itemElement.SetElementValue("amount", amount);
+                            itemElement.SetElementValue("cost", cost);
+                            itemElement.SetElementValue("price", price);
+                            itemElement.SetElementValue("status", status);
+                            itemElement.SetElementValue("updatedDate", updatedDate);
+                            itemElement.SetElementValue("imagePath", imagePathFull);
+
+                        }
+
+                        medicineDoc.Save(@xmlFileLocation);
+
+                        textBoxName.Text = "";
+                        textBoxAmount.Text = "";
+                        textBoxMg.Text = "";
+                        textBoxPrice.Text = "";
+                        textBoxCost.Text = "";
+                        comboBoxCategory.Text = "";
+                        radioButtonSaleable.Checked = false;
+                        radioButtonUnsaleable.Checked = false;
+
+                        Form_Reload(sender, e);
+
+                        MessageBox.Show("Medicine updated", "confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
-
-                    medicineDoc.Save(@xmlFileLocation);
-
-                    textBoxName.Text = "";
-                    textBoxAmount.Text = "";
-                    textBoxMg.Text = "";
-                    textBoxPrice.Text = "";
-                    textBoxCost.Text = "";
-                    comboBoxCategory.Text = "";
-                    radioButtonSaleable.Checked = false;
-                    radioButtonUnsaleable.Checked = false;
-
-                    Form_Reload(sender, e);
-
-                    MessageBox.Show("Medicine updated" , "confirm",MessageBoxButtons.OK,MessageBoxIcon.Information);
-
                 }
-            }
-            else { /*doNothing*/}
+                else { /*doNothing*/}
 
-            pictureBoxImage.Image = null;
+                pictureBoxImage.Image = null;
+            }
+
+            
                 
 
 

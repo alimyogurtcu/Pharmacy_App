@@ -25,16 +25,16 @@ namespace Pharmacy_App
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Directory.Exists(folderName))
+            if (Directory.Exists(folderName))// checks if xml file created before or not
             {
-                
+                // since there is an xml file which alreay created 
+                // do nothing
             }
-            else
+            else// create's xml file
             {
                 Directory.CreateDirectory(folderName);
 
                 string xmlContent = "<medicines>" +
-                    "<countLastValue>0</countLastValue>"+
                     "</medicines>";
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(xmlContent);
@@ -48,14 +48,13 @@ namespace Pharmacy_App
 
             }
 
-            if (Directory.Exists(imageFolderName))
+            if (Directory.Exists(imageFolderName))// checks if image folder is created before
             {
-
+                // since image folder created do nothing
             }
-            else
+            else// creates image folder
             {
                 Directory.CreateDirectory(imageFolderName);
-
             }
             
                 
@@ -66,6 +65,13 @@ namespace Pharmacy_App
         {
             AdminPanel adminPanel = new AdminPanel();
             adminPanel.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            employePanel EP = new employePanel();
+            EP.Show();
             this.Hide();
         }
     }
