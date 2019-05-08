@@ -53,7 +53,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.labelImagePath = new System.Windows.Forms.Label();
-            this.labelID = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.SuspendLayout();
@@ -115,7 +114,7 @@
             this.comboBoxCategory.Items.AddRange(new object[] {
             "Antipyretics",
             "Analgesics",
-            "Antimalarial",
+            "Antimalarial Drugs",
             "Antibiotics",
             "Antiseptics",
             "Mood Stabilizers",
@@ -314,21 +313,11 @@
             this.labelImagePath.Size = new System.Drawing.Size(0, 13);
             this.labelImagePath.TabIndex = 47;
             // 
-            // labelID
-            // 
-            this.labelID.AutoSize = true;
-            this.labelID.Location = new System.Drawing.Point(1147, 66);
-            this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(0, 13);
-            this.labelID.TabIndex = 98;
-            this.labelID.Visible = false;
-            // 
             // AdminPanelUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1236, 555);
-            this.Controls.Add(this.labelID);
             this.Controls.Add(this.labelImagePath);
             this.Controls.Add(this.pictureBoxImage);
             this.Controls.Add(this.groupBox2);
@@ -371,6 +360,5 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.PictureBox pictureBoxImage;
         private System.Windows.Forms.Label labelImagePath;
-        private System.Windows.Forms.Label labelID;
     }
 }

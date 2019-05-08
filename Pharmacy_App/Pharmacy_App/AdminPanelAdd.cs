@@ -10,12 +10,17 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Data.SQLite;
 using System.Xml.Linq;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace Pharmacy_App
 {
     public partial class AdminPanelAdd : Form
     {
-        SQLiteConnection conn = new SQLiteConnection(@"Data Source= medicines.db"); //sql
+        //sql*
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= medicines.db");
+        SQLiteCommand cmd = new SQLiteCommand();
+        //*sql
 
         List<medicineRecords> temporaryMedicineRecordList = new List<medicineRecords>();
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml"; // xml file location
@@ -168,30 +173,23 @@ namespace Pharmacy_App
                 // If dialog result is Yes. Program adds the medicine.
                 // If dialog result is no Program dont do anything.
 
-                if (MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "Name: " + name + "\n" + "Category: " + category + "\n" + "Amount:" + amount + "\n" + "Milligram: " + mg + "\n" + "Experation Date: " + experationDate + "\n" + "Cost: " + cost + "\n" + "Price: " + price + "\n" + "Status: " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if(MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "Name: " + name + "\n" + "Category: " +category + "\n" + "Amount:" + amount + "\n" + "Milligram: " + mg + "\n" + "Experation Date: " + experationDate + "\n" + "Cost: " + cost + "\n" + "Price: " + price + "\n" + "Status: " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    //*sql add
-                    conn.Open();
-                    string sql = "insert into Medicines(Name, Category, Milligram, ExperationDate, Amount, Cost, Price, Status, UpdatedDate) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + status.ToString() + "', '" + System.DateTime.Now + "')";
-                    SQLiteCommand uploadDB = new SQLiteCommand(sql, conn);
-                    uploadDB.ExecuteNonQuery();
-                    conn.Close();
-                    //*sql add
 
                     Form_Reload(sender, e);
 
                     // Adding colums to the list view
 
-                    listViewMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add(" ", 57, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
                     listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Expiration Date", 145, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
                     listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);
-                    listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
+                    listViewMedicines.Columns.Add("Upload Date", 145, HorizontalAlignment.Center);
 
                     //------------------------------
 
@@ -237,6 +235,7 @@ namespace Pharmacy_App
                         row.SubItems.Add(itms9);
                         
                         listViewMedicines.Items.Add(row);
+
                     }
 
                     var doc = XDocument.Load(@xmlFileLocation); //opening xml file
@@ -258,8 +257,17 @@ namespace Pharmacy_App
 
                     doc.Save(@xmlFileLocation);
 
+                    //sql*
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "insert into Medicines(Name, Category, Milligram, ExperationDate, Amount, Cost, Price, Status, UpdatedDate) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + status.ToString() + "', '" + System.DateTime.Now + "')";
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    //*sql
+
                     MessageBox.Show("Medicine is added.", "add proccess complation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    labelClickMessage.Visible = true;
                     textBoxName.Text = "";
                     textBoxMg.Text = "";
                     textBoxAmount.Text = "";
@@ -271,13 +279,11 @@ namespace Pharmacy_App
                     pictureBoxImage.Image = null;
                     imageCopyName = "";
                     
-
-                }
+                    }
                 else
                 {
                     /*doNothing*/
                 }
-
 
             }
             else
@@ -285,9 +291,12 @@ namespace Pharmacy_App
                 //do nothing
             }
 
+            
+
         }
 
-        private void AdminPanelAdd_Load(object sender, EventArgs e)
+
+            private void AdminPanelAdd_Load(object sender, EventArgs e)
         {
             radioButtonSaleable.Checked = true;// Radio button salable is checked
 
@@ -312,6 +321,7 @@ namespace Pharmacy_App
             DialogResult dr = ofd.ShowDialog();
             if(dr == System.Windows.Forms.DialogResult.OK)
             {
+
                 imageSourcePath = ofd.FileName.ToString();
                 imageCopyName = ofd.SafeFileName.ToString();
 
@@ -339,9 +349,9 @@ namespace Pharmacy_App
                     }
                 }
 
-                
 
-                labelClickMessage.Text = "";
+
+                labelClickMessage.Visible = false;
                 
 
                     
@@ -356,10 +366,6 @@ namespace Pharmacy_App
         {
             pictureBoxImage_Click(sender,e);
         }
-
-
-
-
 
     }
 
