@@ -36,6 +36,10 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonAddAdmin = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelUsername = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -44,7 +48,7 @@
             // 
             this.listViewMedicines.FullRowSelect = true;
             this.listViewMedicines.GridLines = true;
-            this.listViewMedicines.Location = new System.Drawing.Point(12, 41);
+            this.listViewMedicines.Location = new System.Drawing.Point(12, 38);
             this.listViewMedicines.Name = "listViewMedicines";
             this.listViewMedicines.Size = new System.Drawing.Size(843, 393);
             this.listViewMedicines.TabIndex = 0;
@@ -120,11 +124,53 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medicine Image";
             // 
+            // buttonAddAdmin
+            // 
+            this.buttonAddAdmin.Location = new System.Drawing.Point(1060, 12);
+            this.buttonAddAdmin.Name = "buttonAddAdmin";
+            this.buttonAddAdmin.Size = new System.Drawing.Size(75, 38);
+            this.buttonAddAdmin.TabIndex = 71;
+            this.buttonAddAdmin.Text = "Add New Admin";
+            this.buttonAddAdmin.UseVisualStyleBackColor = true;
+            this.buttonAddAdmin.Click += new System.EventHandler(this.buttonAddAdmin_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1060, 56);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 38);
+            this.button1.TabIndex = 72;
+            this.button1.Text = "Logout";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 73;
+            this.label1.Text = "Loginned As :";
+            // 
+            // labelUsername
+            // 
+            this.labelUsername.AutoSize = true;
+            this.labelUsername.Location = new System.Drawing.Point(90, 9);
+            this.labelUsername.Name = "labelUsername";
+            this.labelUsername.Size = new System.Drawing.Size(55, 13);
+            this.labelUsername.TabIndex = 75;
+            this.labelUsername.Text = "Username";
+            // 
             // AdminPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 443);
+            this.Controls.Add(this.labelUsername);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonAddAdmin);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
@@ -138,6 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -151,5 +198,9 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.PictureBox pictureBoxImage;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonAddAdmin;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label labelUsername;
     }
 }

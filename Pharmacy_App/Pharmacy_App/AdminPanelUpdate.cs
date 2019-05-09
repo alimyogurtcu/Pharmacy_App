@@ -25,6 +25,7 @@ namespace Pharmacy_App
         string xmlName,xmlCategory,xmlExperationDate,xmlStatus, imagePathFull;
         int xmlAmount;
         double xmlMg, xmlCost, xmlPrice;
+        bool listViewItemSelected = false;
         //-----------------------------------------------
         int listViewIndex;
         string imageSourcePath, imageCopyName;
@@ -201,6 +202,7 @@ namespace Pharmacy_App
         {
             int medicineNumber;
 
+            listViewItemSelected = true;
 
             listViewIndex = listViewMedicines.FocusedItem.Index;
 
@@ -238,15 +240,8 @@ namespace Pharmacy_App
             xmlAmount = int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString());
             xmlCost = double.Parse(listViewMedicines.FocusedItem.SubItems[6].Text.ToString());
             xmlPrice = double.Parse(listViewMedicines.FocusedItem.SubItems[7].Text.ToString());
-
-            if (listViewMedicines.FocusedItem.SubItems[8].Text.ToString() == "Saleable")
-            {
-                xmlStatus = "Saleable";
-            }
-            else
-            {
-                xmlStatus = "Unsaleable";
-            }
+            xmlStatus = listViewMedicines.FocusedItem.SubItems[8].Text.ToString();
+            
             //------------------------------------------------------------------------------------
 
 
@@ -268,7 +263,7 @@ namespace Pharmacy_App
             string errorMessage = "";
             bool validation = true;
 
-            if(listViewMedicines.FocusedItem == null)
+            if(pictureBoxImage.Image == null)
             {
                 MessageBox.Show("Please select a medicine", "medicine selection confirm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -348,6 +343,27 @@ namespace Pharmacy_App
                     MessageBox.Show("Invalid inputs. Please try again:\n" + errorMessage, "validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
+                if (validation)
+                {
+                    for (int i = 0; i < medicineRecordList.Count; i++)
+                    {
+                        if (medicineRecordList[i].name == name &&
+                            medicineRecordList[i].category == category &&
+                            medicineRecordList[i].mg == mg &&
+                            medicineRecordList[i].experationDate == experationDate)
+                        {
+                            MessageBox.Show("This medicine is already entered", "medicine control", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            validation = false;
+                            break;
+                        }
+                        else
+                        {/*doNothing*/}
+                    }
+                }
+                else
+                {
+                    //do nothing
+                }
 
                 if (validation)
                 {
@@ -403,6 +419,7 @@ namespace Pharmacy_App
                         comboBoxCategory.Text = "";
                         radioButtonSaleable.Checked = false;
                         radioButtonUnsaleable.Checked = false;
+                        pictureBoxImage.Image = null;
 
                         Form_Reload(sender, e);
 
@@ -412,7 +429,6 @@ namespace Pharmacy_App
                 }
                 else { /*doNothing*/}
 
-                pictureBoxImage.Image = null;
             }
 
             

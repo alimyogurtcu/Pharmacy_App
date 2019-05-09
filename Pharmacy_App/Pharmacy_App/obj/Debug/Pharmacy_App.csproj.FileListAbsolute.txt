@@ -12,7 +12,6 @@ C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmac
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelDelete.resources
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelHistory.resources
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelUpdate.resources
-C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.Employee.resources
 C:\Users\Ali\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\Pharmacy_App.exe.config
 C:\Users\Ali\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\Pharmacy_App.exe
 C:\Users\Ali\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\Pharmacy_App.pdb
@@ -92,3 +91,5 @@ C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\S
 C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\alimy\Desktop\Pharmacy_App-master\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete
 C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.employePanel.resources
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelAddNewAdmin.resources
+C:\Users\Sateri\Desktop\Pharmacy_App\Pharmacy_App\Pharmacy_App\obj\Debug\Pharmacy_App.employeHistory.resources

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+
 namespace Pharmacy_App
 {
     public partial class employePanel : Form
@@ -16,15 +17,35 @@ namespace Pharmacy_App
 
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
+        string historyXmlFileLocation = "C://Users/Public/PharmacyAppData/history.xml";
         XmlNodeList imagePathList;
+        string xmlName, xmlCategory, xmlExperationDate, xmlStatus, imagePathFull;
+        int xmlAmount;
+        double xmlMg, xmlCost, xmlPrice;
+
+
         public employePanel()
         {
             InitializeComponent();
         }
 
+        public void Form_Reload(object sender, EventArgs e)
+        {
+            listViewMedicines.Items.Clear();
+            listViewMedicines.Columns.Clear();
+            medicineRecordList.Clear();
+            employePanel_Load(sender, e);
+        }
+
+        private void buttonHistory_Click(object sender, EventArgs e)
+        {
+            employeHistory EP = new employeHistory();
+            EP.Show();
+        }
+
         public void updateViewList() // funchtion for get values from xml to view list
         {
-
+            radioButtonRecipe.Checked = true;
             // Adding columns for list view
 
             listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);// sub item 0
@@ -122,6 +143,165 @@ namespace Pharmacy_App
         private void employePanel_Load(object sender, EventArgs e)
         {
             updateViewList();
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            Form1 login = new Form1();
+            login.Show();
+            this.Close();
+        }
+
+        private void buttonSell_Click(object sender, EventArgs e)
+        {
+            string customerName = "",
+                recipe,medicineName = "",
+                errorMessage = "";
+            int amount = 0;
+            
+            double totalPrice = 0;
+
+            XmlDocument historyDoc = new XmlDocument();
+
+
+            
+
+            medicineName = labelMedicineName.Text.ToString();
+
+            if(medicineName == "")
+            {
+                errorMessage += "\nPlease select a medicine";
+            }
+            else { /*doNothing*/}
+
+            customerName = textBoxCustomerName.Text.ToString();
+            if (customerName == "")
+            {
+                errorMessage += "\nPlease enter customer name";
+            }
+            else { /*do nothing*/ }
+
+            try
+            {
+                amount = int.Parse(comboBoxAmount.Text.ToString());
+
+            }
+            catch
+            {
+                errorMessage += "\nPlease select amount";
+            }
+
+            try
+            {
+                totalPrice = double.Parse(textBoxTotalPrice.Text.ToString());
+            }
+            catch
+            {
+                errorMessage += "\nTotal price cant be empty";
+            }
+
+
+            if (radioButtonRecipe.Checked == true)
+            {
+                recipe = radioButtonRecipe.Text.ToString();
+            }
+            else
+            {
+                recipe = radioButtonWithoutRecipe.Text.ToString();
+            }
+
+            if(labelAmount.Text == "0")
+            {
+                errorMessage = "Stok for this medicine is 0.(Empty stok)";
+            }
+            else { /*do nothing*/}
+
+            if(errorMessage == "")
+            {
+                if (MessageBox.Show("Do you want to continue to sell process of this medicine ?", "medicine delete confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    var doc = XDocument.Load(historyXmlFileLocation); //opening xml file
+
+
+                    var newElement = new XElement("customer",
+                    new XElement("customerName", customerName),
+                    new XElement("medicineName", medicineName),
+                    new XElement("mg", xmlMg),
+                    new XElement("amount", amount),
+                    new XElement("recipe", recipe),
+                    new XElement("totalPrice", totalPrice),
+                    new XElement("sellDate", System.DateTime.Now.ToString()));
+
+
+                    doc.Element("customers").Add(newElement);
+
+                    doc.Save(historyXmlFileLocation);
+
+                    var medicineDoc = XDocument.Load(@xmlFileLocation);
+
+                    var items = from item in medicineDoc.Descendants("medicine")
+                                where (item.Element("name").Value == xmlName && item.Element("category").Value == xmlCategory && item.Element("mg").Value == xmlMg.ToString() && item.Element("experationDate").Value == xmlExperationDate && item.Element("amount").Value == xmlAmount.ToString() && item.Element("cost").Value == xmlCost.ToString() && item.Element("price").Value == xmlPrice.ToString() && item.Element("status").Value == xmlStatus.ToString())
+                                select item;
+
+                    foreach (XElement itemElement in items)
+                    {
+                        itemElement.SetElementValue("amount", (int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString()) - amount));
+
+                    }
+
+                    medicineDoc.Save(@xmlFileLocation);
+
+                    Form_Reload(sender, e);
+
+                    labelMedicineName.Text = "";
+                    labelAmount.Text = "";
+                    labelPrice.Text = "";
+                    textBoxCustomerName.Text = "";
+                    textBoxTotalPrice.Text = "";
+                    comboBoxAmount.Text = "";
+                    comboBoxAmount.Items.Clear();
+                }
+                else { /*doNothing*/}
+
+            }
+            else
+            {
+
+                MessageBox.Show(errorMessage, "errors check", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+
+            }
+
+        private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            xmlName = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
+            xmlCategory = listViewMedicines.FocusedItem.SubItems[2].Text.ToString();
+            xmlMg = double.Parse(listViewMedicines.FocusedItem.SubItems[3].Text.ToString());
+            xmlExperationDate = listViewMedicines.FocusedItem.SubItems[4].Text.ToString();
+            xmlAmount = int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString());
+            xmlCost = double.Parse(listViewMedicines.FocusedItem.SubItems[6].Text.ToString());
+            xmlPrice = double.Parse(listViewMedicines.FocusedItem.SubItems[7].Text.ToString());
+            xmlStatus = listViewMedicines.FocusedItem.SubItems[8].Text.ToString();
+
+
+            labelMedicineName.Text = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
+            labelPrice.Text = listViewMedicines.FocusedItem.SubItems[7].Text.ToString();
+            labelAmount.Text = listViewMedicines.FocusedItem.SubItems[5].Text.ToString();
+            comboBoxAmount.Items.Clear();
+            for(int i = 1; i <= int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString()); i++)
+            {
+                comboBoxAmount.Items.Add(i);
+            }
+        }
+
+        private void comboBoxAmount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            double price;
+
+            price = double.Parse(comboBoxAmount.Text.ToString()) * double.Parse(labelPrice.Text.ToString());
+
+            textBoxTotalPrice.Text = price.ToString();
         }
     }
 }

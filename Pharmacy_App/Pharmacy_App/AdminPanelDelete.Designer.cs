@@ -31,9 +31,6 @@
             this.listViewMedicines = new System.Windows.Forms.ListView();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonSearch = new System.Windows.Forms.Button();
-            this.textBoxSeach = new System.Windows.Forms.TextBox();
-            this.labelSearch = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -89,32 +86,6 @@
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Product List";
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Location = new System.Drawing.Point(276, 19);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(99, 20);
-            this.buttonSearch.TabIndex = 16;
-            this.buttonSearch.Text = "search";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            // 
-            // textBoxSeach
-            // 
-            this.textBoxSeach.Location = new System.Drawing.Point(170, 19);
-            this.textBoxSeach.Name = "textBoxSeach";
-            this.textBoxSeach.Size = new System.Drawing.Size(100, 20);
-            this.textBoxSeach.TabIndex = 15;
-            this.textBoxSeach.Text = "search";
-            // 
-            // labelSearch
-            // 
-            this.labelSearch.AutoSize = true;
-            this.labelSearch.Location = new System.Drawing.Point(125, 22);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(39, 13);
-            this.labelSearch.TabIndex = 14;
-            this.labelSearch.Text = "search";
             // 
             // buttonCancel
             // 
@@ -267,7 +238,7 @@
             // labelMedicineMg
             // 
             this.labelMedicineMg.AutoSize = true;
-            this.labelMedicineMg.Location = new System.Drawing.Point(518, 16);
+            this.labelMedicineMg.Location = new System.Drawing.Point(518, 217);
             this.labelMedicineMg.Name = "labelMedicineMg";
             this.labelMedicineMg.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineMg.TabIndex = 28;
@@ -322,9 +293,6 @@
             this.ClientSize = new System.Drawing.Size(1232, 450);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSearch);
-            this.Controls.Add(this.textBoxSeach);
-            this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.listViewMedicines);
@@ -344,9 +312,6 @@
         private System.Windows.Forms.ListView listViewMedicines;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.TextBox textBoxSeach;
-        private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

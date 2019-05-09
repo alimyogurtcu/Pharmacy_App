@@ -52,6 +52,7 @@ namespace Pharmacy_App
         {
             AdminPanelHistory adminPanelHistory = new AdminPanelHistory();
             adminPanelHistory.Show();
+            this.Close();
         }
 
         public void Form_Reload(object sender, EventArgs e)
@@ -127,6 +128,7 @@ namespace Pharmacy_App
 
             for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecors list's elements to the list view 
             {
+
                 listViewMedicines.SmallImageList = img;
                 ListViewItem row = new ListViewItem((i+1).ToString());
 
@@ -182,6 +184,20 @@ namespace Pharmacy_App
             pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString());
             pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
             //---------------------------
+        }
+
+        private void buttonAddAdmin_Click(object sender, EventArgs e)
+        {
+            AdminPanelAddNewAdmin APA = new AdminPanelAddNewAdmin();
+            APA.Show();
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form1 LG = new Form1();
+            LG.Show();
+            this.Close();
         }
     }
 }

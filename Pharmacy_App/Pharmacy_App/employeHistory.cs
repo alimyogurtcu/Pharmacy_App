@@ -12,22 +12,16 @@ using System.Xml.Linq;
 
 namespace Pharmacy_App
 {
-    public partial class AdminPanelHistory : Form
+    public partial class employeHistory : Form
     {
 
         List<customerRecords> customerRecordsList = new List<customerRecords>();
         string historyXmlFileLocation = "C://Users/Public/PharmacyAppData/history.xml";// history xml
+        
 
-        public AdminPanelHistory()
+        public employeHistory()
         {
             InitializeComponent();
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            AdminPanel AP = new AdminPanel();
-            AP.Show();
-            this.Close();
         }
 
         public void updateViewList() // funchtion for get values from xml to view list
@@ -57,7 +51,7 @@ namespace Pharmacy_App
             XmlNodeList totalPriceList = history.GetElementsByTagName("totalPrice");
             XmlNodeList mgList = history.GetElementsByTagName("mg");
             XmlNodeList sellDateList = history.GetElementsByTagName("sellDate");
-
+           
 
             //--------------------------------------------------------------------------------------
 
@@ -107,54 +101,9 @@ namespace Pharmacy_App
 
         }
 
-        public void Form_Reload(object sender, EventArgs e)
-        {
-            listViewHistory.Items.Clear();
-            listViewHistory.Columns.Clear();
-            customerRecordsList.Clear();
-            AdminPanelHistory_Load(sender, e);
-        }
-
-        private void AdminPanelHistory_Load(object sender, EventArgs e)
+        private void employeHistory_Load(object sender, EventArgs e)
         {
             updateViewList();
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string customerName, medicineName, mg, soldAmount, totalPrice, recipe, sellDate;
-
-                customerName = listViewHistory.FocusedItem.SubItems[1].Text.ToString();
-                medicineName = listViewHistory.FocusedItem.SubItems[2].Text.ToString();
-                mg = listViewHistory.FocusedItem.SubItems[3].Text.ToString();
-                soldAmount = listViewHistory.FocusedItem.SubItems[4].Text.ToString();
-                totalPrice = listViewHistory.FocusedItem.SubItems[5].Text.ToString();
-                recipe = listViewHistory.FocusedItem.SubItems[6].Text.ToString();
-                sellDate = listViewHistory.FocusedItem.SubItems[7].Text.ToString();
-
-                var medicineDoc = XDocument.Load(historyXmlFileLocation);
-
-                medicineDoc.Descendants("customer")
-                    .Where(x => (string)x.Element("customerName") == customerName)
-                    .Where(y => (string)y.Element("medicineName") == medicineName)
-                    .Where(z => (string)z.Element("mg") == mg)
-                    .Where(t => (string)t.Element("amount") == soldAmount)
-                    .Where(a => (string)a.Element("totalPrice") == totalPrice)
-                    .Where(b => (string)b.Element("recipe") == recipe)
-                    .Where(c => (string)c.Element("sellDate") == sellDate)
-                    .Remove();
-
-                medicineDoc.Save(historyXmlFileLocation);
-
-                Form_Reload(sender, e);
-            }
-            catch
-            {
-                MessageBox.Show("Please select history", "history select confirm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            
         }
     }
 }

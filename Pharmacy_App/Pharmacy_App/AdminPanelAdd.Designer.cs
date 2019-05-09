@@ -52,8 +52,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listViewMedicines = new System.Windows.Forms.ListView();
+            this.listViewTemporaryMedicines = new System.Windows.Forms.ListView();
             this.label8 = new System.Windows.Forms.Label();
+            this.listViewMedicines = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.SuspendLayout();
@@ -83,7 +84,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxName);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 339);
+            this.groupBox1.Location = new System.Drawing.Point(12, 372);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(733, 225);
             this.groupBox1.TabIndex = 4;
@@ -298,34 +299,45 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
-            // listViewMedicines
+            // listViewTemporaryMedicines
             // 
-            this.listViewMedicines.FullRowSelect = true;
-            this.listViewMedicines.GridLines = true;
-            this.listViewMedicines.Location = new System.Drawing.Point(12, 25);
-            this.listViewMedicines.Name = "listViewMedicines";
-            this.listViewMedicines.Size = new System.Drawing.Size(864, 308);
-            this.listViewMedicines.TabIndex = 5;
-            this.listViewMedicines.UseCompatibleStateImageBehavior = false;
-            this.listViewMedicines.View = System.Windows.Forms.View.Details;
-            this.listViewMedicines.SelectedIndexChanged += new System.EventHandler(this.listViewMedicines_SelectedIndexChanged);
+            this.listViewTemporaryMedicines.FullRowSelect = true;
+            this.listViewTemporaryMedicines.GridLines = true;
+            this.listViewTemporaryMedicines.Location = new System.Drawing.Point(12, 293);
+            this.listViewTemporaryMedicines.Name = "listViewTemporaryMedicines";
+            this.listViewTemporaryMedicines.Size = new System.Drawing.Size(864, 73);
+            this.listViewTemporaryMedicines.TabIndex = 5;
+            this.listViewTemporaryMedicines.UseCompatibleStateImageBehavior = false;
+            this.listViewTemporaryMedicines.View = System.Windows.Forms.View.Details;
+            this.listViewTemporaryMedicines.SelectedIndexChanged += new System.EventHandler(this.listViewMedicines_SelectedIndexChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 9);
+            this.label8.Location = new System.Drawing.Point(9, 277);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(115, 13);
             this.label8.TabIndex = 6;
             this.label8.Text = "New Added Elements :";
             // 
+            // listViewMedicines
+            // 
+            this.listViewMedicines.GridLines = true;
+            this.listViewMedicines.Location = new System.Drawing.Point(12, 12);
+            this.listViewMedicines.Name = "listViewMedicines";
+            this.listViewMedicines.Size = new System.Drawing.Size(864, 262);
+            this.listViewMedicines.TabIndex = 7;
+            this.listViewMedicines.UseCompatibleStateImageBehavior = false;
+            this.listViewMedicines.View = System.Windows.Forms.View.Details;
+            // 
             // AdminPanelAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 576);
-            this.Controls.Add(this.label8);
+            this.ClientSize = new System.Drawing.Size(1400, 609);
             this.Controls.Add(this.listViewMedicines);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.listViewTemporaryMedicines);
             this.Controls.Add(this.groupBox1);
             this.Name = "AdminPanelAdd";
             this.Text = "AdminPanelAdd";
@@ -362,9 +374,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxCategory;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListView listViewMedicines;
+        private System.Windows.Forms.ListView listViewTemporaryMedicines;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label labelClickMessage;
         private System.Windows.Forms.PictureBox pictureBoxImage;
+        private System.Windows.Forms.ListView listViewMedicines;
     }
 }
