@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.labelErrorMessage = new System.Windows.Forms.Label();
+            this.buttonEmployee = new System.Windows.Forms.Button();
             this.labelAdminName = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -49,27 +50,28 @@
             this.label2.TabIndex = 76;
             this.label2.Text = "Login";
             // 
-            // label1
+            // labelErrorMessage
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.ForeColor = System.Drawing.Color.Maroon;
-            this.label1.Location = new System.Drawing.Point(273, 243);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(255, 13);
-            this.label1.TabIndex = 75;
-            this.label1.Text = "* Username or password is incorrect !";
+            this.labelErrorMessage.AutoSize = true;
+            this.labelErrorMessage.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelErrorMessage.ForeColor = System.Drawing.Color.Maroon;
+            this.labelErrorMessage.Location = new System.Drawing.Point(273, 243);
+            this.labelErrorMessage.Name = "labelErrorMessage";
+            this.labelErrorMessage.Size = new System.Drawing.Size(255, 13);
+            this.labelErrorMessage.TabIndex = 75;
+            this.labelErrorMessage.Text = "* Username or password is incorrect !";
+            this.labelErrorMessage.Visible = false;
             // 
-            // button2
+            // buttonEmployee
             // 
-            this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.Location = new System.Drawing.Point(303, 304);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(195, 28);
-            this.button2.TabIndex = 74;
-            this.button2.Text = "Continue As Developer";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonEmployee.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonEmployee.Location = new System.Drawing.Point(303, 304);
+            this.buttonEmployee.Name = "buttonEmployee";
+            this.buttonEmployee.Size = new System.Drawing.Size(195, 28);
+            this.buttonEmployee.TabIndex = 4;
+            this.buttonEmployee.Text = "Continue As Employee";
+            this.buttonEmployee.UseVisualStyleBackColor = true;
+            this.buttonEmployee.Click += new System.EventHandler(this.buttonEmployee_Click);
             // 
             // labelAdminName
             // 
@@ -85,7 +87,7 @@
             this.textBoxName.Location = new System.Drawing.Point(346, 184);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(100, 20);
-            this.textBoxName.TabIndex = 72;
+            this.textBoxName.TabIndex = 1;
             // 
             // buttonLogin
             // 
@@ -93,7 +95,7 @@
             this.buttonLogin.Location = new System.Drawing.Point(333, 270);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(130, 28);
-            this.buttonLogin.TabIndex = 71;
+            this.buttonLogin.TabIndex = 3;
             this.buttonLogin.Text = "Login As Admin";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
@@ -102,8 +104,9 @@
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(346, 210);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
-            this.textBoxPassword.TabIndex = 70;
+            this.textBoxPassword.TabIndex = 2;
             // 
             // labelPassword
             // 
@@ -114,14 +117,26 @@
             this.labelPassword.TabIndex = 69;
             this.labelPassword.Text = "Password";
             // 
+            // buttonClose
+            // 
+            this.buttonClose.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonClose.Location = new System.Drawing.Point(764, 12);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(55, 29);
+            this.buttonClose.TabIndex = 77;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 493);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.labelErrorMessage);
+            this.Controls.Add(this.buttonEmployee);
             this.Controls.Add(this.labelAdminName);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.buttonLogin);
@@ -138,13 +153,14 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label labelErrorMessage;
+        private System.Windows.Forms.Button buttonEmployee;
         private System.Windows.Forms.Label labelAdminName;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label labelPassword;
+        private System.Windows.Forms.Button buttonClose;
     }
 }
 

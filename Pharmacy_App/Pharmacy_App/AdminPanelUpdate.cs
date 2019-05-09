@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using System.Data.SQLite;
 using System.IO;
+using System.Data.SQLite;
 
 namespace Pharmacy_App
 {
     public partial class AdminPanelUpdate : Form
     {
         //sql*
-        SQLiteConnection conn = new SQLiteConnection(@"Data Source= medicines.db");
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= Database/medicines.db");
         SQLiteCommand cmd = new SQLiteCommand();
-        string DBid;
         //*sql
+
         int medicineNumber;
 
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();
@@ -33,6 +33,7 @@ namespace Pharmacy_App
         string xmlName,xmlCategory,xmlExperationDate,xmlStatus, imagePathFull;
         int xmlAmount;
         double xmlMg, xmlCost, xmlPrice;
+        bool listViewItemSelected = false;
         //-----------------------------------------------
         int listViewIndex;
         string imageSourcePath, imageCopyName;
@@ -107,16 +108,16 @@ namespace Pharmacy_App
 
             // Adding columns for list view
 
-            listViewMedicines.Columns.Add(" ", 57, HorizontalAlignment.Center);// sub item 0
-            listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);//  sub item 1
-            listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);// sub item 2
-            listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);// sub item 3
-            listViewMedicines.Columns.Add("Expiration Date", 145, HorizontalAlignment.Center); // sub item 4
-            listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);// sub item 5
-            listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);// sub item 6
-            listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);// sub item 7
-            listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);// sub item 8
-            listViewMedicines.Columns.Add("Upload Date", 145, HorizontalAlignment.Center);// sub item 9
+            listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);// sub item 0
+            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);//  sub item 1
+            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);// sub item 2
+            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);// sub item 3
+            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center); // sub item 4
+            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);// sub item 5
+            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);// sub item 6
+            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);// sub item 7
+            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);// sub item 8
+            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);// sub item 9
 
             //----------------------------------------------------------------------------
 
@@ -136,7 +137,7 @@ namespace Pharmacy_App
             imagePathList = medicines.GetElementsByTagName("imagePath");
 
             ImageList img = new ImageList();
-            img.ImageSize = new Size(25, 25);
+            img.ImageSize = new Size(70, 70);
 
             for (int i = 0; i < imagePathList.Count; i++)
             {
@@ -201,12 +202,19 @@ namespace Pharmacy_App
 
         private void AdminPanelUpdate_Load(object sender, EventArgs e)
         {
-            updateViewList();
+            //FULL SCREEN
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            //FULL SCREEN
+
+            updateViewList();    
         }
 
 
         private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            listViewItemSelected = true;
 
             listViewIndex = listViewMedicines.FocusedItem.Index;
 
@@ -244,23 +252,17 @@ namespace Pharmacy_App
             xmlAmount = int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString());
             xmlCost = double.Parse(listViewMedicines.FocusedItem.SubItems[6].Text.ToString());
             xmlPrice = double.Parse(listViewMedicines.FocusedItem.SubItems[7].Text.ToString());
-
-            if (listViewMedicines.FocusedItem.SubItems[8].Text.ToString() == "Saleable")
-            {
-                xmlStatus = "Saleable";
-            }
-            else
-            {
-                xmlStatus = "Unsaleable";
-            }
+            xmlStatus = listViewMedicines.FocusedItem.SubItems[8].Text.ToString();
+            
             //------------------------------------------------------------------------------------
 
-            //getting image from xml file
 
+            //getting image from xml file
+            
             pictureBoxImage.Image = Image.FromFile(imagePathList[medicineNumber].InnerXml.ToString());
             pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
             //---------------------------
-            DBid = (medicineNumber + 1).ToString(); //sql
+
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
@@ -272,7 +274,7 @@ namespace Pharmacy_App
             string errorMessage = "";
             bool validation = true;
 
-            if(listViewMedicines.FocusedItem == null)
+            if(pictureBoxImage.Image == null)
             {
                 MessageBox.Show("Please select a medicine", "medicine selection confirm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -352,6 +354,27 @@ namespace Pharmacy_App
                     MessageBox.Show("Invalid inputs. Please try again:\n" + errorMessage, "validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
+                if (validation)
+                {
+                    for (int i = 0; i < medicineRecordList.Count; i++)
+                    {
+                        if (medicineRecordList[i].name == name &&
+                            medicineRecordList[i].category == category &&
+                            medicineRecordList[i].mg == mg &&
+                            medicineRecordList[i].experationDate == experationDate)
+                        {
+                            MessageBox.Show("This medicine is already entered", "medicine control", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            validation = false;
+                            break;
+                        }
+                        else
+                        {/*doNothing*/}
+                    }
+                }
+                else
+                {
+                    //do nothing
+                }
 
                 if (validation)
                 {
@@ -373,11 +396,10 @@ namespace Pharmacy_App
                             xmlStatus +
                             "\nDo you want to continue to update ?", "updated check", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                       
                         //sql*update
                         conn.Open();
                         cmd.Connection = conn;
-                        cmd.CommandText = "Update Medicines set Name ='" + textBoxName.Text + "', Category = '" + comboBoxCategory.Text + "', Milligram = '" + textBoxMg.Text + "', ExperationDate = '" + dateTimePickerExpirationDate.Text + "', Amount = '" + textBoxAmount.Text + "', Cost = '" + textBoxCost.Text + "', Price = '" + textBoxPrice.Text + "', Status = '" + status.ToString() + "', UpdatedDate = '" + System.DateTime.Now + "' where ID =" + listViewMedicines.FocusedItem.SubItems[0].Text.ToString() + "";
+                        cmd.CommandText = "Update Medicines set Name ='" + textBoxName.Text + "', Category = '" + comboBoxCategory.Text + "', Milligram = '" + textBoxMg.Text + "', ExperationDate = '" + dateTimePickerExpirationDate.Text + "', Amount = '" + textBoxAmount.Text + "', Cost = '" + textBoxCost.Text + "', Price = '" + textBoxPrice.Text + "', Status = '" + status.ToString() + "', UpdatedDate = '" + System.DateTime.Now + "', ImageFolder = '" + imageFolderPath.ToString() + "' where ROWID ='" + listViewMedicines.FocusedItem.SubItems[0].Text.ToString() + "'";
                         cmd.ExecuteNonQuery();
                         conn.Close();
                         //sql*update
@@ -414,6 +436,7 @@ namespace Pharmacy_App
                         comboBoxCategory.Text = "";
                         radioButtonSaleable.Checked = false;
                         radioButtonUnsaleable.Checked = false;
+                        pictureBoxImage.Image = null;
 
                         Form_Reload(sender, e);
 
@@ -423,12 +446,7 @@ namespace Pharmacy_App
                 }
                 else { /*doNothing*/}
 
-                pictureBoxImage.Image = null;
             }
-
-            
-                
-
 
         }
     }

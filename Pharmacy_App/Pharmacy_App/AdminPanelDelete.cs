@@ -8,19 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.Data.SQLite;
 using System.Xml.Linq;
+using System.Data.SQLite;
 
 namespace Pharmacy_App
 {
     public partial class AdminPanelDelete : Form
     {
         //sql*
-        SQLiteConnection conn = new SQLiteConnection(@"Data Source= medicines.db");
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= Database/medicines.db");
         SQLiteCommand cmd = new SQLiteCommand();
-        int medicineNumber;
         //*sql
 
+        int medicineNumber;
+        
 
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();// adding class
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";// adding file location
@@ -40,33 +41,25 @@ namespace Pharmacy_App
             AdminPanelDelete_Load(sender, e);
         }
 
-        private void ButtonDelete_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.F10)
-            {
-                buttonDelete.PerformClick();
-            }
-        }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
 
-            if (labelMedicineName.Text == "")
+            if(labelMedicineName.Text == "")
             {
                 MessageBox.Show("Please chose an item from list", "selection error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (MessageBox.Show("Are you sure to delete this medicine ? ", "medicine delete confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+            else if(MessageBox.Show("Are you sure to delete this medicine ? ", "medicine delete confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes) {
+
+                // searching values is xml File and removing it 
 
                 //sql*
                 conn.Open();
                 cmd.Connection = conn;
-                cmd.CommandText = "DELETE FROM Medicines WHERE ID ='" + int.Parse(listViewMedicines.FocusedItem.SubItems[0].Text.ToString()) + "'";
+                cmd.CommandText = "DELETE FROM Medicines WHERE ROWID ='" + int.Parse(listViewMedicines.FocusedItem.SubItems[0].Text.ToString()) + "'";
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 //*sql
-
-                // searching values is xml File and removing it 
 
                 var medicineDoc = XDocument.Load(xmlFileLocation);
 
@@ -88,7 +81,7 @@ namespace Pharmacy_App
                 //------------------------------------------------
 
 
-                // clearing labels after delete procress
+                // clearing labels after delet procress
                 labelMedicineName.Text = "";
                 labelMedicineAmount.Text = "";
                 labelMedicineCategory.Text = "";
@@ -101,10 +94,11 @@ namespace Pharmacy_App
                 pictureBoxMedicine.Image = null;
                 //---------------------------------------
 
+
                 Form_Reload(sender, e);
 
             }
-            else { /*do nothing*/}
+            else{ /*do nothing*/}
 
 
         }
@@ -127,16 +121,16 @@ namespace Pharmacy_App
 
             // Adding columns for list view
 
-            listViewMedicines.Columns.Add(" ", 57, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
             listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Expiration Date", 145, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
             listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Upload Date", 145, HorizontalAlignment.Center);
+            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
 
             //----------------------------------------------------------------------------
 
@@ -156,7 +150,7 @@ namespace Pharmacy_App
             imagePathList = medicines.GetElementsByTagName("imagePath");
 
             ImageList img = new ImageList();
-            img.ImageSize = new Size(25, 25);
+            img.ImageSize = new Size(70, 70);
 
             for (int i = 0; i < imagePathList.Count; i++)
             {
@@ -219,25 +213,20 @@ namespace Pharmacy_App
 
         private void AdminPanelDelete_Load(object sender, EventArgs e)
         {
+            //FULL SCREEN
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            //FULL SCREEN
+
             updateViewList();
         }
 
         private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            labelMedicineName.Visible = true;
-            labelMedicineAmount.Visible = true;
-            labelMedicineCategory.Visible = true;
-            labelMedicineCost.Visible = true;
-            labelMedicinePrice.Visible = true;
-            labelMedicineStatus.Visible = true;
-            labelMedicineUploadDate.Visible = true;
-            labelMedicineExperationDate.Visible = true;
-            labelMedicineMg.Visible = true;
-
             // getting values from listview to labels 
 
-            medicineNumber = int.Parse(listViewMedicines.FocusedItem.SubItems[0].Text.ToString()) - 1;
+            medicineNumber = int.Parse(listViewMedicines.FocusedItem.SubItems[0].Text.ToString())-1;
             labelMedicineName.Text = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
             labelMedicineAmount.Text = listViewMedicines.FocusedItem.SubItems[5].Text.ToString();
             labelMedicineCategory.Text = listViewMedicines.FocusedItem.SubItems[2].Text.ToString();
@@ -264,6 +253,10 @@ namespace Pharmacy_App
             xmlExperationDate = listViewMedicines.FocusedItem.SubItems[4].Text.ToString();
 
             //--------------------------------------------------
-        }
+
+            
+
+            
+        } 
     }
 }

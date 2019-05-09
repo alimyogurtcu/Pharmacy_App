@@ -31,9 +31,6 @@
             this.listViewMedicines = new System.Windows.Forms.ListView();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonSearch = new System.Windows.Forms.Button();
-            this.textBoxSeach = new System.Windows.Forms.TextBox();
-            this.labelSearch = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -80,7 +77,6 @@
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            this.buttonDelete.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ButtonDelete_PreviewKeyDown);
             // 
             // label1
             // 
@@ -90,32 +86,6 @@
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Product List";
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Location = new System.Drawing.Point(276, 19);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(99, 20);
-            this.buttonSearch.TabIndex = 16;
-            this.buttonSearch.Text = "search";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            // 
-            // textBoxSeach
-            // 
-            this.textBoxSeach.Location = new System.Drawing.Point(170, 19);
-            this.textBoxSeach.Name = "textBoxSeach";
-            this.textBoxSeach.Size = new System.Drawing.Size(100, 20);
-            this.textBoxSeach.TabIndex = 15;
-            this.textBoxSeach.Text = "search";
-            // 
-            // labelSearch
-            // 
-            this.labelSearch.AutoSize = true;
-            this.labelSearch.Location = new System.Drawing.Point(125, 22);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(39, 13);
-            this.labelSearch.TabIndex = 14;
-            this.labelSearch.Text = "search";
             // 
             // buttonCancel
             // 
@@ -130,7 +100,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(250, 217);
+            this.label2.Location = new System.Drawing.Point(322, 217);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 18;
@@ -139,7 +109,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(121, 217);
+            this.label3.Location = new System.Drawing.Point(153, 217);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 19;
@@ -148,22 +118,18 @@
             // labelMedicineAmount
             // 
             this.labelMedicineAmount.AutoSize = true;
-            this.labelMedicineAmount.Location = new System.Drawing.Point(167, 217);
+            this.labelMedicineAmount.Location = new System.Drawing.Point(208, 217);
             this.labelMedicineAmount.Name = "labelMedicineAmount";
-            this.labelMedicineAmount.Size = new System.Drawing.Size(66, 13);
+            this.labelMedicineAmount.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineAmount.TabIndex = 20;
-            this.labelMedicineAmount.Text = "<AMOUNT>";
-            this.labelMedicineAmount.Visible = false;
             // 
             // labelMedicineName
             // 
             this.labelMedicineName.AutoSize = true;
-            this.labelMedicineName.Location = new System.Drawing.Point(44, 217);
+            this.labelMedicineName.Location = new System.Drawing.Point(53, 217);
             this.labelMedicineName.Name = "labelMedicineName";
-            this.labelMedicineName.Size = new System.Drawing.Size(50, 13);
+            this.labelMedicineName.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineName.TabIndex = 21;
-            this.labelMedicineName.Text = "<NAME>";
-            this.labelMedicineName.Visible = false;
             // 
             // label6
             // 
@@ -197,7 +163,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(468, 45);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(632, 311);
+            this.groupBox1.Size = new System.Drawing.Size(594, 311);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medicine";
@@ -213,7 +179,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(262, 247);
+            this.label19.Location = new System.Drawing.Point(275, 276);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(43, 13);
             this.label19.TabIndex = 35;
@@ -222,37 +188,31 @@
             // labelMedicineStatus
             // 
             this.labelMedicineStatus.AutoSize = true;
-            this.labelMedicineStatus.Location = new System.Drawing.Point(301, 247);
+            this.labelMedicineStatus.Location = new System.Drawing.Point(324, 276);
             this.labelMedicineStatus.Name = "labelMedicineStatus";
-            this.labelMedicineStatus.Size = new System.Drawing.Size(62, 13);
+            this.labelMedicineStatus.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineStatus.TabIndex = 34;
-            this.labelMedicineStatus.Text = "<STATUS>";
-            this.labelMedicineStatus.Visible = false;
             // 
             // labelMedicineUploadDate
             // 
             this.labelMedicineUploadDate.AutoSize = true;
-            this.labelMedicineUploadDate.Location = new System.Drawing.Point(99, 298);
+            this.labelMedicineUploadDate.Location = new System.Drawing.Point(108, 276);
             this.labelMedicineUploadDate.Name = "labelMedicineUploadDate";
-            this.labelMedicineUploadDate.Size = new System.Drawing.Size(74, 13);
+            this.labelMedicineUploadDate.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineUploadDate.TabIndex = 33;
-            this.labelMedicineUploadDate.Text = "<UPD.DATE>";
-            this.labelMedicineUploadDate.Visible = false;
             // 
             // labelMedicineExperationDate
             // 
             this.labelMedicineExperationDate.AutoSize = true;
-            this.labelMedicineExperationDate.Location = new System.Drawing.Point(480, 247);
+            this.labelMedicineExperationDate.Location = new System.Drawing.Point(417, 247);
             this.labelMedicineExperationDate.Name = "labelMedicineExperationDate";
-            this.labelMedicineExperationDate.Size = new System.Drawing.Size(72, 13);
+            this.labelMedicineExperationDate.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineExperationDate.TabIndex = 32;
-            this.labelMedicineExperationDate.Text = "<EXP.DATE>";
-            this.labelMedicineExperationDate.Visible = false;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 298);
+            this.label15.Location = new System.Drawing.Point(6, 276);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(96, 13);
             this.label15.TabIndex = 31;
@@ -261,17 +221,15 @@
             // labelMedicineCategory
             // 
             this.labelMedicineCategory.AutoSize = true;
-            this.labelMedicineCategory.Location = new System.Drawing.Point(301, 217);
+            this.labelMedicineCategory.Location = new System.Drawing.Point(383, 217);
             this.labelMedicineCategory.Name = "labelMedicineCategory";
-            this.labelMedicineCategory.Size = new System.Drawing.Size(78, 13);
+            this.labelMedicineCategory.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineCategory.TabIndex = 30;
-            this.labelMedicineCategory.Text = "<CATEGORY>";
-            this.labelMedicineCategory.Visible = false;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(456, 217);
+            this.label13.Location = new System.Drawing.Point(484, 217);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(28, 13);
             this.label13.TabIndex = 29;
@@ -280,17 +238,15 @@
             // labelMedicineMg
             // 
             this.labelMedicineMg.AutoSize = true;
-            this.labelMedicineMg.Location = new System.Drawing.Point(480, 217);
+            this.labelMedicineMg.Location = new System.Drawing.Point(518, 217);
             this.labelMedicineMg.Name = "labelMedicineMg";
-            this.labelMedicineMg.Size = new System.Drawing.Size(36, 13);
+            this.labelMedicineMg.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineMg.TabIndex = 28;
-            this.labelMedicineMg.Text = "<MG>";
-            this.labelMedicineMg.Visible = false;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(10, 247);
+            this.label11.Location = new System.Drawing.Point(6, 247);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(37, 13);
             this.label11.TabIndex = 27;
@@ -299,17 +255,15 @@
             // labelMedicinePrice
             // 
             this.labelMedicinePrice.AutoSize = true;
-            this.labelMedicinePrice.Location = new System.Drawing.Point(44, 247);
+            this.labelMedicinePrice.Location = new System.Drawing.Point(49, 247);
             this.labelMedicinePrice.Name = "labelMedicinePrice";
-            this.labelMedicinePrice.Size = new System.Drawing.Size(51, 13);
+            this.labelMedicinePrice.Size = new System.Drawing.Size(0, 13);
             this.labelMedicinePrice.TabIndex = 26;
-            this.labelMedicinePrice.Text = "<PRICE>";
-            this.labelMedicinePrice.Visible = false;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(136, 247);
+            this.label9.Location = new System.Drawing.Point(153, 247);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 13);
             this.label9.TabIndex = 25;
@@ -318,17 +272,15 @@
             // labelMedicineCost
             // 
             this.labelMedicineCost.AutoSize = true;
-            this.labelMedicineCost.Location = new System.Drawing.Point(167, 247);
+            this.labelMedicineCost.Location = new System.Drawing.Point(193, 247);
             this.labelMedicineCost.Name = "labelMedicineCost";
-            this.labelMedicineCost.Size = new System.Drawing.Size(48, 13);
+            this.labelMedicineCost.Size = new System.Drawing.Size(0, 13);
             this.labelMedicineCost.TabIndex = 24;
-            this.labelMedicineCost.Text = "<COST>";
-            this.labelMedicineCost.Visible = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(395, 247);
+            this.label7.Location = new System.Drawing.Point(322, 247);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 23;
@@ -341,9 +293,6 @@
             this.ClientSize = new System.Drawing.Size(1232, 450);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSearch);
-            this.Controls.Add(this.textBoxSeach);
-            this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.listViewMedicines);
@@ -363,9 +312,6 @@
         private System.Windows.Forms.ListView listViewMedicines;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.TextBox textBoxSeach;
-        private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
