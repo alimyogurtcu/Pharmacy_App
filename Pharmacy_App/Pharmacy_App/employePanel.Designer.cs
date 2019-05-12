@@ -208,6 +208,7 @@
             this.textBoxBarcodeNo.Name = "textBoxBarcodeNo";
             this.textBoxBarcodeNo.Size = new System.Drawing.Size(243, 19);
             this.textBoxBarcodeNo.TabIndex = 22;
+            this.textBoxBarcodeNo.TextChanged += new System.EventHandler(this.textBoxBarcodeNo_TextChanged);
             // 
             // groupBox1
             // 

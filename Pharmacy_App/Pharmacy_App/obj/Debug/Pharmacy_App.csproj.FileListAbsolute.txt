@@ -288,3 +288,31 @@ C:\Users\alimy\Desktop\Yeni klasör (2)\PharmacyApp\Pharmacy_App\obj\Debug\Pharm
 C:\Users\alimy\Desktop\Yeni klasör (2)\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete
 C:\Users\alimy\Desktop\Yeni klasör (2)\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.exe
 C:\Users\alimy\Desktop\Yeni klasör (2)\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.pdb
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\Pharmacy_App.exe.config
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\Pharmacy_App.exe
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\Pharmacy_App.pdb
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\EntityFramework.dll
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\System.Data.SQLite.dll
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\EntityFramework.xml
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\System.Data.SQLite.xml
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanel.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelAdd.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelAddNewAdmin.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelDelete.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelHistory.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.AdminPanelUpdate.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.employeChooseMedicine.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.employeHistory.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.employePanel.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.Form1.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.Properties.Resources.resources
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.GenerateResource.cache
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CoreCompileInputs.cache
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.csproj.CopyComplete
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.exe
+C:\Users\alimy\Desktop\PharmacyApp\Pharmacy_App\obj\Debug\Pharmacy_App.pdb

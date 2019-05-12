@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pharmacy_App", "Pharmacy_App\Pharmacy_App.csproj", "{08D5F76E-84A2-4A6E-BF6D-E3ADA51F788B}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installation Package", "Installation Package\Installation Package.vdproj", "{1846830E-505C-43E8-AAF9-3881E3E31CC8}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Installation Package\Installation Package.vdproj", "{1846830E-505C-43E8-AAF9-3881E3E31CC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
