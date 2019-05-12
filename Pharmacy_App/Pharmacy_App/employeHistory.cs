@@ -110,5 +110,12 @@ namespace Pharmacy_App
 
             updateViewList();
         }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            employePanel EP = new employePanel();
+            EP.Show();
+            this.Close();
+        }
     }
 }

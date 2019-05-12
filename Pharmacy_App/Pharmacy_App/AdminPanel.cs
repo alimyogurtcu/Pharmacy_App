@@ -30,14 +30,16 @@ namespace Pharmacy_App
         {
             AdminPanelAdd adminPanelAdd = new AdminPanelAdd();
             adminPanelAdd.Show();
+            adminPanelAdd.username = labelUsername.Text.ToString();
             this.Close();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            
+
             AdminPanelDelete adminPanelDelete = new AdminPanelDelete();
             adminPanelDelete.Show();
+            adminPanelDelete.username = labelUsername.Text.ToString();
             this.Close();
         }
 
@@ -45,6 +47,7 @@ namespace Pharmacy_App
         {
             AdminPanelUpdate adminPanelUpdate = new AdminPanelUpdate();
             adminPanelUpdate.Show();
+            adminPanelUpdate.username = labelUsername.Text.ToString();
             this.Close();
         }
 
@@ -52,6 +55,7 @@ namespace Pharmacy_App
         {
             AdminPanelHistory adminPanelHistory = new AdminPanelHistory();
             adminPanelHistory.Show();
+            adminPanelHistory.username = labelUsername.Text.ToString();
             this.Close();
         }
 
@@ -67,17 +71,18 @@ namespace Pharmacy_App
         {
 
             // Adding columns for list view
-            
-            listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
-            listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);
-            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
+
+            listViewMedicines.Columns.Add(" ", 80, HorizontalAlignment.Center);// sub item 0
+            listViewMedicines.Columns.Add("Name", 110, HorizontalAlignment.Left);//  sub item 1
+            listViewMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);// sub item 2
+            listViewMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);// sub item 3
+            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center); // sub item 4
+            listViewMedicines.Columns.Add("Amount", 60, HorizontalAlignment.Center);// sub item 5
+            listViewMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);// sub item 6
+            listViewMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);// sub item 7
+            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);// sub item 8
+            listViewMedicines.Columns.Add("Barcode No", 150, HorizontalAlignment.Center);//sub item 9
+            listViewMedicines.Columns.Add("Upload Date", 145, HorizontalAlignment.Center);// sub item 10
 
             //----------------------------------------------------------------------------
 
@@ -93,11 +98,12 @@ namespace Pharmacy_App
             XmlNodeList priceList = medicines.GetElementsByTagName("price");
             XmlNodeList experationDateList = medicines.GetElementsByTagName("experationDate");
             XmlNodeList statusList = medicines.GetElementsByTagName("status");
+            XmlNodeList barcodeNoList = medicines.GetElementsByTagName("barcodeNo");
             XmlNodeList UpdatedDateList = medicines.GetElementsByTagName("updatedDate");
             imagePathList = medicines.GetElementsByTagName("imagePath");
 
             ImageList img = new ImageList();
-            img.ImageSize = new Size(70, 70);
+            img.ImageSize = new Size(50, 50);
 
             for (int i = 0; i < imagePathList.Count; i++)
             {
@@ -108,29 +114,30 @@ namespace Pharmacy_App
             //--------------------------------------------------------------------------------------
 
 
-            for (int i = 0; i < nameList.Count; i++)// Assaning every element from xml document to developer defined medicineRecords class list
+            for (int i = 0; i < nameList.Count; i++)// Assıgning every element from xml document to developer defined medicineRecords class list
             {
                 medicineRecordList.Add(new medicineRecords
                 {
                     name = nameList[i].InnerXml,
                     category = categoryList[i].InnerXml,
-                    mg = double.Parse(mgList[i].InnerXml),
+                    mg = XmlConvert.ToDouble(mgList[i].InnerXml),
                     amount = int.Parse(amountList[i].InnerXml),
-                    cost = double.Parse(costList[i].InnerXml),
-                    price = double.Parse(priceList[i].InnerXml),
+                    cost = XmlConvert.ToDouble(costList[i].InnerXml),
+                    price = XmlConvert.ToDouble(priceList[i].InnerXml),
                     experationDate = experationDateList[i].InnerXml,
                     status = statusList[i].InnerXml,
+                    barcodeNo = ulong.Parse(barcodeNoList[i].InnerXml),
                     updatedDate = UpdatedDateList[i].InnerXml,
                 });
 
             }
 
 
-            for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecors list's elements to the list view 
+            for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecords list's elements to the list view 
             {
-
                 listViewMedicines.SmallImageList = img;
-                ListViewItem row = new ListViewItem((i+1).ToString());
+
+                ListViewItem row = new ListViewItem((i + 1).ToString());
 
                 ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].name.ToString());
                 ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].category.ToString());
@@ -140,7 +147,9 @@ namespace Pharmacy_App
                 ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].cost.ToString());
                 ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].price.ToString());
                 ListViewItem.ListViewSubItem itms7 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].status.ToString());
+                ListViewItem.ListViewSubItem itms10 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].barcodeNo.ToString());
                 ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].updatedDate.ToString());
+
 
 
                 row.ImageIndex = i;
@@ -152,9 +161,12 @@ namespace Pharmacy_App
                 row.SubItems.Add(itms5);
                 row.SubItems.Add(itms6);
                 row.SubItems.Add(itms7);
+                row.SubItems.Add(itms10);
                 row.SubItems.Add(itms9);
 
                 listViewMedicines.Items.Add(row);
+
+
             }
 
         }
@@ -167,8 +179,8 @@ namespace Pharmacy_App
         private void AdminPanel_Load(object sender, EventArgs e)
         {
             //FULL SCREEN
-            FormBorderStyle = FormBorderStyle.None;
-            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;// removing application borders
+            WindowState = FormWindowState.Maximized;// maximazing application window
             //FULL SCREEN
 
             updateViewList();
@@ -176,8 +188,8 @@ namespace Pharmacy_App
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            Form_Reload(sender,e);
-            
+            Form_Reload(sender, e);
+
         }
 
         private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
@@ -195,6 +207,7 @@ namespace Pharmacy_App
         {
             AdminPanelAddNewAdmin APA = new AdminPanelAddNewAdmin();
             APA.Show();
+            APA.LoginnedAdminName = labelUsername.Text.ToString();
             this.Close();
         }
 

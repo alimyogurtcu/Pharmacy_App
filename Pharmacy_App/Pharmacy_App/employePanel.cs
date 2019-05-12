@@ -16,18 +16,24 @@ namespace Pharmacy_App
     public partial class employePanel : Form
     {
         //sql*
-        SQLiteConnection connHistory = new SQLiteConnection(@"Data Source= Database/history.db");
-        SQLiteConnection connMedicines = new SQLiteConnection(@"Data Source= Database/medicines.db");
+        SQLiteConnection connHistory = new SQLiteConnection(@"Data Source= C:\Users\Public\PharmacyAppDatabase\history.db");
+        SQLiteConnection connMedicines = new SQLiteConnection(@"Data Source= C:\Users\Public\PharmacyAppDatabase\medicines.db");
         SQLiteCommand cmd = new SQLiteCommand();
         //*sql
 
         List<medicineRecords> medicineRecordList = new List<medicineRecords>();
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml";
         string historyXmlFileLocation = "C://Users/Public/PharmacyAppData/history.xml";
+
+
         XmlNodeList imagePathList;
-        string xmlName, xmlCategory, xmlExperationDate, xmlStatus, imagePathFull;
-        int xmlAmount;
-        double xmlMg, xmlCost, xmlPrice;
+
+
+        public string xmlName, xmlCategory, xmlExperationDate, xmlStatus, imagePathFull;
+        public int xmlAmount;
+        public double xmlMg, xmlCost, xmlPrice;
+        public ulong xmlBarcodeNo;
+        public int xmlCountNumber;
 
 
         public employePanel()
@@ -37,8 +43,6 @@ namespace Pharmacy_App
 
         public void Form_Reload(object sender, EventArgs e)
         {
-            listViewMedicines.Items.Clear();
-            listViewMedicines.Columns.Clear();
             medicineRecordList.Clear();
             employePanel_Load(sender, e);
         }
@@ -47,25 +51,49 @@ namespace Pharmacy_App
         {
             employeHistory EP = new employeHistory();
             EP.Show();
+            this.Close();
+        }
+
+        private void textBoxBarcodeNo_TextChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < medicineRecordList.Count; i++)
+            {
+                if (textBoxBarcodeNo.Text.ToString() == medicineRecordList[i].barcodeNo.ToString())
+                {
+                    xmlName = medicineRecordList[i].name;
+                    xmlCategory = medicineRecordList[i].category;
+                    xmlMg = medicineRecordList[i].mg;
+                    xmlExperationDate = medicineRecordList[i].experationDate;
+                    xmlAmount = medicineRecordList[i].amount;
+                    xmlCost = medicineRecordList[i].cost;
+                    xmlPrice = medicineRecordList[i].price;
+                    xmlStatus = medicineRecordList[i].status;
+                    xmlBarcodeNo = medicineRecordList[i].barcodeNo;
+
+                    labelMedicineName.Text = medicineRecordList[i].name;
+                    labelPrice.Text = medicineRecordList[i].price.ToString();
+                    textBoxBarcodeNo.Text = medicineRecordList[i].barcodeNo.ToString();
+                    comboBoxAmount.Items.Clear();
+                    for (int j = 1; j <= int.Parse(medicineRecordList[i].amount.ToString().ToString()); j++)
+                    {
+                        comboBoxAmount.Items.Add(j);
+                    }
+                    break;
+                }
+
+            }
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            employeChooseMedicine ECM = new employeChooseMedicine();
+            ECM.Show();
+            this.Close();
         }
 
         public void updateViewList() // funchtion for get values from xml to view list
         {
             radioButtonRecipe.Checked = true;
-            // Adding columns for list view
-
-            listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);// sub item 0
-            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);//  sub item 1
-            listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);// sub item 2
-            listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);// sub item 3
-            listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center); // sub item 4
-            listViewMedicines.Columns.Add("Amount", 70, HorizontalAlignment.Center);// sub item 5
-            listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);// sub item 6
-            listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);// sub item 7
-            listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);// sub item 8
-            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);// sub item 9
-
-            //----------------------------------------------------------------------------
 
             // getting elements in xml to the temperory list. Each tag have its own list. 
             XmlDocument medicines = new XmlDocument();
@@ -80,6 +108,7 @@ namespace Pharmacy_App
             XmlNodeList experationDateList = medicines.GetElementsByTagName("experationDate");
             XmlNodeList statusList = medicines.GetElementsByTagName("status");
             XmlNodeList UpdatedDateList = medicines.GetElementsByTagName("updatedDate");
+            XmlNodeList barcodeNoList = medicines.GetElementsByTagName("barcodeNo");
             imagePathList = medicines.GetElementsByTagName("imagePath");
 
             ImageList img = new ImageList();
@@ -100,48 +129,16 @@ namespace Pharmacy_App
                 {
                     name = nameList[i].InnerXml,
                     category = categoryList[i].InnerXml,
-                    mg = double.Parse(mgList[i].InnerXml),
+                    mg = XmlConvert.ToDouble(mgList[i].InnerXml),
                     amount = int.Parse(amountList[i].InnerXml),
-                    cost = double.Parse(costList[i].InnerXml),
-                    price = double.Parse(priceList[i].InnerXml),
+                    cost = XmlConvert.ToDouble(costList[i].InnerXml),
+                    price = XmlConvert.ToDouble(priceList[i].InnerXml),
                     experationDate = experationDateList[i].InnerXml,
                     status = statusList[i].InnerXml,
+                    barcodeNo = ulong.Parse(barcodeNoList[i].InnerXml),
                     updatedDate = UpdatedDateList[i].InnerXml,
                 });
 
-            }
-
-
-            for (var i = 0; i < medicineRecordList.Count; i++)// Adding medicineRecords list's elements to the list view 
-            {
-                listViewMedicines.SmallImageList = img;
-
-                ListViewItem row = new ListViewItem((i + 1).ToString());
-
-                ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].name.ToString());
-                ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].category.ToString());
-                ListViewItem.ListViewSubItem itms2 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].mg.ToString());
-                ListViewItem.ListViewSubItem itms3 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].experationDate.ToString());
-                ListViewItem.ListViewSubItem itms4 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].amount.ToString());
-                ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].cost.ToString());
-                ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].price.ToString());
-                ListViewItem.ListViewSubItem itms7 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].status.ToString());
-                ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].updatedDate.ToString());
-
-
-
-                row.ImageIndex = i;
-                row.SubItems.Add(itms1);
-                row.SubItems.Add(itms8);
-                row.SubItems.Add(itms2);
-                row.SubItems.Add(itms3);
-                row.SubItems.Add(itms4);
-                row.SubItems.Add(itms5);
-                row.SubItems.Add(itms6);
-                row.SubItems.Add(itms7);
-                row.SubItems.Add(itms9);
-
-                listViewMedicines.Items.Add(row);
             }
 
         }
@@ -152,6 +149,8 @@ namespace Pharmacy_App
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             //FULL SCREEN
+
+            this.comboBoxAmount.DropDownStyle = ComboBoxStyle.DropDownList;
 
             updateViewList();
         }
@@ -166,20 +165,20 @@ namespace Pharmacy_App
         private void buttonSell_Click(object sender, EventArgs e)
         {
             string customerName = "",
-                recipe,medicineName = "",
+                recipe, medicineName = "",
                 errorMessage = "";
             int amount = 0;
-            
+
             double totalPrice = 0;
 
             XmlDocument historyDoc = new XmlDocument();
 
 
-            
+
 
             medicineName = labelMedicineName.Text.ToString();
 
-            if(medicineName == "")
+            if (medicineName == "")
             {
                 errorMessage += "\nPlease select a medicine";
             }
@@ -221,15 +220,15 @@ namespace Pharmacy_App
                 recipe = radioButtonWithoutRecipe.Text.ToString();
             }
 
-            if(labelAmount.Text == "0")
+            if (xmlAmount.ToString() == "0")
             {
-                errorMessage = "Stok for this medicine is 0.(Empty stok)";
+                errorMessage += "\nStok for this medicine is 0.(Empty stok)";
             }
             else { /*do nothing*/}
 
-            if(errorMessage == "")
+            if (errorMessage == "")
             {
-                if (MessageBox.Show("Do you want to continue to sell process of this medicine ?", "medicine delete confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do you want to continue to sell process of this medicine ?", "medicine delete confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     var doc = XDocument.Load(historyXmlFileLocation); //opening xml file
 
@@ -237,10 +236,10 @@ namespace Pharmacy_App
                     var newElement = new XElement("customer",
                     new XElement("customerName", customerName),
                     new XElement("medicineName", medicineName),
-                    new XElement("mg", xmlMg),
+                    new XElement("mg", XmlConvert.ToString(xmlMg)),
                     new XElement("amount", amount),
                     new XElement("recipe", recipe),
-                    new XElement("totalPrice", totalPrice),
+                    new XElement("totalPrice", XmlConvert.ToString(totalPrice)),
                     new XElement("sellDate", System.DateTime.Now.ToString()));
 
 
@@ -251,12 +250,12 @@ namespace Pharmacy_App
                     var medicineDoc = XDocument.Load(@xmlFileLocation);
 
                     var items = from item in medicineDoc.Descendants("medicine")
-                                where (item.Element("name").Value == xmlName && item.Element("category").Value == xmlCategory && item.Element("mg").Value == xmlMg.ToString() && item.Element("experationDate").Value == xmlExperationDate && item.Element("amount").Value == xmlAmount.ToString() && item.Element("cost").Value == xmlCost.ToString() && item.Element("price").Value == xmlPrice.ToString() && item.Element("status").Value == xmlStatus.ToString())
+                                where (item.Element("name").Value == xmlName && item.Element("category").Value == xmlCategory && item.Element("mg").Value == xmlMg.ToString() && item.Element("experationDate").Value == xmlExperationDate && item.Element("amount").Value == xmlAmount.ToString() && item.Element("cost").Value == xmlCost.ToString() && item.Element("price").Value == xmlPrice.ToString() && item.Element("status").Value == xmlStatus.ToString() && item.Element("barcodeNo").Value == xmlBarcodeNo.ToString())
                                 select item;
 
                     foreach (XElement itemElement in items)
                     {
-                        itemElement.SetElementValue("amount", (int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString()) - amount));
+                        itemElement.SetElementValue("amount", (xmlAmount - amount));
 
                     }
 
@@ -265,7 +264,7 @@ namespace Pharmacy_App
                     //sql*history.db
                     connHistory.Open();
                     cmd.Connection = connHistory;
-                    cmd.CommandText = "insert into History(CostumerName, MedicineName, Milligram, Amount, Recipe, TotalPrice, SellDate) Values('" + textBoxCustomerName.Text + "', '" + medicineName.ToString() + "', '" + xmlMg.ToString() + "', '" + comboBoxAmount.Text + "', '" + recipe.ToString() + "', '" + totalPrice.ToString() + "', '" + System.DateTime.Now.ToString() + "')";
+                    cmd.CommandText = "insert into History(CostumerName, MedicineName, Milligram, Amount, Recipe, TotalPrice, BarcodeNo, SellDate) Values('" + customerName + "', '" + medicineName + "', '" + xmlMg + "', '" + amount + "', '" + recipe + "', '" + totalPrice + "', '" + xmlBarcodeNo + "', '" + System.DateTime.Now + "')";
                     cmd.ExecuteNonQuery();
                     connHistory.Close();
                     //*sql
@@ -274,7 +273,7 @@ namespace Pharmacy_App
                     //sql*medicines.db
                     connMedicines.Open();
                     cmd.Connection = connMedicines;
-                    cmd.CommandText = "Update Medicines set Amount = '" + (int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text)-int.Parse(comboBoxAmount.Text)).ToString() + "' where ROWID =" + listViewMedicines.FocusedItem.SubItems[0].Text.ToString() + "";
+                    cmd.CommandText = "Update Medicines set Amount = '" + (xmlAmount - amount).ToString() + "' where ROWID =" + xmlCountNumber + "";
                     cmd.ExecuteNonQuery();
                     connMedicines.Close();
                     //*sql
@@ -282,7 +281,6 @@ namespace Pharmacy_App
                     Form_Reload(sender, e);
 
                     labelMedicineName.Text = "";
-                    labelAmount.Text = "";
                     labelPrice.Text = "";
                     textBoxCustomerName.Text = "";
                     textBoxTotalPrice.Text = "";
@@ -299,28 +297,6 @@ namespace Pharmacy_App
 
             }
 
-            }
-
-        private void listViewMedicines_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            xmlName = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
-            xmlCategory = listViewMedicines.FocusedItem.SubItems[2].Text.ToString();
-            xmlMg = double.Parse(listViewMedicines.FocusedItem.SubItems[3].Text.ToString());
-            xmlExperationDate = listViewMedicines.FocusedItem.SubItems[4].Text.ToString();
-            xmlAmount = int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString());
-            xmlCost = double.Parse(listViewMedicines.FocusedItem.SubItems[6].Text.ToString());
-            xmlPrice = double.Parse(listViewMedicines.FocusedItem.SubItems[7].Text.ToString());
-            xmlStatus = listViewMedicines.FocusedItem.SubItems[8].Text.ToString();
-
-
-            labelMedicineName.Text = listViewMedicines.FocusedItem.SubItems[1].Text.ToString();
-            labelPrice.Text = listViewMedicines.FocusedItem.SubItems[7].Text.ToString();
-            labelAmount.Text = listViewMedicines.FocusedItem.SubItems[5].Text.ToString();
-            comboBoxAmount.Items.Clear();
-            for(int i = 1; i <= int.Parse(listViewMedicines.FocusedItem.SubItems[5].Text.ToString()); i++)
-            {
-                comboBoxAmount.Items.Add(i);
-            }
         }
 
         private void comboBoxAmount_SelectedIndexChanged(object sender, EventArgs e)

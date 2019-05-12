@@ -16,7 +16,7 @@ namespace Pharmacy_App
     public partial class AdminPanelAdd : Form
     {
         //sql*
-        SQLiteConnection conn = new SQLiteConnection(@"Data Source= Database/medicines.db");
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= C:\Users\Public\PharmacyAppDatabase\medicines.db");
         SQLiteCommand cmd = new SQLiteCommand();
         //*sql
 
@@ -24,8 +24,8 @@ namespace Pharmacy_App
         List<medicineRecords> temporaryMedicineRecordList = new List<medicineRecords>();
         string xmlFileLocation = @"C:/Users/Public/PharmacyAppData/medicineInfo.xml"; // xml file location
         string imageFolderPath = @"C:/Users/Public/PharmacyAppData/Images";// folder for images
-        string image = "";
         string imageSourcePath, imageCopyName = "";
+        public string username;
         XmlNodeList imagePathList;
 
         public AdminPanelAdd()
@@ -50,7 +50,7 @@ namespace Pharmacy_App
             // Adding columns for list view
 
             listViewMedicines.Columns.Add(" ", 87, HorizontalAlignment.Center);// sub item 0
-            listViewMedicines.Columns.Add("Name", 170, HorizontalAlignment.Left);//  sub item 1
+            listViewMedicines.Columns.Add("Name", 145, HorizontalAlignment.Left);//  sub item 1
             listViewMedicines.Columns.Add("Category", 150, HorizontalAlignment.Center);// sub item 2
             listViewMedicines.Columns.Add("Mg", 70, HorizontalAlignment.Center);// sub item 3
             listViewMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center); // sub item 4
@@ -58,7 +58,8 @@ namespace Pharmacy_App
             listViewMedicines.Columns.Add("Cost", 70, HorizontalAlignment.Center);// sub item 6
             listViewMedicines.Columns.Add("Price", 70, HorizontalAlignment.Center);// sub item 7
             listViewMedicines.Columns.Add("Status", 100, HorizontalAlignment.Center);// sub item 8
-            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);// sub item 9
+            listViewMedicines.Columns.Add("Barcode No", 150, HorizontalAlignment.Center);//sub item 9
+            listViewMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);// sub item 10
 
             //----------------------------------------------------------------------------
 
@@ -74,11 +75,12 @@ namespace Pharmacy_App
             XmlNodeList priceList = medicines.GetElementsByTagName("price");
             XmlNodeList experationDateList = medicines.GetElementsByTagName("experationDate");
             XmlNodeList statusList = medicines.GetElementsByTagName("status");
+            XmlNodeList barcodeNoList = medicines.GetElementsByTagName("barcodeNo");
             XmlNodeList UpdatedDateList = medicines.GetElementsByTagName("updatedDate");
             imagePathList = medicines.GetElementsByTagName("imagePath");
 
             ImageList img = new ImageList();
-            img.ImageSize = new Size(70, 70);
+            img.ImageSize = new Size(50, 50);
 
             for (int i = 0; i < imagePathList.Count; i++)
             {
@@ -95,12 +97,13 @@ namespace Pharmacy_App
                 {
                     name = nameList[i].InnerXml,
                     category = categoryList[i].InnerXml,
-                    mg = double.Parse(mgList[i].InnerXml),
+                    mg = XmlConvert.ToDouble(mgList[i].InnerXml),
                     amount = int.Parse(amountList[i].InnerXml),
-                    cost = double.Parse(costList[i].InnerXml),
-                    price = double.Parse(priceList[i].InnerXml),
+                    cost = XmlConvert.ToDouble(costList[i].InnerXml),
+                    price = XmlConvert.ToDouble(priceList[i].InnerXml),
                     experationDate = experationDateList[i].InnerXml,
                     status = statusList[i].InnerXml,
+                    barcodeNo = ulong.Parse(barcodeNoList[i].InnerXml),
                     updatedDate = UpdatedDateList[i].InnerXml,
                 });
 
@@ -121,6 +124,7 @@ namespace Pharmacy_App
                 ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].cost.ToString());
                 ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].price.ToString());
                 ListViewItem.ListViewSubItem itms7 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].status.ToString());
+                ListViewItem.ListViewSubItem itms10 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].barcodeNo.ToString());
                 ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, medicineRecordList[i].updatedDate.ToString());
 
 
@@ -134,9 +138,60 @@ namespace Pharmacy_App
                 row.SubItems.Add(itms5);
                 row.SubItems.Add(itms6);
                 row.SubItems.Add(itms7);
+                row.SubItems.Add(itms10);
                 row.SubItems.Add(itms9);
 
                 listViewMedicines.Items.Add(row);
+
+
+            }
+
+
+            // Adding colums to the list view
+
+            listViewTemporaryMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Name", 100, HorizontalAlignment.Left);
+            listViewTemporaryMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Amount", 60, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);// sub item 8
+            listViewTemporaryMedicines.Columns.Add("Barcode No", 150, HorizontalAlignment.Center);
+            listViewTemporaryMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
+
+            //------------------------------
+
+            for (var i = 0; i < temporaryMedicineRecordList.Count; i++)// Adding temporaryMedicineRecors list's elements to the list view 
+            {
+
+                ListViewItem row = new ListViewItem((i + 1).ToString());
+
+                ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].name.ToString());
+                ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].category.ToString());
+                ListViewItem.ListViewSubItem itms2 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].mg.ToString());
+                ListViewItem.ListViewSubItem itms3 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].experationDate.ToString());
+                ListViewItem.ListViewSubItem itms4 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].amount.ToString());
+                ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].cost.ToString());
+                ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].price.ToString());
+                ListViewItem.ListViewSubItem itms7 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].status.ToString());
+                ListViewItem.ListViewSubItem itms10 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].barcodeNo.ToString());
+                ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].updatedDate.ToString());
+
+
+                row.SubItems.Add(itms1);
+                row.SubItems.Add(itms8);
+                row.SubItems.Add(itms2);
+                row.SubItems.Add(itms3);
+                row.SubItems.Add(itms4);
+                row.SubItems.Add(itms5);
+                row.SubItems.Add(itms6);
+                row.SubItems.Add(itms7);
+                row.SubItems.Add(itms10);
+                row.SubItems.Add(itms9);
+
+                listViewTemporaryMedicines.Items.Add(row);
             }
 
         }
@@ -146,12 +201,13 @@ namespace Pharmacy_App
         {
             //decleration of values for get informations from textboxes
 
-            string name = "", experationDate, status = "", category,errorMessage = "";
+            string name = "", experationDate, status = "", category, errorMessage = "";
+            ulong barcodeNo = 0;
             double cost = 0,
                    price = 0,
                    mg = 0;
             int amount = 0;
-                
+
 
 
 
@@ -181,6 +237,16 @@ namespace Pharmacy_App
 
             try
             {
+               barcodeNo = ulong.Parse(textBoxBarcodeNo.Text.ToString());
+            }
+            catch
+            {
+                errorMessage += "\nBarcode No";
+                textBoxBarcodeNo.Text = "";
+            }
+
+            try
+            {
                 amount = int.Parse(textBoxAmount.Text.ToString());
             }
             catch (Exception Ex)
@@ -192,7 +258,7 @@ namespace Pharmacy_App
 
             try
             {
-                mg = double.Parse(textBoxMg.Text.ToString());
+                mg = double.Parse(textBoxMg.Text);
 
             }
             catch (Exception Ex)
@@ -216,7 +282,7 @@ namespace Pharmacy_App
 
             try
             {
-                
+
                 price = double.Parse(textBoxPrice.Text.ToString());
             }
             catch
@@ -250,13 +316,13 @@ namespace Pharmacy_App
                 status = radioButtonUnsaleable.Text.ToString();
             }
 
-            if(imageCopyName == "")
+            if (imageCopyName == "")
             {
                 errorMessage += "\nImage";
             }
 
 
-            if(errorMessage == "")
+            if (errorMessage == "")
             {
                 validation = true;
 
@@ -273,12 +339,13 @@ namespace Pharmacy_App
 
             if (validation)
             {
-                for(int i = 0; i < medicineRecordList.Count; i++)
+                for (int i = 0; i < medicineRecordList.Count; i++)
                 {
                     if (medicineRecordList[i].name == name &&
                         medicineRecordList[i].category == category &&
                         medicineRecordList[i].mg == mg &&
-                        medicineRecordList[i].experationDate == experationDate )
+                        medicineRecordList[i].experationDate == experationDate &&
+                        medicineRecordList[i].barcodeNo == barcodeNo)
                     {
                         MessageBox.Show("This medicine is already entered", "medicine control", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         validation = false;
@@ -299,32 +366,16 @@ namespace Pharmacy_App
                 // If dialog result is Yes. Program adds the medicine.
                 // If dialog result is no Program dont do anything.
 
-                if (MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "Name: " + name + "\n" + "Category: " + category + "\n" + "Amount:" + amount + "\n" + "Milligram: " + mg + "\n" + "Experation Date: " + experationDate + "\n" + "Cost: " + cost + "\n" + "Price: " + price + "\n" + "Status: " + status, "validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do you want continue to add this medicine ?\n\n" + "Name: " + name + "\n" + "Category: " + category + "\n" + "Amount:" + amount + "\n" + "Milligram: " + mg + "\n" + "Experation Date: " + experationDate + "\n" + "Cost: " + cost + "\n" + "Price: " + price + "\n" + "Status: " + status + "\n" + "Barcode No: " + barcodeNo, "Validation of adding process", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     //sql*
                     conn.Open();
                     cmd.Connection = conn;
-                    cmd.CommandText = "insert into Medicines(Name, Category, Milligram, ExperationDate, Amount, Cost, Price, Status, UpdatedDate, ImageFolder) Values('" + textBoxName.Text + "', '" + comboBoxCategory.Text + "', '" + textBoxMg.Text + "', '" + dateTimePickerExpirationDate.Text + "', '" + textBoxAmount.Text + "', '" + textBoxCost.Text + "', '" + textBoxPrice.Text + "', '" + status.ToString() + "', '" + System.DateTime.Now + "', '" + imageFolderPath.ToString() + "')";
+                    cmd.CommandText = "insert into Medicines(Name, Category, Milligram, ExperationDate, Amount, Cost, Price, Status, BarcodeNo, UpdatedDate, ImageFolder) Values('" + name + "', '" + category + "', '" + mg + "', '" + experationDate + "', '" + amount + "', '" + cost + "', '" + price + "', '" + status + "', '" + barcodeNo + "', '" + System.DateTime.Now + "', '" + (imageCopyName + "/" + imageCopyName) + "')";
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     //*sql
 
-                    Form_Reload(sender, e);
-
-                    // Adding colums to the list view
-
-                    listViewTemporaryMedicines.Columns.Add(" ", 25, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Name", 120, HorizontalAlignment.Left);
-                    listViewTemporaryMedicines.Columns.Add("Category", 100, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Mg", 50, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Expiration Date", 150, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Amount", 50, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Cost", 50, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Price", 50, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Status", 70, HorizontalAlignment.Center);
-                    listViewTemporaryMedicines.Columns.Add("Upload Date", 150, HorizontalAlignment.Center);
-
-                    //------------------------------
 
                     temporaryMedicineRecordList.Add(new medicineRecords // adding new item to temporary list.
                     {
@@ -336,53 +387,28 @@ namespace Pharmacy_App
                         price = price,
                         experationDate = experationDate,
                         status = status,
+                        barcodeNo = barcodeNo,
                         updatedDate = System.DateTime.Now.ToString(),
                         imagePath = imageFolderPath + "/" + imageCopyName,
 
                     });
 
-                    for (var i = 0; i < temporaryMedicineRecordList.Count; i++)// Adding temporaryMedicineRecors list's elements to the list view 
-                    {
 
-                        ListViewItem row = new ListViewItem((i + 1).ToString());
-
-                        ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].name.ToString());
-                        ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].category.ToString());
-                        ListViewItem.ListViewSubItem itms2 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].mg.ToString());
-                        ListViewItem.ListViewSubItem itms3 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].experationDate.ToString());
-                        ListViewItem.ListViewSubItem itms4 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].amount.ToString());
-                        ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].cost.ToString());
-                        ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].price.ToString());
-                        ListViewItem.ListViewSubItem itms7 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].status.ToString());
-                        ListViewItem.ListViewSubItem itms9 = new ListViewItem.ListViewSubItem(row, temporaryMedicineRecordList[i].updatedDate.ToString());
-
-
-                        row.SubItems.Add(itms1);
-                        row.SubItems.Add(itms8);
-                        row.SubItems.Add(itms2);
-                        row.SubItems.Add(itms3);
-                        row.SubItems.Add(itms4);
-                        row.SubItems.Add(itms5);
-                        row.SubItems.Add(itms6);
-                        row.SubItems.Add(itms7);
-                        row.SubItems.Add(itms9);
-
-                        listViewTemporaryMedicines.Items.Add(row);
-                    }
 
                     var doc = XDocument.Load(@xmlFileLocation); //opening xml file
 
                     //adding new element and saving it 
                     var newElement = new XElement("medicine",
                     new XElement("name", name),
-                    new XElement("mg", mg),
+                    new XElement("mg", XmlConvert.ToString(mg)),
                     new XElement("amount", amount),
-                    new XElement("cost", cost),
-                    new XElement("price", price),
+                    new XElement("cost", XmlConvert.ToString(cost)),
+                    new XElement("price", XmlConvert.ToString(price)),
                     new XElement("experationDate", experationDate),
                     new XElement("status", status),
                     new XElement("category", category),
                     new XElement("updatedDate", System.DateTime.Now.ToString()),
+                    new XElement("barcodeNo", barcodeNo),
                     new XElement("imagePath", imageFolderPath + "/" + imageCopyName));
 
                     doc.Element("medicines").Add(newElement);
@@ -397,14 +423,15 @@ namespace Pharmacy_App
                     textBoxMg.Text = "";
                     textBoxCost.Text = "";
                     textBoxPrice.Text = "";
+                    textBoxBarcodeNo.Text = "";
                     comboBoxCategory.Text = "";
                     radioButtonSaleable.Checked = true;
                     pictureBoxImage.Image = null;
                     imageCopyName = "";
-                    labelClickMessage.Text = "click to add image";
+                    
 
                     Form_Reload(sender, e);
-                   
+
 
                 }
                 else
@@ -417,7 +444,7 @@ namespace Pharmacy_App
                 //do nothing
             }
 
-            
+
 
         }
 
@@ -431,7 +458,8 @@ namespace Pharmacy_App
             updateViewList();
             radioButtonSaleable.Checked = true;// Radio button salable is checked
 
-            this.comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList; // Makes combo box unvriteable
+            
+            // Makes combo box unvriteable
         }
 
         private void ButtonReturn_Click_1(object sender, EventArgs e)
@@ -440,6 +468,7 @@ namespace Pharmacy_App
 
             AdminPanel AP = new AdminPanel();
             AP.Show();
+            AP.labelUsername.Text = username;
             this.Close();
 
         }
@@ -450,7 +479,7 @@ namespace Pharmacy_App
             ofd.Title = "Please select product picture.";
             ofd.Filter = "JPG|*.jpg|JPEG|*.jpeg|GIF|*.gif|PNG|*.png";
             DialogResult dr = ofd.ShowDialog();
-            if(dr == System.Windows.Forms.DialogResult.OK)
+            if (dr == System.Windows.Forms.DialogResult.OK)
             {
                 imageSourcePath = ofd.FileName.ToString();
                 imageCopyName = ofd.SafeFileName.ToString();
@@ -459,10 +488,11 @@ namespace Pharmacy_App
                 {
                     System.IO.File.Copy(imageSourcePath, imageFolderPath + "/" + imageCopyName);
                     pictureBoxImage.Image = Image.FromFile(imageFolderPath + "/" + imageCopyName);
+                    pictureBoxImage.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 catch
                 {
-                    for(int i = 0; i < 100000; i++)
+                    for (int i = 0; i < 100000; i++)
                     {
                         try
                         {
@@ -472,36 +502,25 @@ namespace Pharmacy_App
                             imageCopyName = "(" + i + ")" + imageCopyName;
                             break;
                         }
-                        catch(Exception Ex)
+                        catch (Exception Ex)
                         {
 
                         }
                     }
                 }
 
-                
-
-                labelClickMessage.Text = "";
-                
-
-                    
 
             }
             else { /*doNothing*/}
-            
+
 
         }
 
         private void clickMessageLabel_Click(object sender, EventArgs e)
         {
-            pictureBoxImage_Click(sender,e);
+            pictureBoxImage_Click(sender, e);
         }
-
-
-
-
 
     }
 
-    
 }

@@ -18,6 +18,6 @@ namespace Pharmacy_App
         public string status { get; set; }
         public string updatedDate { get; set; }
         public string imagePath { get; set; }
-
+        public ulong barcodeNo { get; set; }
     }
 }

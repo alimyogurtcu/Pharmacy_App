@@ -17,12 +17,13 @@ namespace Pharmacy_App
     {
 
         //sql*
-        SQLiteConnection conn = new SQLiteConnection(@"Data Source= Database/history.db");
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= C:\Users\Public\PharmacyAppDatabase\history.db");
         SQLiteCommand cmd = new SQLiteCommand();
         //*sql
 
         List<customerRecords> customerRecordsList = new List<customerRecords>();
         string historyXmlFileLocation = "C://Users/Public/PharmacyAppData/history.xml";// history xml
+        public string username;
 
         public AdminPanelHistory()
         {
@@ -33,6 +34,7 @@ namespace Pharmacy_App
         {
             AdminPanel AP = new AdminPanel();
             AP.Show();
+            AP.labelUsername.Text = username;
             this.Close();
         }
 
@@ -46,9 +48,9 @@ namespace Pharmacy_App
             listViewHistory.Columns.Add("Medicine Name", 150, HorizontalAlignment.Center);// sub item 2
             listViewHistory.Columns.Add("Mg", 70, HorizontalAlignment.Center);// sub item 3
             listViewHistory.Columns.Add("Medicine Sold Amount", 150, HorizontalAlignment.Center); // sub item 4
-            listViewHistory.Columns.Add("Total Price", 150, HorizontalAlignment.Center); // sub item 4
-            listViewHistory.Columns.Add("Recipe", 150, HorizontalAlignment.Center);
-            listViewHistory.Columns.Add("Sell Date", 150, HorizontalAlignment.Center);
+            listViewHistory.Columns.Add("Total Price", 150, HorizontalAlignment.Center); // sub item 5
+            listViewHistory.Columns.Add("Recipe", 150, HorizontalAlignment.Center);// sub item 6    
+            listViewHistory.Columns.Add("Sell Date", 150, HorizontalAlignment.Center);// sub item 7
 
             //----------------------------------------------------------------------------
 
@@ -74,10 +76,10 @@ namespace Pharmacy_App
                 {
                     customerName = customerNameList[i].InnerXml,
                     medicineName = medicineNameList[i].InnerXml,
-                    mg = double.Parse(mgList[i].InnerXml),
+                    mg = XmlConvert.ToDouble(mgList[i].InnerXml),
                     amount = int.Parse(amountList[i].InnerXml),
                     recipe = recipeList[i].InnerXml,
-                    totalPrice = double.Parse(totalPriceList[i].InnerXml),
+                    totalPrice = XmlConvert.ToDouble(totalPriceList[i].InnerXml),
                     sellDate = sellDateList[i].InnerXml,
                 });
 
@@ -87,15 +89,15 @@ namespace Pharmacy_App
             for (var i = 0; i < customerRecordsList.Count; i++)// Adding medicineRecors list's elements to the list view 
             {
 
-                ListViewItem row = new ListViewItem((i + 1).ToString());
+                ListViewItem row = new ListViewItem((i + 1).ToString());// sub item 0
 
-                ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].customerName.ToString());
-                ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].medicineName.ToString());
-                ListViewItem.ListViewSubItem itms2 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].mg.ToString());
-                ListViewItem.ListViewSubItem itms3 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].amount.ToString());
-                ListViewItem.ListViewSubItem itms4 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].totalPrice.ToString());
-                ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].recipe.ToString());
-                ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].sellDate.ToString());
+                ListViewItem.ListViewSubItem itms1 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].customerName.ToString());// sub item 1
+                ListViewItem.ListViewSubItem itms8 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].medicineName.ToString());// sub item 2 
+                ListViewItem.ListViewSubItem itms2 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].mg.ToString());// sub item 3
+                ListViewItem.ListViewSubItem itms3 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].amount.ToString());// sub item 4
+                ListViewItem.ListViewSubItem itms4 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].totalPrice.ToString());// sub item 5
+                ListViewItem.ListViewSubItem itms5 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].recipe.ToString());// sub item 6
+                ListViewItem.ListViewSubItem itms6 = new ListViewItem.ListViewSubItem(row, customerRecordsList[i].sellDate.ToString());// sub item 7
 
 
 
@@ -133,47 +135,52 @@ namespace Pharmacy_App
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            string customerName = "", medicineName = "", soldAmount = "", recipe = "", sellDate = "";
+            double mg,totalPrice;
             try
             {
-                string customerName, medicineName, mg, soldAmount, totalPrice, recipe, sellDate;
+                if(MessageBox.Show("Do you want to continue to delete this history ? ","History delete confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    customerName = listViewHistory.FocusedItem.SubItems[1].Text.ToString();
+                    medicineName = listViewHistory.FocusedItem.SubItems[2].Text.ToString();
+                    mg = double.Parse(listViewHistory.FocusedItem.SubItems[3].Text.ToString());
+                    soldAmount = listViewHistory.FocusedItem.SubItems[4].Text.ToString();
+                    totalPrice = double.Parse(listViewHistory.FocusedItem.SubItems[5].Text.ToString());
+                    recipe = listViewHistory.FocusedItem.SubItems[6].Text.ToString();
+                    sellDate = listViewHistory.FocusedItem.SubItems[7].Text.ToString();
 
-                customerName = listViewHistory.FocusedItem.SubItems[1].Text.ToString();
-                medicineName = listViewHistory.FocusedItem.SubItems[2].Text.ToString();
-                mg = listViewHistory.FocusedItem.SubItems[3].Text.ToString();
-                soldAmount = listViewHistory.FocusedItem.SubItems[4].Text.ToString();
-                totalPrice = listViewHistory.FocusedItem.SubItems[5].Text.ToString();
-                recipe = listViewHistory.FocusedItem.SubItems[6].Text.ToString();
-                sellDate = listViewHistory.FocusedItem.SubItems[7].Text.ToString();
+                    var medicineDoc = XDocument.Load(historyXmlFileLocation);
 
-                var medicineDoc = XDocument.Load(historyXmlFileLocation);
+                    medicineDoc.Descendants("customer")
+                        .Where(x => (string)x.Element("customerName") == customerName)
+                        .Where(y => (string)y.Element("medicineName") == medicineName)
+                        .Where(z => (string)z.Element("mg") == XmlConvert.ToString(mg))
+                        .Where(t => (string)t.Element("amount") == soldAmount)
+                        .Where(a => (string)a.Element("totalPrice") == XmlConvert.ToString(totalPrice))
+                        .Where(b => (string)b.Element("recipe") == recipe)
+                        .Where(c => (string)c.Element("sellDate") == sellDate)
+                        .Remove();
 
-                medicineDoc.Descendants("customer")
-                    .Where(x => (string)x.Element("customerName") == customerName)
-                    .Where(y => (string)y.Element("medicineName") == medicineName)
-                    .Where(z => (string)z.Element("mg") == mg)
-                    .Where(t => (string)t.Element("amount") == soldAmount)
-                    .Where(a => (string)a.Element("totalPrice") == totalPrice)
-                    .Where(b => (string)b.Element("recipe") == recipe)
-                    .Where(c => (string)c.Element("sellDate") == sellDate)
-                    .Remove();
+                    medicineDoc.Save(historyXmlFileLocation);
 
-                medicineDoc.Save(historyXmlFileLocation);
+                    //sql*
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "DELETE FROM History WHERE ROWID ='" + int.Parse(listViewHistory.FocusedItem.SubItems[0].Text.ToString()) + "'";
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    //*sql
 
-                //sql*
-                conn.Open();
-                cmd.Connection = conn;
-                cmd.CommandText = "DELETE FROM History WHERE ROWID ='" + int.Parse(listViewHistory.FocusedItem.SubItems[0].Text.ToString()) + "'";
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                //*sql
-
-                Form_Reload(sender, e);
+                    Form_Reload(sender, e);
+                }
+                else { /*doNothing*/}
             }
+                
             catch
             {
                 MessageBox.Show("Please select history", "history select confirm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
     }
 }

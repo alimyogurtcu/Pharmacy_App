@@ -49,8 +49,8 @@ namespace Pharmacy_App
 
                 string adminsXmlContent = "<admins>" +
                     "<admin>" +
-                    "<username>burak</username>" +
-                    "<password>50mf</password>" +
+                    "<username>admin</username>" +
+                    "<password>admin</password>" +
                     "<lastLogin>new</lastLogin>" +
                     "</admin>" +
                     "</admins>";
@@ -171,6 +171,16 @@ namespace Pharmacy_App
         private void ButtonClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBoxName_MouseClick(object sender, MouseEventArgs e)
+        {
+            textBoxName.Text = "";
+        }
+
+        private void textBoxPassword_MouseClick(object sender, MouseEventArgs e)
+        {
+            textBoxPassword.Text = "";
         }
     }
 }

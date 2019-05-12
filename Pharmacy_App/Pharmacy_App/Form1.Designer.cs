@@ -28,139 +28,193 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.labelErrorMessage = new System.Windows.Forms.Label();
             this.buttonEmployee = new System.Windows.Forms.Button();
-            this.labelAdminName = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.labelPassword = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label2.Location = new System.Drawing.Point(357, 152);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 29);
-            this.label2.TabIndex = 76;
-            this.label2.Text = "Login";
             // 
             // labelErrorMessage
             // 
             this.labelErrorMessage.AutoSize = true;
-            this.labelErrorMessage.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelErrorMessage.ForeColor = System.Drawing.Color.Maroon;
-            this.labelErrorMessage.Location = new System.Drawing.Point(273, 243);
+            this.labelErrorMessage.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelErrorMessage.ForeColor = System.Drawing.Color.Red;
+            this.labelErrorMessage.Location = new System.Drawing.Point(559, 369);
             this.labelErrorMessage.Name = "labelErrorMessage";
-            this.labelErrorMessage.Size = new System.Drawing.Size(255, 13);
+            this.labelErrorMessage.Size = new System.Drawing.Size(212, 16);
             this.labelErrorMessage.TabIndex = 75;
             this.labelErrorMessage.Text = "* Username or password is incorrect !";
             this.labelErrorMessage.Visible = false;
             // 
             // buttonEmployee
             // 
-            this.buttonEmployee.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonEmployee.Location = new System.Drawing.Point(303, 304);
+            this.buttonEmployee.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.buttonEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEmployee.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonEmployee.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonEmployee.Location = new System.Drawing.Point(593, 441);
             this.buttonEmployee.Name = "buttonEmployee";
-            this.buttonEmployee.Size = new System.Drawing.Size(195, 28);
+            this.buttonEmployee.Size = new System.Drawing.Size(119, 34);
             this.buttonEmployee.TabIndex = 4;
-            this.buttonEmployee.Text = "Continue As Employee";
+            this.buttonEmployee.Text = "Employee";
             this.buttonEmployee.UseVisualStyleBackColor = true;
             this.buttonEmployee.Click += new System.EventHandler(this.buttonEmployee_Click);
             // 
-            // labelAdminName
-            // 
-            this.labelAdminName.AutoSize = true;
-            this.labelAdminName.Location = new System.Drawing.Point(273, 187);
-            this.labelAdminName.Name = "labelAdminName";
-            this.labelAdminName.Size = new System.Drawing.Size(67, 13);
-            this.labelAdminName.TabIndex = 73;
-            this.labelAdminName.Text = "Admin Name";
-            // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(346, 184);
+            this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
+            this.textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxName.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBoxName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBoxName.Location = new System.Drawing.Point(562, 292);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxName.Size = new System.Drawing.Size(220, 19);
             this.textBoxName.TabIndex = 1;
+            this.textBoxName.Text = "Username";
+            this.textBoxName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxName_MouseClick);
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonLogin.Location = new System.Drawing.Point(333, 270);
+            this.buttonLogin.BackColor = System.Drawing.Color.Aqua;
+            this.buttonLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonLogin.FlatAppearance.BorderSize = 0;
+            this.buttonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLogin.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonLogin.Location = new System.Drawing.Point(593, 403);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(130, 28);
+            this.buttonLogin.Size = new System.Drawing.Size(119, 32);
             this.buttonLogin.TabIndex = 3;
-            this.buttonLogin.Text = "Login As Admin";
-            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Text = "Login";
+            this.buttonLogin.UseVisualStyleBackColor = false;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(346, 210);
+            this.textBoxPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
+            this.textBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxPassword.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBoxPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBoxPassword.Location = new System.Drawing.Point(562, 333);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPassword.Size = new System.Drawing.Size(220, 19);
             this.textBoxPassword.TabIndex = 2;
-            // 
-            // labelPassword
-            // 
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(287, 213);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(53, 13);
-            this.labelPassword.TabIndex = 69;
-            this.labelPassword.Text = "Password";
+            this.textBoxPassword.Text = "*********";
+            this.textBoxPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxPassword_MouseClick);
             // 
             // buttonClose
             // 
+            this.buttonClose.FlatAppearance.BorderSize = 0;
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClose.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonClose.Location = new System.Drawing.Point(764, 12);
+            this.buttonClose.Image = ((System.Drawing.Image)(resources.GetObject("buttonClose.Image")));
+            this.buttonClose.Location = new System.Drawing.Point(1273, 12);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(55, 29);
+            this.buttonClose.Size = new System.Drawing.Size(65, 65);
             this.buttonClose.TabIndex = 77;
-            this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(524, 279);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 78;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(524, 320);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox2.TabIndex = 79;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(521, 300);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(277, 13);
+            this.label1.TabIndex = 80;
+            this.label1.Text = "_____________________________________________";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(521, 341);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(277, 13);
+            this.label3.TabIndex = 81;
+            this.label3.Text = "_____________________________________________";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(593, 141);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox3.TabIndex = 82;
+            this.pictureBox3.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 493);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
+            this.ClientSize = new System.Drawing.Size(1350, 712);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.labelErrorMessage);
             this.Controls.Add(this.buttonEmployee);
-            this.Controls.Add(this.labelAdminName);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.textBoxPassword);
-            this.Controls.Add(this.labelPassword);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelErrorMessage;
         private System.Windows.Forms.Button buttonEmployee;
-        private System.Windows.Forms.Label labelAdminName;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 

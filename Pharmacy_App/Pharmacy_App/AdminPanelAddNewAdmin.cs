@@ -17,13 +17,17 @@ namespace Pharmacy_App
     {
 
         //sql*
-        SQLiteConnection conn = new SQLiteConnection(@"Data Source= Database/admins.db");
+        SQLiteConnection conn = new SQLiteConnection(@"Data Source= C:\Users\Public\PharmacyAppDatabase\admins.db");
         SQLiteCommand cmd = new SQLiteCommand();
         //*sql
 
         List<adminsRecords> adminsList = new List<adminsRecords>();// creating list depends on adminclass
         string adminXmlFileLocation = "C://Users/Public/PharmacyAppData/admins.xml";// path to the admins xml file
         public string xmlUsername, xmlPassword;
+        string username = "", password = "";
+        public string LoginnedAdminName;
+
+
         public AdminPanelAddNewAdmin()
         {
             InitializeComponent();
@@ -32,25 +36,27 @@ namespace Pharmacy_App
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             //decleration of values
-            string username, password;
+            string username, password, errorMessage = "";
             bool control = true;
 
             username = textBoxUsername.Text.ToString();
             password = textBoxPassword.Text.ToString();
 
-            if(username == null)
+            if (username == "")
             {
-                MessageBox.Show("Please enter username !", "validation of username", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorMessage += "Please enter Username !\n";
             }
-            else if(password == null)
+            else { /*doNothing*/}
+            if (password == "")
             {
-                MessageBox.Show("Please enter password !", "validation of password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorMessage += "Please enter Password !";
             }
-            else
+            else { /*doNothing*/}
+            if (errorMessage == "")
             {
-                for(int i = 0; i < adminsList.Count; i++)
+                for (int i = 0; i < adminsList.Count; i++)
                 {
-                    if(username == adminsList[i].username.ToString())
+                    if (username == adminsList[i].username.ToString() && password == adminsList[i].password.ToString())
                     {
                         control = false;
                     }
@@ -71,10 +77,11 @@ namespace Pharmacy_App
 
                         adminDoc.Save(adminXmlFileLocation);
 
+
                         //sql*
                         conn.Open();
                         cmd.Connection = conn;
-                        cmd.CommandText = "insert into Admins(AdminName, Password) Values('" + textBoxUsername.Text + "', '" + textBoxPassword.Text + "')";
+                        cmd.CommandText = "insert into Admins(AdminName, Password) Values('" + username + "', '" + password + "')";
                         cmd.ExecuteNonQuery();
                         conn.Close();
                         //*sql
@@ -89,15 +96,19 @@ namespace Pharmacy_App
                     }
                     else
                     {
-                        
+
                     }
                 }
                 else
                 {
-                    MessageBox.Show("You cant use same username for different admins !", "same username usage error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("You cant use same username and password for different admins !", "same username and password usage error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     textBoxUsername.Focus();
                 }
-                
+
+            }
+            else
+            {
+                MessageBox.Show(errorMessage, "input checks", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             refresh_form(sender, e);
@@ -110,21 +121,16 @@ namespace Pharmacy_App
             listViewAdmins.Items.Clear();
             listViewAdmins.Columns.Clear();
             adminsList.Clear();
-            AdminPanelAddNewAdmin_Load(sender,e);
+            AdminPanelAddNewAdmin_Load(sender, e);
 
         }
 
-        private void AdminPanelAddNewAdmin_Load(object sender, EventArgs e)
+        public void uploadAdminListView() // funchtion for get admins username and password
         {
-            //FULL SCREEN
-            FormBorderStyle = FormBorderStyle.None;
-            WindowState = FormWindowState.Maximized;
-            //FULL SCREEN
-
             listViewAdmins.Columns.Add(" ", 75, HorizontalAlignment.Center);// adding empty column for numbers to the list view
-            listViewAdmins.Columns.Add("Username", 75, HorizontalAlignment.Center);// adding columns to the list view
-            listViewAdmins.Columns.Add("Password", 75, HorizontalAlignment.Center);// adding columns to the list view
-            listViewAdmins.Columns.Add("Last Login", 75, HorizontalAlignment.Center);
+            listViewAdmins.Columns.Add("Username", 130, HorizontalAlignment.Center);// adding columns to the list view
+            listViewAdmins.Columns.Add("Password", 130, HorizontalAlignment.Center);// adding columns to the list view
+            listViewAdmins.Columns.Add("Last Login", 175, HorizontalAlignment.Center);
 
             XmlDocument adminXmlDocument = new XmlDocument();// opends admin xml file
             adminXmlDocument.Load(adminXmlFileLocation);//---------------------------
@@ -140,76 +146,93 @@ namespace Pharmacy_App
                     username = usernameList[i].InnerXml,// adds username 
                     password = passwordList[i].InnerXml,// adds password
                     lastLogin = lastLoginList[i].InnerXml,
-                    
+
                 });
             }
 
 
-            for(int i = 0; i < adminsList.Count; i++)// adding row 
+            for (int i = 0; i < adminsList.Count; i++)// adding row 
             {
-                ListViewItem row = new ListViewItem((i+1).ToString());
+                ListViewItem row = new ListViewItem((i + 1).ToString());
 
                 ListViewItem.ListViewSubItem itemUsername = new ListViewItem.ListViewSubItem(row, adminsList[i].username.ToString());// adding username to second column
                 ListViewItem.ListViewSubItem itemPassword = new ListViewItem.ListViewSubItem(row, adminsList[i].password.ToString());// adding password to third column
                 ListViewItem.ListViewSubItem itemLastLogin = new ListViewItem.ListViewSubItem(row, adminsList[i].lastLogin.ToString());// adding password to third column
 
-                
+
                 row.SubItems.Add(itemUsername);
                 row.SubItems.Add(itemPassword);
                 row.SubItems.Add(itemLastLogin);
 
                 listViewAdmins.Items.Add(row);
             }
+        }
+
+        private void AdminPanelAddNewAdmin_Load(object sender, EventArgs e)
+        {
+            //FULL SCREEN
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            //FULL SCREEN
+
+            uploadAdminListView();
 
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            string username;
 
-            username = textBoxUsername.Text.ToString();
+            string username = "", password = "", lastLogin = "";
 
-            if(username == "")
+            try
             {
-                MessageBox.Show("Please choose admin that you want to delete", "admin delete confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                username = listViewAdmins.FocusedItem.SubItems[1].Text.ToString();
+                password = listViewAdmins.FocusedItem.SubItems[2].Text.ToString();
+                lastLogin = listViewAdmins.FocusedItem.SubItems[3].Text.ToString();
+
+                if (adminsList.Count == 1)
+                {
+                    MessageBox.Show("You cant delete all admins.", "admin delete number confirm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (MessageBox.Show("Do you want to continue to delete selected admin ? ", "delete confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    var adminXml = XDocument.Load(adminXmlFileLocation);
+                    adminXml.Descendants("admin")
+                        .Where(x => (string)x.Element("username") == username)
+                        .Where(y => (string)y.Element("password") == password)
+                        .Where(z => (string)z.Element("lastLogin") == lastLogin)
+                        .Remove();
+
+                    adminXml.Save(adminXmlFileLocation);
+
+                    username = "";
+                    password = "";
+                    lastLogin = "";
+
+                    //sql*
+                    conn.Open();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "DELETE FROM Admins WHERE ROWID ='" + int.Parse(listViewAdmins.FocusedItem.SubItems[0].Text.ToString()) + "'";
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    //*sql
+
+
+
+                    refresh_form(sender, e);
+
+                }
+
             }
-            else if(adminsList.Count == 1)
+            catch
             {
-                MessageBox.Show("You cant delete all admins.", "admin delete number confirm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select an admin before delete it !","Select Admin",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-            else if(MessageBox.Show("Do you want to continue to delete selected admin ? ","delete confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                var adminXml = XDocument.Load(adminXmlFileLocation);
-                adminXml.Descendants("admin")
-                    .Where(x => (string)x.Element("username") == username)
-                    .Remove();
 
-                adminXml.Save(adminXmlFileLocation);
-
-                //sql*
-                conn.Open();
-                cmd.Connection = conn;
-                cmd.CommandText = "DELETE FROM Admins WHERE ROWID ='" + int.Parse(listViewAdmins.FocusedItem.SubItems[0].Text.ToString()) + "'";
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                //*sql
-
-                textBoxUsername.Text = "";
-                textBoxPassword.Text = "";
-                labelUsername.Text = "";
-                textBoxUpdatePassword.Text = "";
-
-                refresh_form(sender, e);
-
-            }
-            
-            
         }
 
         private void listViewAdmins_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxUsername.Text = listViewAdmins.FocusedItem.SubItems[1].Text.ToString();
-            textBoxPassword.Text = listViewAdmins.FocusedItem.SubItems[2].Text.ToString();
             xmlUsername = listViewAdmins.FocusedItem.SubItems[1].Text.ToString();
             xmlPassword = listViewAdmins.FocusedItem.SubItems[2].Text.ToString();
             labelUsername.Text = listViewAdmins.FocusedItem.SubItems[1].Text.ToString();
@@ -220,6 +243,7 @@ namespace Pharmacy_App
         {
             AdminPanel AP = new AdminPanel();
             AP.Show();
+            AP.labelUsername.Text = LoginnedAdminName;
             this.Close();
         }
 
@@ -228,19 +252,20 @@ namespace Pharmacy_App
             string password;
             password = textBoxUpdatePassword.Text;
 
-            
-            
-            if(textBoxUpdatePassword.Text == "")
+
+
+            if (textBoxUpdatePassword.Text == "")
             {
                 MessageBox.Show("Please be sure to write new password correctly !", "username password error check", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                if(MessageBox.Show("Do you want to continue to update user '"+ xmlUsername +"' ? ","update confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes){
+                if (MessageBox.Show("Do you want to continue to update user '" + xmlUsername + "' ? ", "update confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
                     var doc = XDocument.Load(adminXmlFileLocation);
 
                     var items = from item in doc.Descendants("admin")
-                                where item.Element("username").Value == xmlUsername
+                                where item.Element("username").Value == xmlUsername && item.Element("password").Value == xmlPassword
                                 select item;
 
                     foreach (XElement itemElement in items)
@@ -259,11 +284,17 @@ namespace Pharmacy_App
                     //*sql
 
                     MessageBox.Show("Admin '" + xmlUsername + "' was updated", "update info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    labelUsername.Text = "";
+                    textBoxUpdatePassword.Text = "";
+                    xmlUsername = "";
+                    xmlPassword = "";
+
                     refresh_form(sender, e);
                 }
-                else{ /*doNothing*/}
+                else { /*doNothing*/}
             }
-           
+
         }
     }
 }
